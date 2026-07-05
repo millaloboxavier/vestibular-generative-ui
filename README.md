@@ -55,3 +55,22 @@ http://localhost:3000
 ## Observação sobre o skeleton
 
 O skeleton é apenas um feedback visual de carregamento. Ele não substitui a resposta da OpenAI e não funciona como fallback. A resposta real continua vindo da API `/api/generate-ui`.
+
+
+## Ajuste V3
+
+- O botão do histórico saiu do cabeçalho e passou a ficar ao lado do campo de busca após a primeira consulta.
+- A nomenclatura foi simplificada de “Sua jornada” para “Histórico”, para facilitar o entendimento do usuário neste primeiro protótipo.
+- O drawer agora usa o título “Histórico” e lista as consultas recentes.
+
+
+## V4 — Resumo do resultado no Histórico
+
+Esta versão adiciona uma área de captação dentro do drawer de Histórico. Quando já existem consultas salvas, a pessoa pode preencher nome e e-mail para liberar:
+
+- download de um PDF gerado no navegador;
+- compartilhamento de uma versão curta por WhatsApp.
+
+O PDF não é apenas uma lista de perguntas. Ele reúne o conteúdo das respostas renderizadas pela IA: títulos, textos, cursos, datas, formas de ingresso, eventos, bolsas, diferenciais e próximos caminhos exibidos na interface.
+
+No protótipo, nome e e-mail ficam salvos somente no `localStorage`. Em produção, esse ponto pode ser conectado a CRM, RD Station, Salesforce, Drupal ou outro endpoint de leads.
