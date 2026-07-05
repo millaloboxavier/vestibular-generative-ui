@@ -18,6 +18,8 @@ export type Section = {
   course?: any;
 };
 
+export type SkeletonVariant = "courses" | "timeline" | "admission" | "scholarships" | "events" | "detail" | "default";
+
 function safeItems(section: Section) {
   return Array.isArray(section.items) ? section.items : [];
 }
@@ -45,6 +47,138 @@ function SectionShell({ section, children, className }: { section: Section; chil
       {children}
     </section>
   );
+}
+
+function SkeletonLine({ className }: { className?: string }) {
+  return <div className={cn("h-3 rounded-full bg-muted-foreground/15", className)} />;
+}
+
+function SkeletonCard({ variant = "card" }: { variant?: "card" | "compact" }) {
+  return (
+    <div className="rounded-2xl border bg-background p-5">
+      <div className="flex gap-2">
+        <div className="h-6 w-20 rounded-full bg-muted-foreground/15" />
+        <div className="h-6 w-24 rounded-full bg-muted-foreground/15" />
+      </div>
+      <SkeletonLine className="mt-5 h-5 w-2/3" />
+      <SkeletonLine className="mt-3 w-full" />
+      <SkeletonLine className="mt-2 w-4/5" />
+      {variant === "card" ? (
+        <>
+          <SkeletonLine className="mt-6 w-1/2" />
+          <div className="mt-5 h-9 w-28 rounded-full bg-muted-foreground/15" />
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function CoursesSkeleton() {
+  return (
+    <div className="rounded-[1.35rem] border bg-background p-5 md:p-6">
+      <SkeletonLine className="h-6 w-72 max-w-full" />
+      <SkeletonLine className="mt-3 w-96 max-w-full" />
+      <div className="mt-6 flex gap-2">
+        <div className="h-9 w-28 rounded-full bg-foreground/15" />
+        <div className="h-9 w-24 rounded-full bg-muted-foreground/15" />
+        <div className="h-9 w-24 rounded-full bg-muted-foreground/15" />
+      </div>
+      <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <SkeletonCard />
+        <SkeletonCard />
+        <SkeletonCard />
+      </div>
+    </div>
+  );
+}
+
+function TimelineSkeleton() {
+  return (
+    <div className="rounded-[1.35rem] border border-foreground/20 bg-background p-5 md:p-6">
+      <SkeletonLine className="h-6 w-72 max-w-full" />
+      <SkeletonLine className="mt-3 w-80 max-w-full" />
+      <div className="mt-6 grid gap-3">
+        {[0, 1, 2].map((item) => (
+          <div key={item} className="flex gap-4 rounded-2xl border bg-muted/30 p-4">
+            <div className="h-10 w-10 rounded-full bg-muted-foreground/15" />
+            <div className="flex-1">
+              <SkeletonLine className="h-4 w-48" />
+              <SkeletonLine className="mt-3 h-5 w-64 max-w-full" />
+              <SkeletonLine className="mt-2 w-80 max-w-full" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AdmissionSkeleton() {
+  return (
+    <div className="rounded-[1.35rem] border bg-background p-5 md:p-6">
+      <SkeletonLine className="h-6 w-64" />
+      <SkeletonLine className="mt-3 w-96 max-w-full" />
+      <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        {[0, 1, 2, 3, 4, 5].map((item) => <SkeletonCard key={item} variant="compact" />)}
+      </div>
+    </div>
+  );
+}
+
+function EventsSkeleton() {
+  return (
+    <div className="rounded-[1.35rem] border bg-background p-5 md:p-6">
+      <SkeletonLine className="h-6 w-64" />
+      <SkeletonLine className="mt-3 w-80 max-w-full" />
+      <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        {[0, 1, 2].map((item) => <SkeletonCard key={item} variant="compact" />)}
+      </div>
+    </div>
+  );
+}
+
+function DetailSkeleton() {
+  return (
+    <div className="rounded-[1.35rem] border bg-background p-5 md:p-6">
+      <SkeletonLine className="h-6 w-72 max-w-full" />
+      <SkeletonLine className="mt-3 w-96 max-w-full" />
+      <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        {[0, 1, 2, 3, 4, 5].map((item) => (
+          <div key={item} className="rounded-2xl border bg-muted/30 p-4">
+            <SkeletonLine className="h-3 w-20" />
+            <SkeletonLine className="mt-4 h-5 w-40 max-w-full" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DefaultSkeleton() {
+  return (
+    <div className="rounded-[1.35rem] border bg-background p-5 md:p-6">
+      <SkeletonLine className="h-6 w-64" />
+      <SkeletonLine className="mt-3 w-96 max-w-full" />
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <SkeletonCard />
+        <SkeletonCard />
+      </div>
+    </div>
+  );
+}
+
+export function GenerativeSkeleton({ variant }: { variant: SkeletonVariant }) {
+  const content = (() => {
+    if (variant === "courses") return <CoursesSkeleton />;
+    if (variant === "timeline") return <TimelineSkeleton />;
+    if (variant === "admission") return <AdmissionSkeleton />;
+    if (variant === "scholarships") return <AdmissionSkeleton />;
+    if (variant === "events") return <EventsSkeleton />;
+    if (variant === "detail") return <DetailSkeleton />;
+    return <DefaultSkeleton />;
+  })();
+
+  return <div className="mt-6 animate-pulse">{content}</div>;
 }
 
 function CourseCard({ course, onPrompt }: { course: any; onPrompt: (prompt: string) => void }) {
