@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 40 5% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 40 5% 11%;
+  --muted: 45 16% 95%;
+  --muted-foreground: 40 4% 42%;
+  --border: 45 9% 84%;
+  --ring: 40 5% 11%;
+  --primary: 40 5% 11%;
+  --primary-foreground: 0 0% 100%;
+}
+
+* { border-color: hsl(var(--border)); }
+html { scroll-behavior: smooth; }
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+::selection { background: #1c1c1a; color: #fff; }
+
+.dot-typing span:nth-child(1) { animation-delay: 0s; }
+.dot-typing span:nth-child(2) { animation-delay: 0.14s; }
+.dot-typing span:nth-child(3) { animation-delay: 0.28s; }
