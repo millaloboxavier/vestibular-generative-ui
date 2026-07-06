@@ -74,3 +74,10 @@ Esta versão adiciona uma área de captação dentro do drawer de Histórico. Qu
 O PDF não é apenas uma lista de perguntas. Ele reúne o conteúdo das respostas renderizadas pela IA: títulos, textos, cursos, datas, formas de ingresso, eventos, bolsas, diferenciais e próximos caminhos exibidos na interface.
 
 No protótipo, nome e e-mail ficam salvos somente no `localStorage`. Em produção, esse ponto pode ser conectado a CRM, RD Station, Salesforce, Drupal ou outro endpoint de leads.
+
+
+## V6 - seletor de comparação de cursos
+
+Nesta versão, CTAs como **Comparar cursos** não disparam mais uma pergunta genérica diretamente. Eles abrem uma gaveta lateral para a pessoa escolher dois cursos. Depois da escolha, a aplicação chama a IA com os cursos selecionados e renderiza a comparação.
+
+Isso reforça a lógica de navegação por intenção: a IA sugere o caminho, mas a interface oferece o componente certo para a pessoa continuar a jornada.
