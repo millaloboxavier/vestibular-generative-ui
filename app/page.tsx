@@ -95,88 +95,175 @@ function compactDateLabel() {
   return new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit" }).format(new Date());
 }
 
+
+type PdfBlock = {
+  type: "title" | "meta" | "h2" | "h3" | "p" | "bullet" | "small" | "divider";
+  text?: string;
+};
+
+function cleanPdfText(value: any): string {
+  if (value === null || value === undefined) return "";
+  let text = Array.isArray(value) ? value.map(cleanPdfText).filter(Boolean).join(", ") : String(value);
+  text = text
+    .replace(/Consultar página do curso/gi, "")
+    .replace(/consultar página do curso/gi, "")
+    .replace(/consultar página/gi, "")
+    .replace(/página oficial/gi, "")
+    .replace(/site oficial/gi, "")
+    .replace(/Status:\s*active\.?/gi, "")
+    .replace(/Status:\s*inscricoes_em_breve\.?/gi, "Inscrições em breve")
+    .replace(/\s+\./g, ".")
+    .replace(/\.\./g, ".")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+  return text;
+}
+
+function hasUsefulValue(value: any): boolean {
+  const text = cleanPdfText(value);
+  if (!text) return false;
+  return !/^[-–—]+$/.test(text);
+}
+
+function readableStatus(status?: string) {
+  if (!status) return "";
+  const cleaned = String(status).replaceAll("_", " ");
+  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+}
+
 function formatDateForDisplay(date: string): string {
-  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return date || "";
+  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return cleanPdfText(date || "");
   const [year, month, day] = date.split("-");
   return `${day}/${month}/${year}`;
 }
 
-function extractTextValue(value: any): string {
-  if (value === null || value === undefined) return "";
-  if (Array.isArray(value)) return value.map(extractTextValue).filter(Boolean).join(", ");
-  if (typeof value === "object") {
-    if (value.label || value.title || value.name || value.value || value.description || value.shortDescription) {
-      return [value.label || value.title || value.name, value.value || value.description || value.shortDescription]
-        .filter(Boolean)
-        .join(" — ");
-    }
-    return "";
-  }
-  return String(value);
+function joinClean(parts: any[], separator = " · ") {
+  return parts.map(cleanPdfText).filter(Boolean).join(separator);
 }
 
-function summarizeItem(item: any): string {
-  if (!item || typeof item !== "object") return extractTextValue(item);
-  const title = item.name || item.displayName || item.label || item.title || "Item";
-  const parts = [
-    item.city && item.state ? `${item.city}/${item.state}` : item.city,
-    item.school,
-    item.summary || item.description || item.shortDescription,
-    item.duration ? `Duração: ${item.duration}` : "",
-    item.period ? `Período: ${item.period}` : "",
-    item.tuition ? `Mensalidade: ${item.tuition}` : "",
-    item.campus ? `Campus: ${item.campus}` : "",
-    item.candidatePerSeat ? `Relação candidato/vaga: ${item.candidatePerSeat}` : "",
-    Array.isArray(item.admissions) && item.admissions.length ? `Formas de ingresso: ${item.admissions.join(", ")}` : "",
-    item.cycle ? `Ciclo: ${item.cycle}` : "",
-    item.status ? `Status: ${String(item.status).replaceAll("_", " ")}` : "",
-    item.startDate && item.endDate ? `Período: ${formatDateForDisplay(item.startDate)} a ${formatDateForDisplay(item.endDate)}` : "",
-    item.displayDate || item.displayTime ? `Quando: ${[item.displayDate, item.displayTime].filter(Boolean).join(" · ")}` : "",
+function itemTitle(item: any): string {
+  return cleanPdfText(item?.name || item?.displayName || item?.label || item?.title || "Item");
+}
+
+function admissionPeriod(item: any): string {
+  if (item?.startDate && item?.endDate) return `${formatDateForDisplay(item.startDate)} a ${formatDateForDisplay(item.endDate)}`;
+  if (item?.period) return cleanPdfText(item.period);
+  return "";
+}
+
+function courseBullet(course: any, compact = false): string {
+  const title = itemTitle(course);
+  const head = joinClean([title, course?.city && course?.state ? `${course.city}/${course.state}` : course?.city, course?.school]);
+  const parts = [head];
+  if (hasUsefulValue(course?.summary)) parts.push(cleanPdfText(course.summary));
+  const facts = [
+    hasUsefulValue(course?.duration) ? `Duração: ${cleanPdfText(course.duration)}` : "",
+    !compact && hasUsefulValue(course?.period) ? `Período: ${cleanPdfText(course.period)}` : "",
+    !compact && hasUsefulValue(course?.tuition) ? `Mensalidade: ${cleanPdfText(course.tuition)}` : "",
+    !compact && hasUsefulValue(course?.campus) ? `Campus: ${cleanPdfText(course.campus)}` : "",
+    hasUsefulValue(course?.candidatePerSeat) ? `Candidato/vaga: ${cleanPdfText(course.candidatePerSeat).replace(/\.$/, "")}` : "",
+    Array.isArray(course?.admissions) && course.admissions.length ? `Formas de ingresso: ${course.admissions.map(cleanPdfText).filter(Boolean).join(", ")}` : "",
   ].filter(Boolean);
-  return parts.length ? `${title}: ${parts.join(". ")}` : String(title);
+  if (facts.length) parts.push(facts.join(". "));
+  return parts.join(". ");
 }
 
-function buildResultSummary(journeys: JourneyItem[], leadName?: string) {
-  const lines: string[] = [];
-  lines.push("Resumo da sua navegação no Vestibular FGV");
-  if (leadName?.trim()) lines.push(`Nome: ${leadName.trim()}`);
-  lines.push(`Gerado em: ${new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date())}`);
-  lines.push("");
-  lines.push("Este resumo reúne as informações exibidas nas respostas geradas durante sua navegação, como cursos, datas, formas de ingresso, eventos, bolsas e próximos passos.");
+function simpleItemBullet(item: any): string {
+  const title = itemTitle(item);
+  const desc = cleanPdfText(item?.shortDescription || item?.description || item?.summary || item?.value || "");
+  const extras = [
+    item?.city && item?.state ? `${item.city}/${item.state}` : item?.city,
+    item?.displayDate || item?.displayTime ? `Quando: ${joinClean([item.displayDate, item.displayTime])}` : "",
+    admissionPeriod(item) ? `Período: ${admissionPeriod(item)}` : "",
+    item?.cycle ? `Ciclo: ${cleanPdfText(item.cycle)}` : "",
+    item?.status && item.status !== "active" ? readableStatus(item.status) : "",
+  ].map(cleanPdfText).filter(Boolean);
+  return [title, desc, extras.join(". ")].filter(Boolean).join(". ");
+}
 
-  journeys
-    .slice()
-    .reverse()
-    .forEach((journey, journeyIndex) => {
-      lines.push("");
-      lines.push(`${journeyIndex + 1}. ${journey.title || journey.question}`);
-      lines.push(`Pergunta feita: ${journey.question}`);
-      if (journey.plan?.answer) lines.push(`Resumo: ${journey.plan.answer}`);
+function pushParagraph(blocks: PdfBlock[], text?: string) {
+  const cleaned = cleanPdfText(text);
+  if (cleaned) blocks.push({ type: "p", text: cleaned });
+}
 
-      const sections = Array.isArray(journey.plan?.sections) ? journey.plan.sections : [];
-      sections.forEach((section: Section) => {
-        if (!section || section.type === "lead_form") return;
-        lines.push("");
-        lines.push(section.title || "Seção");
-        if (section.intro) lines.push(section.intro);
-        if (section.course) lines.push(`- ${summarizeItem(section.course)}`);
-        if (Array.isArray(section.items) && section.items.length) {
-          section.items.slice(0, 12).forEach((item: any) => lines.push(`- ${summarizeItem(item)}`));
-          if (section.items.length > 12) lines.push(`- E mais ${section.items.length - 12} item(ns) exibidos na interface.`);
-        }
-        if (Array.isArray(section.actions) && section.actions.length) {
-          const actions = section.actions.map((action: any) => action.label || action.title).filter(Boolean);
-          if (actions.length) lines.push(`Próximos caminhos: ${actions.join(", ")}`);
-        }
-      });
+function pushSection(blocks: PdfBlock[], section: Section) {
+  if (!section || section.type === "lead_form" || section.type === "warning") return;
+  if (section.type === "course_cards") {
+    blocks.push({ type: "h2", text: cleanPdfText(section.title || "Cursos") });
+    pushParagraph(blocks, section.intro);
+    const items = Array.isArray(section.items) ? section.items : [];
+    const grouped = items.reduce<Record<string, any[]>>((acc, item) => {
+      const city = cleanPdfText(item?.city || "Outros");
+      acc[city] ||= [];
+      acc[city].push(item);
+      return acc;
+    }, {});
+    const cityOrder = ["Rio de Janeiro", "São Paulo", "Brasília", ...Object.keys(grouped).filter((city) => !["Rio de Janeiro", "São Paulo", "Brasília"].includes(city))].filter((city) => grouped[city]?.length);
+    cityOrder.forEach((city) => {
+      blocks.push({ type: "h3", text: city });
+      grouped[city].forEach((course) => blocks.push({ type: "bullet", text: courseBullet(course, true) }));
     });
+    return;
+  }
 
-  return lines.join("\n");
+  if (section.type === "course_detail") {
+    blocks.push({ type: "h2", text: cleanPdfText(section.title || "Detalhes do curso") });
+    pushParagraph(blocks, section.intro);
+    const items = Array.isArray(section.items) ? section.items : [];
+    items.forEach((item: any) => {
+      const title = itemTitle(item);
+      const value = cleanPdfText(item?.value || item?.shortDescription || item?.description || "");
+      if (title && value) blocks.push({ type: "bullet", text: `${title}: ${value}` });
+    });
+    return;
+  }
+
+  if (section.type === "next_step") {
+    const actions = Array.isArray(section.actions) && section.actions.length ? section.actions : Array.isArray(section.items) ? section.items : [];
+    if (!actions.length) return;
+    blocks.push({ type: "h2", text: cleanPdfText(section.title || "Para continuar") });
+    pushParagraph(blocks, section.intro);
+    actions.forEach((action: any) => {
+      const label = cleanPdfText(action?.label || action?.title);
+      if (label) blocks.push({ type: "bullet", text: label });
+    });
+    return;
+  }
+
+  blocks.push({ type: "h2", text: cleanPdfText(section.title || "Informações") });
+  pushParagraph(blocks, section.intro);
+  if (section.course) blocks.push({ type: "bullet", text: courseBullet(section.course, false) });
+  const items = Array.isArray(section.items) ? section.items : [];
+  items.forEach((item: any) => {
+    const text = section.type === "timeline" ? joinClean([item?.label || item?.title, item?.value, item?.description], " - ") : simpleItemBullet(item);
+    if (text) blocks.push({ type: "bullet", text });
+  });
+}
+
+function buildPdfBlocks(journeys: JourneyItem[], leadName?: string): PdfBlock[] {
+  const blocks: PdfBlock[] = [];
+  blocks.push({ type: "title", text: "Resumo do seu resultado" });
+  blocks.push({ type: "meta", text: "Vestibular FGV - Graduação" });
+  if (leadName?.trim()) blocks.push({ type: "meta", text: `Preparado para: ${leadName.trim()}` });
+  blocks.push({ type: "meta", text: `Gerado em ${new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date())}` });
+  blocks.push({ type: "divider" });
+  blocks.push({ type: "p", text: "Este material reúne as principais informações que apareceram nas respostas da sua navegação: cursos, datas, formas de ingresso, eventos, bolsas, diferenciais e próximos caminhos." });
+
+  journeys.slice().reverse().forEach((journey, index) => {
+    blocks.push({ type: "divider" });
+    blocks.push({ type: "h2", text: `${index + 1}. ${cleanPdfText(journey.title || journey.question)}` });
+    blocks.push({ type: "small", text: `Pergunta: ${cleanPdfText(journey.question)}` });
+    if (journey.plan?.answer) pushParagraph(blocks, journey.plan.answer);
+    const sections = Array.isArray(journey.plan?.sections) ? journey.plan.sections : [];
+    sections.forEach((section) => pushSection(blocks, section));
+  });
+
+  return blocks;
 }
 
 function splitTextToLines(text: string, maxChars = 88) {
   const output: string[] = [];
-  text.split("\n").forEach((paragraph) => {
+  cleanPdfText(text).split("\n").forEach((paragraph) => {
     if (!paragraph.trim()) {
       output.push("");
       return;
@@ -184,7 +271,7 @@ function splitTextToLines(text: string, maxChars = 88) {
     let line = "";
     paragraph.split(/\s+/).forEach((word) => {
       if ((line + " " + word).trim().length > maxChars) {
-        output.push(line.trim());
+        if (line.trim()) output.push(line.trim());
         line = word;
       } else {
         line = `${line} ${word}`.trim();
@@ -208,32 +295,103 @@ function pdfEscape(text: string) {
   return latin1Sanitize(text).replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
 }
 
-function createSimplePdfBlob(text: string) {
-  const lines = splitTextToLines(text, 92);
-  const pages: string[][] = [];
-  const maxLinesPerPage = 45;
-  for (let i = 0; i < lines.length; i += maxLinesPerPage) pages.push(lines.slice(i, i + maxLinesPerPage));
+function createSimplePdfBlob(blocks: PdfBlock[]) {
+  const pageWidth = 595;
+  const pageHeight = 842;
+  const marginX = 48;
+  const topMargin = 58;
+  const bottomMargin = 52;
+  let y = topMargin;
+  const pages: string[][] = [[]];
+  let current = pages[0];
+
+  const newPage = () => {
+    current = [];
+    pages.push(current);
+    y = topMargin;
+  };
+
+  const write = (command: string) => current.push(command);
+  const ensureSpace = (height: number) => {
+    if (y + height > pageHeight - bottomMargin) newPage();
+  };
+  const textCommand = (font: "F1" | "F2", size: number, x: number, yy: number, text: string) => `BT /${font} ${size} Tf ${x} ${pageHeight - yy} Td (${pdfEscape(text)}) Tj ET`;
+  const drawText = (text: string, font: "F1" | "F2", size: number, x: number, lineHeight: number, maxChars: number) => {
+    const lines = splitTextToLines(text, maxChars);
+    ensureSpace(lines.length * lineHeight + 2);
+    lines.forEach((line) => {
+      write(textCommand(font, size, x, y, line));
+      y += lineHeight;
+    });
+  };
+
+  blocks.forEach((block) => {
+    const text = cleanPdfText(block.text || "");
+    if (block.type !== "divider" && !text) return;
+    if (block.type === "divider") {
+      ensureSpace(24);
+      y += 10;
+      write(`0.85 0.85 0.82 RG ${marginX} ${pageHeight - y} m ${pageWidth - marginX} ${pageHeight - y} l S`);
+      y += 18;
+      return;
+    }
+    if (block.type === "title") {
+      ensureSpace(54);
+      drawText(text, "F2", 24, marginX, 30, 36);
+      y += 4;
+      return;
+    }
+    if (block.type === "meta") {
+      drawText(text, "F1", 10, marginX, 15, 90);
+      return;
+    }
+    if (block.type === "h2") {
+      ensureSpace(34);
+      y += 4;
+      drawText(text, "F2", 16, marginX, 22, 58);
+      return;
+    }
+    if (block.type === "h3") {
+      ensureSpace(26);
+      y += 2;
+      drawText(text, "F2", 12, marginX, 17, 74);
+      return;
+    }
+    if (block.type === "small") {
+      drawText(text, "F1", 9, marginX, 13, 96);
+      y += 2;
+      return;
+    }
+    if (block.type === "bullet") {
+      const lines = splitTextToLines(text, 86);
+      ensureSpace(lines.length * 13 + 8);
+      write(textCommand("F1", 10, marginX + 6, y, `- ${lines[0] || ""}`));
+      y += 13;
+      lines.slice(1).forEach((line) => {
+        write(textCommand("F1", 10, marginX + 18, y, line));
+        y += 13;
+      });
+      y += 2;
+      return;
+    }
+    drawText(text, "F1", 10.5, marginX, 15, 88);
+    y += 3;
+  });
 
   const objects: string[] = [];
   const addObject = (content: string) => {
     objects.push(content);
     return objects.length;
   };
-
-  const fontId = addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");
+  const fontRegularId = addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");
+  const fontBoldId = addObject("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
   const pageIds: number[] = [];
 
-  pages.forEach((pageLines) => {
-    const streamLines = ["BT", "/F1 11 Tf", "50 790 Td", "14 TL"];
-    pageLines.forEach((line, index) => {
-      const escaped = pdfEscape(line);
-      if (index === 0) streamLines.push(`(${escaped}) Tj`);
-      else streamLines.push(`T* (${escaped}) Tj`);
-    });
-    streamLines.push("ET");
-    const stream = streamLines.join("\n");
+  pages.forEach((commands, pageIndex) => {
+    const footer = textCommand("F1", 8, pageWidth - 92, pageHeight - 26, `${pageIndex + 1}/${pages.length}`);
+    const stream = [...commands, footer].join("\n");
     const contentId = addObject(`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`);
-    const pageId = addObject(`<< /Type /Page /Parent 0 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${fontId} 0 R >> >> /Contents ${contentId} 0 R >>`);
+    const pageId = addObject(`<< /Type /Page /Parent 0 0 R /MediaBox [0 0 ${pageWidth} ${pageHeight}] /Resources << /Font << /F1 ${fontRegularId} 0 R /F2 ${fontBoldId} 0 R >> >> /Contents ${contentId} 0 R >>`);
     pageIds.push(pageId);
   });
 
@@ -354,7 +512,7 @@ function JourneyDrawer({
                 >
                   <div>
                     <h3 className="text-lg font-semibold">Quer levar isso com você?</h3>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">Preencha seus dados para baixar um PDF com as informações que apareceram nas respostas geradas.</p>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">Preencha seus dados para baixar um PDF com o resumo dos resultados que apareceram na página.</p>
                   </div>
                   <div className="grid gap-2 sm:grid-cols-2">
                     <Input value={leadName} onChange={(event) => onLeadNameChange(event.target.value)} placeholder="Nome" aria-label="Nome" />
@@ -366,7 +524,7 @@ function JourneyDrawer({
               ) : (
                 <div>
                   <h3 className="text-lg font-semibold">Seu resumo está pronto</h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">Baixe o PDF com o conteúdo das respostas ou compartilhe uma versão curta pelo WhatsApp.</p>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">Baixe o PDF com o conteúdo organizado dos seus resultados ou compartilhe uma versão curta pelo WhatsApp.</p>
                   <div className="mt-4 grid gap-2">
                     <Button onClick={onDownloadSummary}>Baixar PDF</Button>
                     <Button variant="outline" onClick={onShareWhatsApp}>Enviar por WhatsApp</Button>
@@ -503,19 +661,19 @@ export default function Page() {
   }
 
   function downloadSummary() {
-    const summary = buildResultSummary(journeys, leadName);
-    const blob = createSimplePdfBlob(summary);
+    const blocks = buildPdfBlocks(journeys, leadName);
+    const blob = createSimplePdfBlob(blocks);
     downloadBlob(blob, "resumo-vestibular-fgv.pdf");
   }
 
   function shareWhatsAppSummary() {
     const latest = journeys[0];
-    const summary = buildResultSummary(journeys.slice(0, 3), leadName);
     const shortText = [
-      "Resumo da minha navegação no Vestibular FGV",
+      "Resumo do meu resultado no Vestibular FGV",
       latest ? `Última resposta: ${latest.title}` : "",
+      latest?.plan?.answer ? cleanPdfText(latest.plan.answer) : "",
       "",
-      summary.split("\n").slice(0, 14).join("\n"),
+      "Baixei um resumo com cursos, datas, formas de ingresso e próximos caminhos para a graduação FGV."
     ].filter(Boolean).join("\n");
     window.open(`https://wa.me/?text=${encodeURIComponent(shortText)}`, "_blank", "noopener,noreferrer");
   }
