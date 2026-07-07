@@ -568,7 +568,9 @@ function resolveSections(plan, message) {
   const selectedAdmissions = matchAdmissionTypes(message, plan.entities?.admissionTypeIds || plan.entities?.admissionTypes || []);
   const specificCourseContext = () => isSpecificCourseContext(message, selectedCourses, cityHints);
   const broadCourseContext = () => isBroadCourseExploration(message, selectedCourses, cityHints);
-  const specificAdmissionContext = selectedAdmissions.length === 1;
+  // O catálogo só tem FAQ cadastrado para a modalidade "Vestibular FGV" — sem essa checagem, uma pergunta
+  // sobre outra modalidade (ex.: Demanda Social) herdaria por engano as dúvidas do Vestibular FGV.
+  const vestibularFgvContext = sig.asksVestibularSpecific || selectedAdmissions.some((item) => item.id === "vestibular-fgv");
   const resolved = [];
   const addSection = (section) => {
     if (!section) return;
@@ -684,12 +686,7 @@ function resolveSections(plan, message) {
     }
 
     if (section.type === "admission_options") {
-      if (specificAdmissionContext) {
-        const acceptingCourses = coursesAcceptingAdmission(selectedAdmissions[0]);
-        if (acceptingCourses.length) addSection({ type: "course_cards", title: `Cursos que aceitam ${selectedAdmissions[0].label}`, intro: "Veja em quais cursos você pode usar essa forma de ingresso.", layout: acceptingCourses.length > 3 ? "tabs_by_city" : "cards", items: acceptingCourses, actions: [] });
-      } else {
-        addSection({ ...sectionBase(section, "admission_options", "Formas de ingresso", "Confira as modalidades relacionadas à sua busca."), items: admissionItems(message, selectedCourses, section.admissionTypeIds) });
-      }
+      addSection({ ...sectionBase(section, "admission_options", "Formas de ingresso", "Confira as modalidades relacionadas à sua busca."), items: admissionItems(message, selectedCourses, section.admissionTypeIds) });
     }
 
     if (section.type === "timeline") {
@@ -733,7 +730,7 @@ function resolveSections(plan, message) {
       if (items.length) addSection({ ...sectionBase(section, "admission_details", "Como funciona o Vestibular FGV", "Veja o essencial sobre a prova, a inscrição e a preparação para essa forma de ingresso.", "cards"), items });
     }
 
-    if (section.type === "faq") {
+    if (section.type === "faq" && vestibularFgvContext) {
       const items = vestibularFaqItems();
       if (items.length) addSection({ ...sectionBase(section, "faq", "Perguntas frequentes sobre o Vestibular FGV", "Tire suas dúvidas antes de se inscrever.", "accordion"), items });
     }
@@ -753,10 +750,7 @@ function resolveSections(plan, message) {
     }
   }
 
-  if (specificAdmissionContext && !selectedCourses.length && !resolved.some((section) => section.type === "course_cards")) {
-    const acceptingCourses = coursesAcceptingAdmission(selectedAdmissions[0]);
-    if (acceptingCourses.length) addSection({ type: "course_cards", title: `Cursos que aceitam ${selectedAdmissions[0].label}`, intro: "Veja em quais cursos você pode usar essa forma de ingresso.", layout: acceptingCourses.length > 3 ? "tabs_by_city" : "cards", items: acceptingCourses, actions: [] });
-  } else if ((sig.asksAdmission || sig.asksDate) && !resolved.some((section) => section.type === "admission_options") && !selectedCourses.length) {
+  if ((sig.asksAdmission || sig.asksDate) && !resolved.some((section) => section.type === "admission_options") && !selectedCourses.length) {
     addSection({ type: "admission_options", title: "Formas de ingresso", intro: "Veja as modalidades e períodos informados para este processo seletivo.", layout: "cards", items: admissionItems(message, selectedCourses, selectedAdmissions.map((item) => item.id)), actions: [] });
   }
 
@@ -800,7 +794,7 @@ function resolveSections(plan, message) {
     if (items.length) addSection({ type: "prep_materials", title: "Prepare-se para o Vestibular FGV", intro: "Use provas anteriores, gabaritos e materiais do processo seletivo para organizar seus estudos.", layout: "cards", items: items.slice(0, 4), actions: [] });
   }
 
-  if (sig.asksFaq && !resolved.some((section) => section.type === "faq")) {
+  if (sig.asksFaq && vestibularFgvContext && !resolved.some((section) => section.type === "faq")) {
     const items = vestibularFaqItems();
     if (items.length) addSection({ type: "faq", title: "Perguntas frequentes sobre o Vestibular FGV", intro: "Tire suas dúvidas antes de se inscrever.", layout: "accordion", items, actions: [] });
   }
@@ -1032,14 +1026,14 @@ Matriz de navegação por intenção:
    - Não mostre todas as formas de ingresso nesse caso.
    - Use timeline primeiro, depois admission_details, prep_materials e events quando houver.
    - Se a base tiver startDate e endDate, cite o período explicitamente no answer.
-4b. De forma geral, quando a pessoa já está vendo os detalhes de uma forma de ingresso específica (Vestibular FGV, ENEM, Processo Seletivo Internacional, Demanda Social, Olimpíadas, Transferência), não use admission_options — repetir a mesma modalidade que já é o assunto da página não ajuda. Se fizer sentido, sugira em next_step ver os cursos que aceitam essa modalidade.
+4b. De forma geral, quando a pessoa já está vendo os detalhes de uma forma de ingresso específica (Vestibular FGV, ENEM, Processo Seletivo Internacional, Demanda Social, Olimpíadas, Transferência), não use admission_options — repetir a mesma modalidade que já é o assunto da página não ajuda. Em vez disso, se fizer sentido, monte você mesma uma seção course_cards com título "Cursos que aceitam [nome da modalidade]": use o campo admissions de cada curso na BASE_DO_SITE para descobrir quais cursos aceitam essa modalidade e liste os courseIds correspondentes. Se os cursos identificados estiverem em mais de uma cidade, use layout tabs_by_city para organizar por cidade.
 5. Para pergunta ampla sobre datas, inscrição, prazo ou processo seletivo:
    - Use timeline primeiro.
    - Depois use admission_options e course_cards quando for útil.
    - Se a base tiver startDate e endDate, cite o período explicitamente no answer.
-6. Para pergunta sobre bolsa, inclua scholarships.
+6. Para pergunta sobre bolsa, inclua scholarships. As bolsas de estudo da BASE_DO_SITE não têm relação com nenhuma forma de ingresso. Ao mostrar bolsas numa página sobre uma forma de ingresso específica, escreva o título e a intro dessa seção exatamente como escreveria numa página geral sobre bolsas — por exemplo "Bolsas de estudo" / "Conheça as bolsas de estudo disponíveis para a graduação FGV" — sem mencionar a modalidade de ingresso da página atual.
 7. Para pergunta sobre preparação, prova, gabarito ou Vestibular FGV, inclua prep_materials quando houver materiais úteis na base.
-8. Para dúvidas comuns sobre a prova do Vestibular FGV (se é presencial, o que pode levar, conteúdo programático, mudança de cidade de prova), use o tipo faq com as perguntas e respostas de admissionTypes[].faq na BASE_DO_SITE. Não invente perguntas nem respostas fora dessa lista.
+8. O FAQ em admissionTypes[].faq só existe para a modalidade Vestibular FGV — use o tipo faq apenas quando a pergunta for sobre dúvidas comuns dessa modalidade específica (se é presencial, o que pode levar, conteúdo programático, mudança de cidade de prova). Não use faq para ENEM, Processo Seletivo Internacional, Demanda Social, Olimpíadas ou Transferência: não há dados de dúvidas frequentes para essas modalidades na base, e usar o FAQ do Vestibular FGV nelas estaria errado. Nunca invente perguntas nem respostas fora da lista.
 9. Enquanto qualquer modalidade estiver com status de inscrições em breve, a experiência deve oferecer cadastro para aviso. Use leadCapture.show=true sempre que a pessoa pedir aviso, perguntar por abertura de inscrição, datas, curso, formas de ingresso, bolsas ou processo seletivo. O backend também forçará esse bloco quando houver inscrições em breve.
 10. Nunca termine uma renderização sem oferecer alguma continuidade útil para a pessoa. Use next_step com poucas opções contextuais, variadas e relacionadas ao que apareceu na página.
 11. Se o pedido estiver fora do escopo do Vestibular FGV, use warning e ofereça caminhos de cursos, formas de ingresso, bolsas, eventos ou provas.
