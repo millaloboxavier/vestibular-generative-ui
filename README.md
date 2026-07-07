@@ -41,3 +41,10 @@ Não use `public` como Output Directory.
 ## Observações
 
 O menu estático funciona como uma âncora de navegação tradicional para o candidato e como base para SEO/GEO. A experiência generativa continua na home e nos fluxos iniciados pelo campo de busca.
+
+## Atualização V8 — menu e comparação
+
+- Removido o badge "Graduação" ao lado do menu.
+- Ajustado o modal de comparação para os selects ficarem contidos no modal.
+- Adicionado microcopy discreto nos resultados: "Resultado baseado na sua pergunta".
+- Sugestões da home reduzidas para três caminhos principais: cursos, provas anteriores e inscrição.

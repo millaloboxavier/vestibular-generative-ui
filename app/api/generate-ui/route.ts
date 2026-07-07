@@ -954,7 +954,7 @@ export async function POST(request) {
 
   const apiKey = process.env.OPENAI_API_KEY || process.env.api_vestibular;
   if (!apiKey) {
-    return NextResponse.json({ error: "OPENAI_API_KEY não configurada na Vercel.", mode: "missing_api_key" }, { status: 500 });
+    return NextResponse.json({ error: "OPENAI_API_KEY não configurada. Defina a variável de ambiente localmente antes de testar.", mode: "missing_api_key" }, { status: 500 });
   }
 
   const dataCatalog = catalog();

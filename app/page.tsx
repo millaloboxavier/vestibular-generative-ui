@@ -11,11 +11,8 @@ import siteData from "@/data/vestibular-content.json";
 
 const suggestions = [
   "quais cursos de graduação a FGV oferece?",
-  "quando abre a inscrição do Vestibular FGV?",
-  "posso usar minha nota do Enem?",
-  "quero estudar para o Vestibular FGV",
-  "tem bolsa de estudo?",
-  "quais eventos tem em São Paulo?",
+  "quero estudar com provas anteriores",
+  "quero me inscrever",
 ];
 
 const loadingSteps = [
@@ -72,13 +69,13 @@ const completeMenuItems = [
   { label: "Contato", href: "/contato" },
 ];
 
-function Header({ hasResult }: { hasResult: boolean }) {
+function Header({ hasResult, onLogoClick }: { hasResult: boolean; onLogoClick?: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6">
-        <Link href="/" className="flex items-center gap-3 font-semibold transition-opacity hover:opacity-75" aria-label="Ir para a página inicial do Vestibular FGV">
+        <Link href="/" onClick={onLogoClick} className="flex items-center gap-3 font-semibold transition-opacity hover:opacity-75" aria-label="Ir para a página inicial do Vestibular FGV">
           <span className="h-8 w-8 rounded-full bg-foreground md:h-9 md:w-9" />
           <span className="text-lg md:text-xl">Vestibular FGV</span>
         </Link>
@@ -92,7 +89,6 @@ function Header({ hasResult }: { hasResult: boolean }) {
         </nav>
 
         <div className="relative flex items-center gap-2">
-          <Badge className={hasResult ? "hidden opacity-100 sm:inline-flex" : "hidden opacity-0 sm:inline-flex"}>Graduação</Badge>
           <Button
             type="button"
             variant="outline"
@@ -534,7 +530,7 @@ function JourneyDrawer({
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Histórico</p>
             <h2 className="mt-1 text-xl font-semibold">Suas perguntas</h2>
-            <p className="mt-1 text-sm leading-6 text-muted-foreground">Volte para qualquer resposta anterior sem perguntar de novo.</p>
+            <p className="mt-1 text-sm leading-5 text-muted-foreground">Volte para qualquer resposta anterior sem perguntar de novo.</p>
           </div>
           <Button variant="ghost" size="icon" onClick={onClose} aria-label="Fechar histórico">
             <X className="h-5 w-5" />
@@ -658,16 +654,16 @@ function CompareCourseModal({
           </Button>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <label className="grid gap-2 text-sm font-medium">
+        <div className="mt-6 grid min-w-0 gap-4 md:grid-cols-2">
+          <label className="grid min-w-0 gap-2 text-sm font-medium">
             Primeiro curso
-            <select value={firstCourseId} onChange={(event) => setFirstCourseId(event.target.value)} className="h-12 rounded-2xl border bg-muted px-4 text-sm outline-none focus:border-foreground focus:bg-background">
+            <select value={firstCourseId} onChange={(event) => setFirstCourseId(event.target.value)} className="h-12 w-full min-w-0 appearance-none truncate rounded-2xl border bg-muted px-4 pr-10 text-sm outline-none focus:border-foreground focus:bg-background">
               {courses.map((course: any) => <option key={course.id} value={course.id}>{courseOptionLabel(course)}</option>)}
             </select>
           </label>
-          <label className="grid gap-2 text-sm font-medium">
+          <label className="grid min-w-0 gap-2 text-sm font-medium">
             Segundo curso
-            <select value={secondCourseId} onChange={(event) => setSecondCourseId(event.target.value)} className="h-12 rounded-2xl border bg-muted px-4 text-sm outline-none focus:border-foreground focus:bg-background">
+            <select value={secondCourseId} onChange={(event) => setSecondCourseId(event.target.value)} className="h-12 w-full min-w-0 appearance-none truncate rounded-2xl border bg-muted px-4 pr-10 text-sm outline-none focus:border-foreground focus:bg-background">
               {courses.map((course: any) => <option key={course.id} value={course.id}>{courseOptionLabel(course)}</option>)}
             </select>
           </label>
@@ -700,6 +696,7 @@ export default function Page() {
   const [summaryUnlocked, setSummaryUnlocked] = useState(false);
   const [compareOpen, setCompareOpen] = useState(false);
   const topRef = useRef<HTMLDivElement>(null);
+  const isFirstJourneysWriteRef = useRef(true);
 
   const sections = useMemo(() => plan?.sections || [], [plan]);
 
@@ -718,6 +715,10 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
+    if (isFirstJourneysWriteRef.current) {
+      isFirstJourneysWriteRef.current = false;
+      return;
+    }
     try {
       window.localStorage.setItem("vestibular-ia-journey", JSON.stringify(journeys.slice(0, 12)));
     } catch {}
@@ -833,11 +834,24 @@ export default function Page() {
     submitQuestion(input);
   }
 
+  function resetHome() {
+    setInput("");
+    setCurrentQuestion("");
+    setPlan(null);
+    setVisibleCount(0);
+    setLoading(false);
+    setError("");
+    setActiveJourneyId(undefined);
+    setDrawerOpen(false);
+    setCompareOpen(false);
+    topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   const hasResult = Boolean(plan || loading || error || currentQuestion);
 
   return (
     <main ref={topRef} className="min-h-screen bg-background">
-      <Header hasResult={hasResult} />
+      <Header hasResult={hasResult} onLogoClick={resetHome} />
       <JourneyDrawer
         open={drawerOpen}
         journeys={journeys}
@@ -865,8 +879,8 @@ export default function Page() {
           <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-foreground text-background">
             <Sparkles className="h-7 w-7" />
           </div>
-          <h1 className="max-w-3xl text-3xl font-semibold tracking-tight md:text-5xl">Encontre o melhor caminho para sua graduação na FGV</h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">Pergunte sobre cursos, inscrições, formas de ingresso, bolsas, provas ou eventos da graduação.</p>
+          <h1 className="max-w-3xl text-3xl font-semibold tracking-tight md:text-5xl">Comece sua jornada para a Graduação FGV</h1>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">Pergunte sobre cursos, inscrições, formas de ingresso, provas e prepare-se seu futuro na FGV.</p>
           <form onSubmit={onSubmit} className="mt-10 flex w-full max-w-2xl gap-2 rounded-full border bg-muted p-2">
             <Input value={input} onChange={(event) => setInput(event.target.value)} placeholder="ex: quando abre a inscrição do Vestibular FGV?" className="border-0 bg-transparent focus:bg-transparent focus:ring-0" />
             <Button type="submit" size="icon" disabled={!input.trim() || loading} aria-label="Buscar"><ArrowUp className="h-5 w-5" /></Button>
@@ -876,7 +890,7 @@ export default function Page() {
           </div>
           {journeys.length ? (
             <Button variant="ghost" className="mt-8 gap-2" onClick={() => setDrawerOpen(true)}>
-              <Menu className="h-4 w-4" /> Ver histórico
+              <History className="h-4 w-4" /> Histórico de perguntas
             </Button>
           ) : null}
         </section>
@@ -891,7 +905,7 @@ export default function Page() {
               {journeys.length ? (
                 <Button variant="outline" onClick={() => setDrawerOpen(true)} className="shrink-0 gap-2 rounded-full px-4">
                   <History className="h-4 w-4" />
-                  <span className="hidden sm:inline">Histórico</span>
+                  <span className="hidden sm:inline">Histórico de perguntas</span>
                   <Badge className="ml-1">{journeys.length}</Badge>
                 </Button>
               ) : null}
@@ -931,6 +945,7 @@ export default function Page() {
             {plan ? (
               <div className="mt-6 space-y-6">
                 <div className="rounded-[1.5rem] border p-5 md:p-6">
+                  <p className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Esta página foi criada baseada na sua pergunta</p>
                   <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{plan.pageTitle}</h1>
                   {plan.answer ? <p className="mt-3 text-base leading-7 text-muted-foreground md:text-lg">{plan.answer}</p> : null}
                 </div>
