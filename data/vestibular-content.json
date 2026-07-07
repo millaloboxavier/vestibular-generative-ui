@@ -248,6 +248,278 @@
           "type": "avaliação MEC"
         }
       ]
+    },
+    {
+      "id": "direito-sp",
+      "name": "FGV Direito SP",
+      "fullName": "FGV Direito SP - Escola de Direito de São Paulo",
+      "city": "São Paulo",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV Direito SP",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV Direito SP.",
+      "recognitions": [
+        {
+          "id": "rede-internacional",
+          "title": "Rede internacional",
+          "description": "A escola informa acordos com mais de 40 instituições estrangeiras.",
+          "type": ""
+        },
+        {
+          "id": "enade-e-igc-mec",
+          "title": "ENADE e IGC/MEC",
+          "description": "A página do curso destaca conceitos máximos em indicadores oficiais.",
+          "type": ""
+        },
+        {
+          "id": "redes-globais-de-direito",
+          "title": "Redes globais de Direito",
+          "description": "Participação em redes e programas internacionais de escolas de Direito.",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "eesp",
+      "name": "FGV EESP",
+      "fullName": "FGV EESP - Escola de Economia de São Paulo",
+      "city": "São Paulo",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV EESP",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV EESP.",
+      "recognitions": [
+        {
+          "id": "referencia-em-pesquisa-economica",
+          "title": "Referência em pesquisa econômica",
+          "description": "A página do curso destaca a FGV EESP entre as principais referências brasileiras em pesquisa econômica.",
+          "type": ""
+        },
+        {
+          "id": "enade-e-igc-mec",
+          "title": "ENADE e IGC/MEC",
+          "description": "A página destaca desempenho máximo e liderança em avaliações oficiais.",
+          "type": ""
+        },
+        {
+          "id": "ranking-ideas-repec",
+          "title": "Ranking IDEAS/RePEc",
+          "description": "A escola informa posição de destaque em pesquisa econômica no Brasil.",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "ri",
+      "name": "FGV RI",
+      "fullName": "FGV RI - Escola de Relações Internacionais",
+      "city": "São Paulo",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV RI",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV RI.",
+      "recognitions": [
+        {
+          "id": "guia-da-faculdade",
+          "title": "Guia da Faculdade",
+          "description": "A página destaca nota máxima no Guia da Faculdade 2023.",
+          "type": ""
+        },
+        {
+          "id": "enade",
+          "title": "ENADE",
+          "description": "A página destaca nota máxima no ENADE 2023.",
+          "type": ""
+        },
+        {
+          "id": "parcerias-internacionais",
+          "title": "Parcerias internacionais",
+          "description": "A FGV informa mais de 200 parcerias internacionais em sua graduação.",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "ebape",
+      "name": "FGV EBAPE",
+      "fullName": "FGV EBAPE - Escola Brasileira de Administração Pública e de Empresas",
+      "city": "Rio de Janeiro",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV EBAPE",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV EBAPE.",
+      "recognitions": [
+        {
+          "id": "acreditacoes-internacionais",
+          "title": "Acreditações internacionais",
+          "description": "A página destaca acreditações como EQUIS, AACSB, ICAPA e NASPAA associadas à escola.",
+          "type": ""
+        },
+        {
+          "id": "enade-e-igc-mec",
+          "title": "ENADE e IGC/MEC",
+          "description": "A página informa conceito máximo e posição de destaque em avaliações oficiais.",
+          "type": ""
+        },
+        {
+          "id": "empregabilidade",
+          "title": "Empregabilidade",
+          "description": "A página destaca alto índice de empregabilidade dos alunos.",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "emap",
+      "name": "FGV EMAp",
+      "fullName": "FGV EMAp - Escola de Matemática Aplicada",
+      "city": "Rio de Janeiro",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV EMAp",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV EMAp.",
+      "recognitions": [
+        {
+          "id": "igc-mec",
+          "title": "IGC/MEC",
+          "description": "A página destaca nota máxima no Índice Geral de Cursos do MEC.",
+          "type": ""
+        },
+        {
+          "id": "enade",
+          "title": "ENADE",
+          "description": "A página destaca a escola como 1º lugar entre instituições privadas em Matemática e 3º lugar geral no Brasil.",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "cpdoc",
+      "name": "FGV CPDOC",
+      "fullName": "FGV CPDOC - Escola de Ciências Sociais",
+      "city": "Rio de Janeiro",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV CPDOC",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV CPDOC.",
+      "recognitions": [
+        {
+          "id": "igc-mec",
+          "title": "IGC/MEC",
+          "description": "A página destaca o CPDOC em posição de liderança no IGC/MEC.",
+          "type": ""
+        },
+        {
+          "id": "enade",
+          "title": "ENADE",
+          "description": "A página informa conceito máximo no ENADE 2021.",
+          "type": ""
+        },
+        {
+          "id": "reconhecimento-academico",
+          "title": "Reconhecimento acadêmico",
+          "description": "A página cita prêmios e reconhecimentos ligados ao CPDOC.",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "comunicacao",
+      "name": "FGV Comunicação",
+      "fullName": "FGV Comunicação Rio",
+      "city": "Rio de Janeiro",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV Comunicação",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV Comunicação.",
+      "recognitions": [
+        {
+          "id": "pioneirismo",
+          "title": "Pioneirismo",
+          "description": "A página afirma que a FGV Comunicação foi a primeira no Brasil a incorporar Data Science em uma graduação em Comunicação.",
+          "type": ""
+        },
+        {
+          "id": "rede-internacional",
+          "title": "Rede internacional",
+          "description": "A página destaca redes parceiras nos EUA e na Europa.",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "direito-rio",
+      "name": "FGV Direito Rio",
+      "fullName": "FGV Direito Rio",
+      "city": "Rio de Janeiro",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV Direito Rio",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV Direito Rio.",
+      "recognitions": [
+        {
+          "id": "enade",
+          "title": "ENADE",
+          "description": "A página destaca nota máxima e liderança nacional em avaliação do curso.",
+          "type": ""
+        },
+        {
+          "id": "oab-recomenda",
+          "title": "OAB Recomenda",
+          "description": "A escola informa reconhecimento recorrente em indicadores da OAB.",
+          "type": ""
+        },
+        {
+          "id": "igc-mec",
+          "title": "IGC/MEC",
+          "description": "A página destaca conceito máximo em indicadores oficiais.",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "epge",
+      "name": "FGV EPGE",
+      "fullName": "FGV EPGE - Escola Brasileira de Economia e Finanças",
+      "city": "Rio de Janeiro",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV EPGE",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV EPGE.",
+      "recognitions": [
+        {
+          "id": "igc-mec",
+          "title": "IGC/MEC",
+          "description": "A página informa a EPGE em 1º lugar no IGC/MEC em 9 de 16 avaliações.",
+          "type": ""
+        },
+        {
+          "id": "enade",
+          "title": "ENADE",
+          "description": "A página destaca 1º lugar no ENADE de Economia em 4 de 6 avaliações.",
+          "type": ""
+        },
+        {
+          "id": "ruf",
+          "title": "RUF",
+          "description": "A página cita 1º lugar entre cursos privados de Economia no RUF 2024/2025.",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "id": "eppg",
+      "name": "FGV EPPG",
+      "fullName": "FGV EPPG - Escola de Políticas Públicas e Governo",
+      "city": "Brasília",
+      "summary": "",
+      "recognitionsTitle": "Reconhecimentos da FGV EPPG",
+      "recognitionsIntro": "Conheça reconhecimentos acadêmicos e institucionais ligados à FGV EPPG.",
+      "recognitions": [
+        {
+          "id": "think-tank",
+          "title": "Think Tank",
+          "description": "A página destaca a FGV entre os principais think tanks do mundo no Global Go To Think Tank Index Report.",
+          "type": ""
+        },
+        {
+          "id": "influencia",
+          "title": "Influência",
+          "description": "A página destaca a FGV como única brasileira entre instituições de ensino superior mais influentes do mundo segundo o LinkedIn.",
+          "type": ""
+        }
+      ]
     }
   ],
   "courses": [
@@ -409,6 +681,70 @@
         "impacto social",
         "São Paulo",
         "EAESP"
+      ],
+      "schoolId": "eaesp",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer compreender como decisões públicas afetam a vida das pessoas, das empresas e das cidades.",
+      "courseDifferentials": [
+        {
+          "id": "dupla-graduacao-e-formacao-complementar",
+          "title": "Dupla graduação e formação complementar",
+          "shortDescription": "Possibilidade de combinar a trajetória com Direito, Economia ou outras áreas, conforme regras da escola.",
+          "type": ""
+        },
+        {
+          "id": "experiencias-praticas",
+          "title": "Experiências práticas",
+          "shortDescription": "Atividades de campo, visitas, projetos e conexão com problemas públicos reais.",
+          "type": ""
+        },
+        {
+          "id": "carreira-com-impacto",
+          "title": "Carreira com impacto",
+          "shortDescription": "Apoio de carreira e preparação para atuação em governo, empresas, terceiro setor, consultorias e organismos internacionais.",
+          "type": ""
+        },
+        {
+          "id": "internacionalizacao",
+          "title": "Internacionalização",
+          "shortDescription": "A escola destaca parcerias internacionais e oportunidades de intercâmbio.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "+110",
+          "label": "instituições parceiras internacionais"
+        },
+        {
+          "value": "33%",
+          "label": "estudantes com algum tipo de bolsa, segundo a página do curso"
+        }
+      ],
+      "careerPaths": [
+        "Gestão pública e políticas públicas",
+        "Educação, saúde, cultura, esporte e sustentabilidade",
+        "Relações governamentais e responsabilidade social",
+        "Consultorias e concessões públicas",
+        "Organizações internacionais e terceiro setor"
+      ],
+      "testimonials": [],
+      "videos": [
+        {
+          "id": "administracao-publica-sp-video-1",
+          "title": "FGV EAESP | Graduação em Administração Pública | AP",
+          "videoId": "LWylY-ydfQc"
+        },
+        {
+          "id": "administracao-publica-sp-video-2",
+          "title": "Aula Simulada do curso de Graduação em Administração Pública",
+          "videoId": "EBmNfSZZd6E"
+        },
+        {
+          "id": "administracao-publica-sp-video-3",
+          "title": "FGV EAESP | Germano Guimarães, aluno formado em Administração Pública",
+          "videoId": "-96uFGU3WkE"
+        }
       ]
     },
     {
@@ -442,6 +778,70 @@
         "São Paulo",
         "dupla graduação",
         "Direito SP"
+      ],
+      "schoolId": "direito-sp",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "O curso foi desenhado para ir além do ensino jurídico tradicional, colocando o estudante diante de problemas concretos, debates atuais e aplicações práticas do Direito.",
+      "courseDifferentials": [
+        {
+          "id": "aprendizagem-pratica",
+          "title": "Aprendizagem prática",
+          "shortDescription": "Estudos de caso, simulações, jogos, projetos e resolução de problemas jurídicos concretos.",
+          "type": ""
+        },
+        {
+          "id": "formacao-multidisciplinar",
+          "title": "Formação multidisciplinar",
+          "shortDescription": "Contato com temas de economia, administração, relações internacionais, políticas públicas e inovação.",
+          "type": ""
+        },
+        {
+          "id": "dupla-graduacao",
+          "title": "Dupla graduação",
+          "shortDescription": "Possibilidades de dupla graduação com outras escolas da FGV, conforme regras acadêmicas.",
+          "type": ""
+        },
+        {
+          "id": "atencao-individualizada",
+          "title": "Atenção individualizada",
+          "shortDescription": "Estrutura com proximidade entre estudantes e professores qualificados.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "+40",
+          "label": "acordos com escolas estrangeiras"
+        },
+        {
+          "value": "20 anos",
+          "label": "de ensino e inovação destacados pela escola"
+        }
+      ],
+      "careerPaths": [
+        "Advocacia empresarial, societária, tributária, regulatória e contenciosa",
+        "Carreiras públicas",
+        "Organizações internacionais",
+        "Pesquisa e docência",
+        "Tecnologia, inovação, negócios e impacto social"
+      ],
+      "testimonials": [],
+      "videos": [
+        {
+          "id": "direito-sp-video-1",
+          "title": "Graduação | Curso de Direito FGV Direito SP | São Paulo",
+          "videoId": "AnVQMTzDFH8"
+        },
+        {
+          "id": "direito-sp-video-2",
+          "title": "Webinar | Vestibular FGV Direito SP – Tire suas dúvidas",
+          "videoId": "ACkisb7DmPM"
+        },
+        {
+          "id": "direito-sp-video-3",
+          "title": "Dupla Graduação Direito e Administração",
+          "videoId": "05OsSTJW5Tc"
+        }
       ]
     },
     {
@@ -469,6 +869,71 @@
         "políticas públicas",
         "São Paulo",
         "EESP"
+      ],
+      "schoolId": "eesp",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer analisar problemas econômicos com profundidade, dados, método e visão crítica.",
+      "courseDifferentials": [
+        {
+          "id": "enfases-de-formacao",
+          "title": "Ênfases de formação",
+          "shortDescription": "Finanças, Macroeconomia, Políticas Públicas, Economia Política, Negócios e trilha acadêmica.",
+          "type": ""
+        },
+        {
+          "id": "metodos-ativos",
+          "title": "Métodos ativos",
+          "shortDescription": "Uso de PBL, projetos, debates, exercícios, jogos, laboratórios e pesquisa aplicada.",
+          "type": ""
+        },
+        {
+          "id": "internacionalizacao",
+          "title": "Internacionalização",
+          "shortDescription": "Possibilidade de experiências internacionais a partir da etapa intermediária do curso.",
+          "type": ""
+        },
+        {
+          "id": "apoio-academico-e-profissional",
+          "title": "Apoio acadêmico e profissional",
+          "shortDescription": "Estruturas como NAPPE e SkillsLab apoiam desenvolvimento acadêmico, carreira e habilidades.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "6",
+          "label": "ênfases de formação"
+        },
+        {
+          "value": "até 15",
+          "label": "estudantes em disciplinas obrigatórias, segundo a página"
+        }
+      ],
+      "careerPaths": [
+        "Mercado financeiro e produtos financeiros",
+        "Políticas públicas",
+        "Estratégia e economia setorial",
+        "Finanças corporativas",
+        "Consultoria estratégica",
+        "Pesquisa econômica e carreira acadêmica"
+      ],
+      "testimonials": [],
+      "videos": [
+        {
+          "id": "economia-sp-video-1",
+          "title": "Graduação | Curso de Economia FGV EESP | São Paulo",
+          "videoId": "DCMkgnOuXt8"
+        },
+        {
+          "id": "economia-sp-video-2",
+          "title": "FGV EESP | Saiba mais sobre o curso de Graduação em Economia",
+          "videoId": "bDDvCNHtAd0"
+        },
+        {
+          "id": "economia-sp-video-3",
+          "title": "Webinar | Conheça o novo currículo da graduação em Economia",
+          "videoId": "z3OEMHeCEpE"
+        }
       ]
     },
     {
@@ -496,6 +961,82 @@
         "política",
         "São Paulo",
         "RI"
+      ],
+      "schoolId": "ri",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer entender o mundo em transformação e atuar com análise política, econômica, social e estratégica.",
+      "courseDifferentials": [
+        {
+          "id": "experiencia-internacional",
+          "title": "Experiência internacional",
+          "shortDescription": "O curso estimula intercâmbio, imersões, simulações, estágios, voluntariado e disciplinas em inglês.",
+          "type": ""
+        },
+        {
+          "id": "formacao-interdisciplinar",
+          "title": "Formação interdisciplinar",
+          "shortDescription": "Integra política, economia, história, dados, direito, negociação e análise de risco.",
+          "type": ""
+        },
+        {
+          "id": "corpo-docente-qualificado",
+          "title": "Corpo docente qualificado",
+          "shortDescription": "Professores com formação em instituições internacionais e experiência profissional em temas globais.",
+          "type": ""
+        },
+        {
+          "id": "preparacao-para-carreiras-globais",
+          "title": "Preparação para carreiras globais",
+          "shortDescription": "Contato com organizações internacionais, setor financeiro, consultorias, empresas, terceiro setor e setor público.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "+200",
+          "label": "parcerias internacionais FGV destacadas para a graduação"
+        },
+        {
+          "value": "Top 10",
+          "label": "think tank global citado nas informações institucionais da FGV"
+        }
+      ],
+      "careerPaths": [
+        "Organizações internacionais",
+        "Mercado financeiro e análise de risco político",
+        "Empresas multinacionais",
+        "Governo e diplomacia",
+        "Terceiro setor",
+        "Mídia, pesquisa e carreira acadêmica"
+      ],
+      "testimonials": [
+        {
+          "name": "Julia Duó",
+          "role": "estudante / depoimento da página do curso",
+          "quote": "A página do curso traz depoimento sobre a experiência na graduação e a escolha por Relações Internacionais na FGV."
+        },
+        {
+          "name": "Júlia Shimizu",
+          "role": "estudante / depoimento da página do curso",
+          "quote": "A página do curso traz depoimento sobre vivência acadêmica e perspectivas profissionais na área internacional."
+        }
+      ],
+      "videos": [
+        {
+          "id": "relacoes-internacionais-sp-video-1",
+          "title": "Graduação | Curso Relações Internacionais FGV RI | São Paulo",
+          "videoId": "7deDpZj0tPE"
+        },
+        {
+          "id": "relacoes-internacionais-sp-video-2",
+          "title": "DIA FGV LIVE - Relações Internacionais SP",
+          "videoId": "Uldrm62J1TM"
+        },
+        {
+          "id": "relacoes-internacionais-sp-video-3",
+          "title": "FGV Undergraduate | International Relations",
+          "videoId": "R0ahG6ROJeQ"
+        }
       ]
     },
     {
@@ -523,6 +1064,80 @@
         "negócios",
         "Rio de Janeiro",
         "EBAPE"
+      ],
+      "schoolId": "ebape",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem busca uma carreira em gestão com forte orientação internacional e conexão com problemas reais de organizações.",
+      "courseDifferentials": [
+        {
+          "id": "trilhas-de-especializacao",
+          "title": "Trilhas de especialização",
+          "shortDescription": "Nos períodos finais, o estudante pode aprofundar a formação em Finanças, International Business, Marketing & Entrepreneurship.",
+          "type": ""
+        },
+        {
+          "id": "experiencia-internacional",
+          "title": "Experiência internacional",
+          "shortDescription": "O curso destaca intercâmbio, dupla titulação e programas internacionais como parte da jornada.",
+          "type": ""
+        },
+        {
+          "id": "field-project-e-vivencias-organizacionais",
+          "title": "Field Project e vivências organizacionais",
+          "shortDescription": "Projetos aplicados aproximam o estudante de desafios reais de organizações.",
+          "type": ""
+        },
+        {
+          "id": "carreira-e-mentoria",
+          "title": "Carreira e mentoria",
+          "shortDescription": "Apoio para orientação profissional, rede Alumni, mentoria e oportunidades em plataformas internacionais.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "70 anos",
+          "label": "de trajetória da escola"
+        },
+        {
+          "value": "95%",
+          "label": "empregabilidade destacada na página"
+        },
+        {
+          "value": "+40",
+          "label": "parcerias internacionais"
+        }
+      ],
+      "careerPaths": [
+        "Gestão em empresas privadas",
+        "Setor público e organizações internacionais",
+        "Consultoria",
+        "Finanças, marketing e negócios internacionais",
+        "Empreendedorismo e inovação"
+      ],
+      "testimonials": [
+        {
+          "name": "Isabela Bahia",
+          "role": "aluna FGV EBAPE",
+          "quote": "A página do curso indica depoimento em vídeo da aluna sobre a experiência na graduação."
+        }
+      ],
+      "videos": [
+        {
+          "id": "administracao-rj-video-1",
+          "title": "Graduação | Curso de Administração de Empresas FGV EBAPE | Rio de Janeiro",
+          "videoId": "W5wISn98wy4"
+        },
+        {
+          "id": "administracao-rj-video-2",
+          "title": "FGV Undergraduate | Business Administration Course (Rio de Janeiro)",
+          "videoId": "dBft1d-4O8U"
+        },
+        {
+          "id": "administracao-rj-video-3",
+          "title": "Aula do curso de graduação em Administração - Vestibular EBAPE/FGV",
+          "videoId": "-LVnVzzw2jI"
+        }
       ]
     },
     {
@@ -558,6 +1173,56 @@
         "tecnologia",
         "Rio de Janeiro",
         "EMAp"
+      ],
+      "schoolId": "emap",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer usar matemática, estatística, computação e IA para resolver problemas concretos.",
+      "courseDifferentials": [
+        {
+          "id": "formacao-tecnica-forte",
+          "title": "Formação técnica forte",
+          "shortDescription": "Base em matemática, estatística, computação, análise de dados, Big Data e escrita científica.",
+          "type": ""
+        },
+        {
+          "id": "casos-reais-e-metodologia-participativa",
+          "title": "Casos reais e metodologia participativa",
+          "shortDescription": "O estudante trabalha com problemas concretos e métodos aplicados.",
+          "type": ""
+        },
+        {
+          "id": "internacionalizacao",
+          "title": "Internacionalização",
+          "shortDescription": "A escola destaca oportunidades de intercâmbio e conexões internacionais.",
+          "type": ""
+        },
+        {
+          "id": "aplicacao-em-multiplas-areas",
+          "title": "Aplicação em múltiplas áreas",
+          "shortDescription": "Mercado financeiro, saúde, tecnologia, consultoria, governo, varejo, pesquisa e terceiro setor.",
+          "type": ""
+        }
+      ],
+      "numbers": [],
+      "careerPaths": [
+        "Tecnologia e startups",
+        "Varejo, e-commerce e mídia",
+        "Consultoria e mercado financeiro",
+        "Saúde, farmacêuticas e epidemiologia",
+        "Governo, políticas públicas e pesquisa aplicada"
+      ],
+      "testimonials": [],
+      "videos": [
+        {
+          "id": "ciencia-dados-ia-rj-video-1",
+          "title": "DIA FGV LIVE - Aula simulada de Ciência de Dados",
+          "videoId": "3HprjaRgFOc"
+        },
+        {
+          "id": "ciencia-dados-ia-rj-video-2",
+          "title": "DIA FGV LIVE | Palestra do curso de Ciências de Dados",
+          "videoId": "hcrZSuPw9Sc"
+        }
       ]
     },
     {
@@ -585,6 +1250,77 @@
         "pesquisa",
         "Rio de Janeiro",
         "CPDOC"
+      ],
+      "schoolId": "cpdoc",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer compreender problemas sociais com profundidade e atuar com pesquisa, análise, políticas públicas, memória, cultura e dados.",
+      "courseDifferentials": [
+        {
+          "id": "teoria-e-pratica-de-pesquisa",
+          "title": "Teoria e prática de pesquisa",
+          "shortDescription": "O curso aproxima leitura crítica, métodos de pesquisa, laboratórios e investigação aplicada.",
+          "type": ""
+        },
+        {
+          "id": "acervo-e-memoria",
+          "title": "Acervo e memória",
+          "shortDescription": "Contato com um dos principais acervos de arquivos pessoais de personalidades públicas do país.",
+          "type": ""
+        },
+        {
+          "id": "interdisciplinaridade",
+          "title": "Interdisciplinaridade",
+          "shortDescription": "Possibilidade de dupla graduação e certificados complementares em áreas como Direito, Matemática Aplicada, Ciência de Dados, Economia, Comunicação Digital e Administração.",
+          "type": ""
+        },
+        {
+          "id": "parcerias-internacionais",
+          "title": "Parcerias internacionais",
+          "shortDescription": "A página destaca acordos com instituições internacionais, incluindo Sciences Po.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "50 anos",
+          "label": "de trajetória do CPDOC"
+        },
+        {
+          "value": "+20",
+          "label": "parcerias internacionais indicadas na página"
+        }
+      ],
+      "careerPaths": [
+        "Pesquisa social aplicada",
+        "Políticas públicas e planejamento",
+        "Organizações da sociedade civil",
+        "Consultoria política e social",
+        "Arquivos, memória, cultura e documentação",
+        "Carreira acadêmica"
+      ],
+      "testimonials": [
+        {
+          "name": "Rodrigo Torrero e Vatusi Paula",
+          "role": "depoimento da página do curso",
+          "quote": "A página traz depoimento sobre a experiência de formação e pesquisa em Ciências Sociais na FGV CPDOC."
+        },
+        {
+          "name": "Rebeca Freitas",
+          "role": "depoimento da página do curso",
+          "quote": "A página traz depoimento sobre a trajetória acadêmica no curso."
+        },
+        {
+          "name": "Anna Beatriz Oliveira",
+          "role": "depoimento da página do curso",
+          "quote": "A página traz depoimento sobre vivência na graduação e possibilidades de atuação."
+        }
+      ],
+      "videos": [
+        {
+          "id": "ciencias-sociais-rj-video-1",
+          "title": "Aula de graduação em Ciências Sociais - Vestibular CPDOC/FGV",
+          "videoId": "NfhDY6gkkos"
+        }
       ]
     },
     {
@@ -612,6 +1348,70 @@
         "digital",
         "mídia",
         "Rio de Janeiro"
+      ],
+      "schoolId": "comunicacao",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer entender como tecnologia, dados, linguagem, plataformas e cultura transformam a comunicação.",
+      "courseDifferentials": [
+        {
+          "id": "comunicacao-dados",
+          "title": "Comunicação + dados",
+          "shortDescription": "O curso une publicidade, jornalismo, linguística, cultura digital, estratégia, IA e Data Science.",
+          "type": ""
+        },
+        {
+          "id": "laboratorios-e-projetos",
+          "title": "Laboratórios e projetos",
+          "shortDescription": "Mídia Lab, DappLab e Agência de Comunicação Digital apoiam experiências práticas desde o início do curso.",
+          "type": ""
+        },
+        {
+          "id": "metodologias-ativas",
+          "title": "Metodologias ativas",
+          "shortDescription": "Casos, projetos e oficinas conectam os alunos a problemas de comunicação reais.",
+          "type": ""
+        },
+        {
+          "id": "internacionalizacao",
+          "title": "Internacionalização",
+          "shortDescription": "A página destaca intercâmbio e experiências como FGV-Sorbonne.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "3",
+          "label": "laboratórios modernos destacados pela página"
+        },
+        {
+          "value": "+10",
+          "label": "redes/instituições parceiras nos EUA e Europa"
+        }
+      ],
+      "careerPaths": [
+        "Produção de conteúdo digital",
+        "Business intelligence e dados de comunicação",
+        "Gestão de comunicação digital",
+        "Empreendedorismo digital",
+        "Pesquisa em mídia, plataformas e cultura digital"
+      ],
+      "testimonials": [],
+      "videos": [
+        {
+          "id": "comunicacao-digital-rj-video-1",
+          "title": "FGV Undergraduate | Digital Communication Course",
+          "videoId": "TDeMOSIvElE"
+        },
+        {
+          "id": "comunicacao-digital-rj-video-2",
+          "title": "Webinar | Bate-papo sobre Graduação em Comunicação Digital",
+          "videoId": "N2ujnnFKH78"
+        },
+        {
+          "id": "comunicacao-digital-rj-video-3",
+          "title": "Inteligência Artificial, cultura visual e criação no digital",
+          "videoId": "vxm9QEpvGbw"
+        }
       ]
     },
     {
@@ -644,6 +1444,83 @@
         "jurídico",
         "Rio de Janeiro",
         "Direito Rio"
+      ],
+      "schoolId": "direito-rio",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer ir além da carreira jurídica tradicional e atuar em advocacia, setor público, pesquisa, tecnologia, mercado, terceiro setor ou organizações internacionais.",
+      "courseDifferentials": [
+        {
+          "id": "field-project",
+          "title": "Field Project",
+          "shortDescription": "Projetos aplicados aproximam os alunos de problemas reais do Direito nos primeiros períodos.",
+          "type": ""
+        },
+        {
+          "id": "atividades-monitoradas",
+          "title": "Atividades monitoradas",
+          "shortDescription": "Atividades de férias e experiências supervisionadas ampliam contato com a prática.",
+          "type": ""
+        },
+        {
+          "id": "mentoria",
+          "title": "Mentoria",
+          "shortDescription": "Apoio individualizado para escolhas acadêmicas e profissionais.",
+          "type": ""
+        },
+        {
+          "id": "dupla-graduacao-e-formacao-complementar",
+          "title": "Dupla graduação e formação complementar",
+          "shortDescription": "Parcerias com EBAPE, EMAp e CPDOC ampliam possibilidades interdisciplinares.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "97%",
+          "label": "aprovação na OAB por turma, segundo a página"
+        },
+        {
+          "value": "+60",
+          "label": "acordos com universidades estrangeiras"
+        }
+      ],
+      "careerPaths": [
+        "Advocacia e escritórios",
+        "Carreiras públicas",
+        "Setor empresarial e regulatório",
+        "Tecnologia, inovação e mercado",
+        "Organizações internacionais",
+        "Terceiro setor e impacto social",
+        "Pesquisa e docência"
+      ],
+      "testimonials": [
+        {
+          "name": "Anna Joppert",
+          "role": "depoimento da página do curso",
+          "quote": "A página traz depoimento sobre a experiência de formação na FGV Direito Rio."
+        },
+        {
+          "name": "Sara Moreira",
+          "role": "depoimento da página do curso",
+          "quote": "A página traz depoimento sobre trajetória acadêmica e possibilidades no curso."
+        }
+      ],
+      "videos": [
+        {
+          "id": "direito-rj-video-1",
+          "title": "Aula de graduação em Direito - Vestibular Direito Rio/FGV",
+          "videoId": "t_jg_5VmqPo"
+        },
+        {
+          "id": "direito-rj-video-2",
+          "title": "FGV Undergraduate Law Course Rio",
+          "videoId": "QuXBX2XzSuY"
+        },
+        {
+          "id": "direito-rj-video-3",
+          "title": "Depoimento sobre o curso de graduação em Direito - FGV",
+          "videoId": "5QFHPz-yZK8"
+        }
       ]
     },
     {
@@ -671,6 +1548,87 @@
         "finanças",
         "Rio de Janeiro",
         "EPGE"
+      ],
+      "schoolId": "epge",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer desenvolver independência intelectual, criatividade, raciocínio analítico e capacidade crítica.",
+      "courseDifferentials": [
+        {
+          "id": "base-rigorosa",
+          "title": "Base rigorosa",
+          "shortDescription": "Forte formação em teoria econômica, métodos quantitativos, programação e modelagem.",
+          "type": ""
+        },
+        {
+          "id": "temas-contemporaneos",
+          "title": "Temas contemporâneos",
+          "shortDescription": "Economia ambiental, fintechs, empreendedorismo, políticas públicas e IA aplicada à economia.",
+          "type": ""
+        },
+        {
+          "id": "ensino-e-pesquisa-integrados",
+          "title": "Ensino e pesquisa integrados",
+          "shortDescription": "Contato com pesquisadores, seminários e produção acadêmica desde a graduação.",
+          "type": ""
+        },
+        {
+          "id": "internacionalizacao",
+          "title": "Internacionalização",
+          "shortDescription": "Visitas de pesquisadores, seminários, intercâmbio e contato com referências globais.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "1961",
+          "label": "ano de fundação da escola"
+        },
+        {
+          "value": "1º",
+          "label": "posição destacada em avaliações oficiais citadas na página"
+        }
+      ],
+      "careerPaths": [
+        "Mercado financeiro",
+        "Gestão e estratégia empresarial",
+        "Setor público e políticas públicas",
+        "Consultoria",
+        "Organizações internacionais",
+        "Pesquisa aplicada, sustentabilidade e tecnologia"
+      ],
+      "testimonials": [
+        {
+          "name": "Luciano Venturim",
+          "role": "depoimento da página do curso",
+          "quote": "A página traz depoimento sobre trajetória e experiência acadêmica na EPGE."
+        },
+        {
+          "name": "Haislan Wellington",
+          "role": "depoimento da página do curso",
+          "quote": "A página traz depoimento sobre a formação e oportunidades do curso."
+        },
+        {
+          "name": "Beatriz Vasconcellos",
+          "role": "depoimento da página do curso",
+          "quote": "A página traz depoimento sobre vivência estudantil e perspectivas profissionais."
+        }
+      ],
+      "videos": [
+        {
+          "id": "economia-rj-video-1",
+          "title": "Graduação | Curso de Economia FGV EPGE | Rio de Janeiro",
+          "videoId": "tHsvFYZ5e3k"
+        },
+        {
+          "id": "economia-rj-video-2",
+          "title": "FGV Undergraduate | Economics Course (Rio de Janeiro)",
+          "videoId": "Sf5KZcLlKWw"
+        },
+        {
+          "id": "economia-rj-video-3",
+          "title": "Graduação | Curso de Ciências Econômicas da FGV EPGE",
+          "videoId": "QlAK7ASr798"
+        }
       ]
     },
     {
@@ -699,6 +1657,67 @@
         "modelagem",
         "Rio de Janeiro",
         "EMAp"
+      ],
+      "schoolId": "emap",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem gosta de raciocínio lógico, modelos, dados e aplicação prática do conhecimento.",
+      "courseDifferentials": [
+        {
+          "id": "tres-eixos-de-formacao",
+          "title": "Três eixos de formação",
+          "shortDescription": "Matemática, Computação e Modelagem Matemática.",
+          "type": ""
+        },
+        {
+          "id": "aplicacao-em-problemas-reais",
+          "title": "Aplicação em problemas reais",
+          "shortDescription": "Modelos e técnicas são discutidos e implementados em casos concretos.",
+          "type": ""
+        },
+        {
+          "id": "internacionalizacao",
+          "title": "Internacionalização",
+          "shortDescription": "A escola destaca conexões internacionais e possibilidades de intercâmbio.",
+          "type": ""
+        },
+        {
+          "id": "corpo-docente-qualificado",
+          "title": "Corpo docente qualificado",
+          "shortDescription": "Professores com doutorado e pós-doutorado em universidades estrangeiras e experiência aplicada.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "3",
+          "label": "eixos disciplinares: Matemática, Computação e Modelagem Matemática"
+        }
+      ],
+      "careerPaths": [
+        "Mercado financeiro e seguros",
+        "Saúde e epidemiologia",
+        "Combate ao crime e segurança",
+        "Monitoramento ambiental e análise de cenários",
+        "Planejamento estratégico e gerenciamento de riscos",
+        "Consultoria e pesquisa acadêmica"
+      ],
+      "testimonials": [],
+      "videos": [
+        {
+          "id": "matematica-aplicada-rj-video-1",
+          "title": "Graduação | Curso de Matemática Aplicada FGV EMAp | Rio de Janeiro",
+          "videoId": "7GYgxaD75iM"
+        },
+        {
+          "id": "matematica-aplicada-rj-video-2",
+          "title": "FGV Undergraduate | Applied Mathematics Course",
+          "videoId": "O9ngIOVGuKg"
+        },
+        {
+          "id": "matematica-aplicada-rj-video-3",
+          "title": "Carreiras - Graduação em Matemática Aplicada",
+          "videoId": "0mfvvjBVjUU"
+        }
       ]
     },
     {
@@ -733,6 +1752,62 @@
         "negócios",
         "Brasília",
         "EPPG"
+      ],
+      "schoolId": "eppg",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer estudar gestão em Brasília, em contato com órgãos dos Três Poderes, organismos internacionais, representações diplomáticas e organizações públicas e privadas.",
+      "courseDifferentials": [
+        {
+          "id": "formacao-integral-global",
+          "title": "Formação Integral Global",
+          "shortDescription": "Desafios ao longo dos quatro anos conectam Distrito Federal, Amazônia, América Latina e temas globais.",
+          "type": ""
+        },
+        {
+          "id": "aprendizado-na-pratica",
+          "title": "Aprendizado na prática",
+          "shortDescription": "Atividades imersivas aproximam os estudantes de organizações públicas, privadas e do terceiro setor.",
+          "type": ""
+        },
+        {
+          "id": "excelencia-academica",
+          "title": "Excelência acadêmica",
+          "shortDescription": "Corpo docente formado em instituições nacionais e internacionais, com pesquisa aplicada e conexões com o mercado.",
+          "type": ""
+        },
+        {
+          "id": "intercambio-internacional",
+          "title": "Intercâmbio internacional",
+          "shortDescription": "A disciplina Experiências Multiculturais integra o intercâmbio ao currículo.",
+          "type": ""
+        }
+      ],
+      "numbers": [],
+      "careerPaths": [
+        "Empreendedorismo privado e público",
+        "Startups e ecossistemas de inovação",
+        "Gestão e liderança em organizações privadas, públicas e do terceiro setor",
+        "Finanças e fundos de investimento",
+        "Relações institucionais e governamentais",
+        "Consultorias estratégicas"
+      ],
+      "testimonials": [],
+      "videos": [
+        {
+          "id": "administracao-df-video-1",
+          "title": "FGV EPPG | Conheça o Curso de Administração de Empresas da FGV Brasília",
+          "videoId": "CZD5ogecTwI"
+        },
+        {
+          "id": "administracao-df-video-2",
+          "title": "Já conhece as Graduações da FGV EPPG?",
+          "videoId": "RDJXZi-DoYw"
+        },
+        {
+          "id": "administracao-df-video-3",
+          "title": "FGV EPPG: Transformando Líderes com Excelência e Inovação",
+          "videoId": "xhiJUSNoymM"
+        }
       ]
     },
     {
@@ -760,6 +1835,84 @@
         "governo",
         "Brasília",
         "EPPG"
+      ],
+      "schoolId": "eppg",
+      "courseDifferentialsTitle": "Diferenciais do curso",
+      "courseDifferentialsIntro": "É uma formação para quem quer contribuir para melhor governança, desenvolvimento e justiça social no Brasil.",
+      "courseDifferentials": [
+        {
+          "id": "formacao-integral-humana",
+          "title": "Formação Integral Humana",
+          "shortDescription": "Desafios em equipe e expedições conectam a formação à missão de transformar o Brasil.",
+          "type": ""
+        },
+        {
+          "id": "aprendizado-na-pratica",
+          "title": "Aprendizado na prática",
+          "shortDescription": "Atividades imersivas com ministérios, secretarias, Congresso, tribunais, agências internacionais, ONGs e empresas.",
+          "type": ""
+        },
+        {
+          "id": "tecnologia-aplicada",
+          "title": "Tecnologia aplicada",
+          "shortDescription": "O curso inclui teorias científicas e tecnologias de aplicação de algoritmos e inteligência artificial.",
+          "type": ""
+        },
+        {
+          "id": "intercambio",
+          "title": "Intercâmbio",
+          "shortDescription": "O estudante pode realizar intercâmbio internacional e também passar um semestre em escolas da FGV em São Paulo ou no Rio de Janeiro.",
+          "type": ""
+        }
+      ],
+      "numbers": [
+        {
+          "value": "+200",
+          "label": "instituições parceiras FGV para intercâmbio, segundo a página"
+        }
+      ],
+      "careerPaths": [
+        "Cargos eletivos e gestão governamental",
+        "Organismos internacionais",
+        "Empresas estatais, privadas e concessionárias",
+        "Terceiro setor e fundações empresariais",
+        "Responsabilidade social e relações governamentais",
+        "Empreendedorismo público e privado",
+        "Consultorias nacionais e internacionais"
+      ],
+      "testimonials": [
+        {
+          "name": "Gehovany",
+          "role": "aluno de Administração Pública",
+          "quote": "É uma instituição que inova, faz diferença no mundo e prepara para o mercado de trabalho, tanto na iniciativa privada quanto no meio público."
+        },
+        {
+          "name": "Sara",
+          "role": "aluna de Administração Pública",
+          "quote": "No curso, aprende-se a lidar com problemas concretos de forma inovadora para impactar positivamente a sociedade e o setor governamental."
+        }
+      ],
+      "videos": [
+        {
+          "id": "administracao-publica-df-video-1",
+          "title": "Graduação FGV | Curso de Administração Pública (Brasília)",
+          "videoId": "QGRA1jvkeso"
+        },
+        {
+          "id": "administracao-publica-df-video-2",
+          "title": "Graduação | Curso de Administração Pública FGV EPPG",
+          "videoId": "6omf7JwCOpo"
+        },
+        {
+          "id": "administracao-publica-df-video-3",
+          "title": "FGV EPPG | Graduação em Administração Pública",
+          "videoId": "KPSb4zzx9QU"
+        },
+        {
+          "id": "administracao-publica-df-video-4",
+          "title": "FGV EPPG | Depoimento aluna Sara",
+          "videoId": "5NLuMxk2fBs"
+        }
       ]
     }
   ],

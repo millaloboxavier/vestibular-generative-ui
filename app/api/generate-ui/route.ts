@@ -118,7 +118,11 @@ function catalog() {
     resultDate: course.resultDate || "",
     summary: course.summary || "",
     tags: safeArray(course.tags),
-    hasDifferentials: safeArray(course.courseDifferentials).length > 0
+    hasDifferentials: safeArray(course.courseDifferentials).length > 0,
+    hasNumbers: safeArray(course.numbers).length > 0,
+    hasCareerPaths: safeArray(course.careerPaths).length > 0,
+    hasTestimonials: safeArray(course.testimonials).length > 0,
+    hasVideos: safeArray(course.videos).length > 0
   }));
 
   const admissionTypes = safeArray(data.admissionTypes).map((item, index) => ({
@@ -458,6 +462,41 @@ function courseDifferentials(courses = []) {
   return items.slice(0, 8);
 }
 
+function courseNumbers(courses = []) {
+  const courseList = safeArray(courses);
+  if (courseList.length !== 1) return [];
+  return safeArray(courseList[0].numbers).map((item, index) => ({
+    id: `number-${index}`,
+    value: item.value || "",
+    label: item.label || ""
+  })).slice(0, 6);
+}
+
+function courseCareerPaths(courses = []) {
+  const courseList = safeArray(courses);
+  if (courseList.length !== 1) return [];
+  return safeArray(courseList[0].careerPaths).map((text, index) => ({ id: `career-${index}`, label: text }));
+}
+
+function courseTestimonials(courses = []) {
+  const courseList = safeArray(courses);
+  if (courseList.length !== 1) return [];
+  return safeArray(courseList[0].testimonials).map((item, index) => ({
+    id: `testimonial-${index}`,
+    name: item.name || "",
+    role: item.role || "",
+    quote: item.quote || ""
+  }));
+}
+
+function courseVideos(courses = []) {
+  const courseList = safeArray(courses);
+  if (courseList.length !== 1) return [];
+  return safeArray(courseList[0].videos)
+    .map((item) => ({ id: item.id, title: item.title || "", videoId: item.videoId || "" }))
+    .filter((item) => item.videoId)
+    .slice(0, 6);
+}
 
 function courseDetailItems(courses = []) {
   const course = safeArray(courses)[0];
@@ -574,7 +613,7 @@ function resolveSections(plan, message) {
   const resolved = [];
   const addSection = (section) => {
     if (!section) return;
-    if (["course_cards", "course_detail", "timeline", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_compare", "prep_materials", "admission_details", "faq", "warning", "lead_form"].includes(section.type)) {
+    if (["course_cards", "course_detail", "timeline", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_numbers", "course_careers", "course_testimonials", "course_videos", "course_compare", "prep_materials", "admission_details", "faq", "warning", "lead_form"].includes(section.type)) {
       const already = resolved.some((item) => item.type === section.type);
       if (already && !["course_cards"].includes(section.type)) return;
     }
@@ -717,6 +756,26 @@ function resolveSections(plan, message) {
     if (section.type === "school_recognitions") {
       const items = schoolRecognitions(selectedCourses);
       if (items.length) addSection({ ...sectionBase(section, "school_recognitions", "Reconhecimentos da escola", "Diferenciais acadêmicos e institucionais ligados à escola responsável pelo curso."), items });
+    }
+
+    if (section.type === "course_numbers") {
+      const items = courseNumbers(selectedCourses);
+      if (items.length) addSection({ ...sectionBase(section, "course_numbers", "Números do curso", "Alguns números que ajudam a entender o curso.", "list"), items });
+    }
+
+    if (section.type === "course_careers") {
+      const items = courseCareerPaths(selectedCourses);
+      if (items.length) addSection({ ...sectionBase(section, "course_careers", "Possibilidades de carreira", "Áreas em que quem se forma nesse curso pode atuar.", "list"), items });
+    }
+
+    if (section.type === "course_testimonials") {
+      const items = courseTestimonials(selectedCourses);
+      if (items.length) addSection({ ...sectionBase(section, "course_testimonials", "Quem já passou por aqui", "Depoimentos de estudantes e ex-alunos do curso.", "list"), items });
+    }
+
+    if (section.type === "course_videos") {
+      const items = courseVideos(selectedCourses);
+      if (items.length) addSection({ ...sectionBase(section, "course_videos", "Vídeos do curso", "Conheça mais sobre o curso em vídeo.", "list"), items });
     }
 
     if (section.type === "prep_materials") {
@@ -964,7 +1023,7 @@ const RESPONSE_SCHEMA = {
         additionalProperties: false,
         required: ["type", "title", "intro", "layout", "courseIds", "admissionTypeIds", "materialIds", "eventIds", "scholarshipIds", "textItems"],
         properties: {
-          type: { type: "string", enum: ["course_cards", "course_detail", "course_compare", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "timeline", "prep_materials", "admission_details", "faq", "next_step", "lead_form", "warning"] },
+          type: { type: "string", enum: ["course_cards", "course_detail", "course_compare", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_numbers", "course_careers", "course_testimonials", "course_videos", "timeline", "prep_materials", "admission_details", "faq", "next_step", "lead_form", "warning"] },
           title: { type: "string" },
           intro: { type: "string" },
           layout: { type: "string", enum: ["cards", "tabs_by_city", "list", "table", "single", "form", "chips", "accordion"] },
@@ -1015,6 +1074,8 @@ Matriz de navegação por intenção:
    - Use course_detail como primeiro bloco, não um card repetido.
    - Pode usar course_differentials apenas se houver exatamente um curso identificado e esse curso tiver diferenciais no JSON.
    - Pode usar school_recognitions apenas se houver exatamente um curso identificado.
+   - Pode usar course_numbers, course_careers e course_testimonials apenas se houver exatamente um curso identificado e o campo correspondente (hasNumbers, hasCareerPaths, hasTestimonials) for true para esse curso na BASE_DO_SITE.
+   - Pode usar course_videos apenas se houver exatamente um curso identificado e hasVideos for true para esse curso. Não escreva texto listando os vídeos no answer nem em outra seção — o vídeo é renderizado pelo próprio componente da seção.
    - Pode usar events da cidade desse curso.
 3. Se a pessoa pergunta "curso de administração" sem cidade clara:
    - Trate como exploração ampla de opções de Administração.

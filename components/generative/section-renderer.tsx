@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, Bell, CalendarDays, GraduationCap, MapPin, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Bell, CalendarDays, GraduationCap, MapPin, Play, Sparkles } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -367,6 +368,103 @@ function FaqSection({ section }: { section: Section }) {
   );
 }
 
+function NumbersSection({ section }: { section: Section }) {
+  const items = safeItems(section);
+  return (
+    <SectionShell section={section}>
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+        {items.map((item, index) => (
+          <div key={item.id || index} className="rounded-2xl border bg-muted/30 p-5 text-center">
+            <p className="text-2xl font-semibold tracking-tight md:text-3xl">{item.value}</p>
+            <p className="mt-1 text-sm text-muted-foreground">{item.label}</p>
+          </div>
+        ))}
+      </div>
+    </SectionShell>
+  );
+}
+
+function CareerPathsSection({ section }: { section: Section }) {
+  const items = safeItems(section);
+  return (
+    <SectionShell section={section}>
+      <div className="flex flex-wrap gap-2">
+        {items.map((item, index) => (
+          <span key={item.id || index} className="rounded-full border bg-muted/40 px-4 py-2 text-sm">
+            {item.label}
+          </span>
+        ))}
+      </div>
+    </SectionShell>
+  );
+}
+
+function TestimonialsSection({ section }: { section: Section }) {
+  const items = safeItems(section);
+  return (
+    <SectionShell section={section}>
+      <div className="grid gap-4 md:grid-cols-2">
+        {items.map((item, index) => (
+          <Card key={item.id || index} className="bg-muted/30">
+            <CardContent className="pt-6">
+              <p className="text-base leading-7 text-foreground">&ldquo;{item.quote}&rdquo;</p>
+              <p className="mt-4 text-sm font-semibold">{item.name}</p>
+              {item.role ? <p className="text-xs text-muted-foreground">{item.role}</p> : null}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </SectionShell>
+  );
+}
+
+function VideoCard({ video }: { video: any }) {
+  const [playing, setPlaying] = useState(false);
+  const thumbnail = `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`;
+
+  return (
+    <div className="overflow-hidden rounded-2xl border bg-background">
+      <div className="relative aspect-video w-full bg-muted">
+        {playing ? (
+          <iframe
+            className="h-full w-full"
+            src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1`}
+            title={video.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            className="group relative block h-full w-full"
+            aria-label={`Assistir: ${video.title}`}
+          >
+            <img src={thumbnail} alt={video.title} className="h-full w-full object-cover" />
+            <span className="absolute inset-0 flex items-center justify-center bg-foreground/20 transition group-hover:bg-foreground/30">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-background/90 shadow-lg transition group-hover:scale-105">
+                <Play className="ml-1 h-6 w-6 fill-foreground text-foreground" />
+              </span>
+            </span>
+          </button>
+        )}
+      </div>
+      <p className="p-4 text-sm font-medium leading-5">{video.title}</p>
+    </div>
+  );
+}
+
+function VideosSection({ section }: { section: Section }) {
+  const items = safeItems(section);
+  return (
+    <SectionShell section={section}>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {items.map((item, index) => <VideoCard key={item.id || index} video={item} />)}
+      </div>
+    </SectionShell>
+  );
+}
+
 function LeadForm({ section }: { section: Section }) {
   return (
     <SectionShell section={section} className="bg-muted/40">
@@ -417,6 +515,10 @@ export function SectionRenderer({ section, onPrompt, onCompareRequest }: { secti
   if (["events"].includes(section.type)) return <ListCards section={section} icon={<CalendarDays className="h-4 w-4 text-muted-foreground" />} />;
   if (["scholarships", "course_differentials", "school_recognitions", "prep_materials", "warning"].includes(section.type)) return <ListCards section={section} icon={<Sparkles className="h-4 w-4 text-muted-foreground" />} />;
   if (section.type === "faq") return <FaqSection section={section} />;
+  if (section.type === "course_numbers") return <NumbersSection section={section} />;
+  if (section.type === "course_careers") return <CareerPathsSection section={section} />;
+  if (section.type === "course_testimonials") return <TestimonialsSection section={section} />;
+  if (section.type === "course_videos") return <VideosSection section={section} />;
   if (section.type === "lead_form") return <LeadForm section={section} />;
   if (section.type === "next_step") return <NextStep section={section} onPrompt={onPrompt} onCompareRequest={onCompareRequest} />;
   return null;
