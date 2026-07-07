@@ -2,7 +2,6 @@
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUp, History, Loader2, Menu, Sparkles, X } from "lucide-react";
-import data from "@/data/vestibular-content.json";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,22 +50,92 @@ function TypingDots() {
   );
 }
 
-function Header({ hasResult }: { hasResult: boolean }) {
+const primaryNavItems = [
+  { label: "Cursos", prompt: "quais cursos de graduação a FGV oferece?" },
+  { label: "Formas de Ingresso", prompt: "quais são as formas de ingresso da graduação FGV?" },
+  { label: "Eventos", prompt: "eventos da graduação FGV" },
+  { label: "BLOG", prompt: "conteúdos do blog sobre graduação FGV" },
+];
+
+const completeMenuItems = [
+  { label: "Cursos", prompt: "quais cursos de graduação a FGV oferece?" },
+  { label: "Formas de Ingresso", prompt: "quais são as formas de ingresso da graduação FGV?" },
+  { label: "Editais", prompt: "editais do processo seletivo da graduação FGV" },
+  { label: "Provas e Gabaritos", prompt: "provas e gabaritos do Vestibular FGV" },
+  { label: "Resultados", prompt: "resultados do processo seletivo da graduação FGV" },
+  { label: "Locais de Prova", prompt: "locais de prova do Vestibular FGV" },
+  { label: "Acompanhe sua Inscrição", prompt: "acompanhar minha inscrição no Vestibular FGV" },
+  { label: "Bolsas de Estudo", prompt: "bolsas de estudo da graduação FGV" },
+  { label: "Eventos", prompt: "eventos da graduação FGV" },
+  { label: "Contato", prompt: "contato do Vestibular FGV" },
+];
+
+function Header({ hasResult, onPrompt }: { hasResult: boolean; onPrompt: (prompt: string) => void }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function goTo(prompt: string) {
+    setMenuOpen(false);
+    onPrompt(prompt);
+  }
+
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6">
-        <div className="flex items-center gap-3 font-semibold">
-          <span className="h-6 w-6 rounded-full bg-foreground" />
-          Vestibular FGV
-        </div>
-        <nav className="hidden items-center gap-2 text-sm text-muted-foreground md:flex">
-          <span>Cursos</span>
-          <span>Processo seletivo</span>
-          <span>Bolsas</span>
-          <span>Eventos</span>
+        <a href="/" className="flex items-center gap-3 font-semibold transition-opacity hover:opacity-75" aria-label="Ir para a página inicial do Vestibular FGV">
+          <span className="h-8 w-8 rounded-full bg-foreground md:h-9 md:w-9" />
+          <span className="text-lg md:text-xl">Vestibular FGV</span>
+        </a>
+
+        <nav className="hidden items-center gap-5 text-sm font-medium text-muted-foreground md:flex">
+          {primaryNavItems.map((item) => (
+            <button
+              key={item.label}
+              type="button"
+              onClick={() => goTo(item.prompt)}
+              className="transition-colors hover:text-foreground"
+            >
+              {item.label}
+            </button>
+          ))}
         </nav>
-        <div className="flex items-center gap-2">
-          <Badge className={hasResult ? "opacity-100" : "opacity-0"}>Graduação</Badge>
+
+        <div className="relative flex items-center gap-2">
+          <Badge className={hasResult ? "hidden opacity-100 sm:inline-flex" : "hidden opacity-0 sm:inline-flex"}>Graduação</Badge>
+          <Button
+            type="button"
+            variant="outline"
+            className="gap-2 rounded-full"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="complete-menu"
+          >
+            <Menu className="h-4 w-4" />
+            <span className="hidden sm:inline">Menu completo</span>
+            <span className="sm:hidden">Menu</span>
+          </Button>
+
+          {menuOpen ? (
+            <div
+              id="complete-menu"
+              className="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-72 overflow-hidden rounded-3xl border bg-background p-2 shadow-2xl"
+            >
+              <div className="px-4 pb-2 pt-3">
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Menu completo</p>
+              </div>
+              <div className="grid gap-1">
+                {completeMenuItems.map((item) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => goTo(item.prompt)}
+                    className="rounded-2xl px-4 py-3 text-left text-sm font-medium transition-colors hover:bg-muted"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </header>
@@ -94,125 +163,6 @@ function inferSkeletonVariant(message: string): SkeletonVariant {
 
 function compactDateLabel() {
   return new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit" }).format(new Date());
-}
-
-
-type CourseOption = {
-  id: string;
-  name: string;
-  city: string;
-  state?: string;
-  school?: string;
-};
-
-function uniqueCourseOptions(): CourseOption[] {
-  const courses = Array.isArray((data as any).courses) ? (data as any).courses : [];
-  return courses
-    .map((course: any, index: number) => ({
-      id: String(course.id || `${course.name || "curso"}-${course.city || "cidade"}-${index}`),
-      name: String(course.displayName || course.name || "Curso"),
-      city: String(course.city || ""),
-      state: String(course.state || ""),
-      school: String(course.school || ""),
-    }))
-    .sort((a: CourseOption, b: CourseOption) => `${a.city} ${a.name}`.localeCompare(`${b.city} ${b.name}`, "pt-BR"));
-}
-
-function courseOptionLabel(course?: CourseOption) {
-  if (!course) return "";
-  return [course.name, course.city, course.school].filter(Boolean).join(" · ");
-}
-
-function CompareCoursesDrawer({
-  open,
-  courses,
-  onClose,
-  onCompare,
-}: {
-  open: boolean;
-  courses: CourseOption[];
-  onClose: () => void;
-  onCompare: (first: CourseOption, second: CourseOption) => void;
-}) {
-  const [firstId, setFirstId] = useState("");
-  const [secondId, setSecondId] = useState("");
-
-  useEffect(() => {
-    if (!open) return;
-    if (!firstId && courses[0]) setFirstId(courses[0].id);
-    if (!secondId && courses[1]) setSecondId(courses[1].id);
-  }, [open, courses, firstId, secondId]);
-
-  const first = courses.find((course) => course.id === firstId);
-  const second = courses.find((course) => course.id === secondId);
-  const canCompare = Boolean(first && second && first.id !== second.id);
-
-  return (
-    <div className={open ? "fixed inset-0 z-[60]" : "pointer-events-none fixed inset-0 z-[60]"} aria-hidden={!open}>
-      <div className={open ? "absolute inset-0 bg-foreground/25 backdrop-blur-[2px]" : "absolute inset-0 bg-transparent"} onClick={onClose} />
-      <aside className={`absolute right-0 top-0 flex h-full w-full max-w-lg flex-col border-l bg-background shadow-2xl transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"}`}>
-        <div className="flex items-start justify-between gap-4 border-b p-5">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Comparar cursos</p>
-            <h2 className="mt-1 text-xl font-semibold">Escolha duas opções</h2>
-            <p className="mt-1 text-sm leading-6 text-muted-foreground">Selecione os cursos que você quer colocar lado a lado. Depois eu monto a comparação para você.</p>
-          </div>
-          <Button variant="ghost" size="icon" onClick={onClose} aria-label="Fechar comparação">
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
-
-        <form
-          className="flex-1 space-y-5 overflow-y-auto p-5"
-          onSubmit={(event) => {
-            event.preventDefault();
-            if (first && second && first.id !== second.id) onCompare(first, second);
-          }}
-        >
-          <label className="block space-y-2">
-            <span className="text-sm font-medium">Primeiro curso</span>
-            <select
-              value={firstId}
-              onChange={(event) => setFirstId(event.target.value)}
-              className="h-12 w-full rounded-full border border-border bg-muted px-5 text-sm outline-none focus:border-foreground focus:bg-background focus:ring-4 focus:ring-foreground/5"
-            >
-              {courses.map((course) => (
-                <option key={course.id} value={course.id}>{courseOptionLabel(course)}</option>
-              ))}
-            </select>
-          </label>
-
-          <label className="block space-y-2">
-            <span className="text-sm font-medium">Segundo curso</span>
-            <select
-              value={secondId}
-              onChange={(event) => setSecondId(event.target.value)}
-              className="h-12 w-full rounded-full border border-border bg-muted px-5 text-sm outline-none focus:border-foreground focus:bg-background focus:ring-4 focus:ring-foreground/5"
-            >
-              {courses.map((course) => (
-                <option key={course.id} value={course.id}>{courseOptionLabel(course)}</option>
-              ))}
-            </select>
-          </label>
-
-          {first && second && first.id === second.id ? (
-            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">Escolha dois cursos diferentes para comparar.</div>
-          ) : null}
-
-          {first && second && first.id !== second.id ? (
-            <div className="rounded-2xl border bg-muted/40 p-4 text-sm leading-6 text-muted-foreground">
-              Vou comparar <strong className="text-foreground">{first.name} em {first.city}</strong> com <strong className="text-foreground">{second.name} em {second.city}</strong>, incluindo cidade, escola, duração e formas de ingresso disponíveis.
-            </div>
-          ) : null}
-
-          <div className="flex gap-2 pt-2">
-            <Button type="submit" disabled={!canCompare}>Montar comparação</Button>
-            <Button type="button" variant="outline" onClick={onClose}>Cancelar</Button>
-          </div>
-        </form>
-      </aside>
-    </div>
-  );
 }
 
 
@@ -678,11 +628,9 @@ export default function Page() {
   const [leadName, setLeadName] = useState("");
   const [leadEmail, setLeadEmail] = useState("");
   const [summaryUnlocked, setSummaryUnlocked] = useState(false);
-  const [compareDrawerOpen, setCompareDrawerOpen] = useState(false);
   const topRef = useRef<HTMLDivElement>(null);
 
   const sections = useMemo(() => plan?.sections || [], [plan]);
-  const compareCourses = useMemo(() => uniqueCourseOptions(), []);
 
   useEffect(() => {
     try {
@@ -800,11 +748,6 @@ export default function Page() {
     window.open(`https://wa.me/?text=${encodeURIComponent(shortText)}`, "_blank", "noopener,noreferrer");
   }
 
-  function submitCourseComparison(first: CourseOption, second: CourseOption) {
-    setCompareDrawerOpen(false);
-    submitQuestion(`compare ${first.name} em ${first.city} com ${second.name} em ${second.city}`);
-  }
-
   function onSubmit(event: FormEvent) {
     event.preventDefault();
     submitQuestion(input);
@@ -814,7 +757,7 @@ export default function Page() {
 
   return (
     <main ref={topRef} className="min-h-screen bg-background">
-      <Header hasResult={hasResult} />
+      <Header hasResult={hasResult} onPrompt={submitQuestion} />
       <JourneyDrawer
         open={drawerOpen}
         journeys={journeys}
@@ -830,12 +773,6 @@ export default function Page() {
         onUnlockSummary={unlockSummary}
         onDownloadSummary={downloadSummary}
         onShareWhatsApp={shareWhatsAppSummary}
-      />
-      <CompareCoursesDrawer
-        open={compareDrawerOpen}
-        courses={compareCourses}
-        onClose={() => setCompareDrawerOpen(false)}
-        onCompare={submitCourseComparison}
       />
 
       {!hasResult ? (
@@ -913,7 +850,7 @@ export default function Page() {
                   {plan.answer ? <p className="mt-3 text-base leading-7 text-muted-foreground md:text-lg">{plan.answer}</p> : null}
                 </div>
                 {sections.slice(0, visibleCount).map((section, index) => (
-                  <SectionRenderer key={`${section.type}-${index}-${section.title}`} section={section} onPrompt={submitQuestion} onCompareRequest={() => setCompareDrawerOpen(true)} />
+                  <SectionRenderer key={`${section.type}-${index}-${section.title}`} section={section} onPrompt={submitQuestion} />
                 ))}
               </div>
             ) : null}

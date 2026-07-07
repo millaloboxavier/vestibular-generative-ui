@@ -356,45 +356,24 @@ function LeadForm({ section }: { section: Section }) {
   );
 }
 
-function looksLikeCompareAction(action: any) {
-  const text = `${action?.label || ""} ${action?.title || ""} ${action?.prompt || ""}`
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-  return /comparar/.test(text) && /curso/.test(text);
-}
-
-function NextStep({ section, onPrompt, onCompareRequest }: { section: Section; onPrompt: (prompt: string) => void; onCompareRequest?: () => void }) {
+function NextStep({ section, onPrompt }: { section: Section; onPrompt: (prompt: string) => void }) {
   const actions = Array.isArray(section.actions) && section.actions.length ? section.actions : safeItems(section);
   return (
     <section className="animate-fade-up rounded-[1.35rem] border bg-foreground p-5 text-background shadow-sm md:p-6">
       <h2 className="text-xl font-semibold">{section.title}</h2>
       {section.intro ? <p className="mt-2 text-sm leading-6 text-background/70 md:text-base">{section.intro}</p> : null}
       <div className="mt-5 flex flex-wrap gap-2">
-        {actions.map((action, index) => {
-          const isCompare = looksLikeCompareAction(action);
-          return (
-            <Button
-              key={action.label || action.title || index}
-              variant="secondary"
-              onClick={() => {
-                if (isCompare && onCompareRequest) {
-                  onCompareRequest();
-                  return;
-                }
-                if (action.prompt) onPrompt(action.prompt);
-              }}
-            >
-              {action.label || action.title}
-            </Button>
-          );
-        })}
+        {actions.map((action, index) => (
+          <Button key={action.label || index} variant="secondary" onClick={() => action.prompt && onPrompt(action.prompt)}>
+            {action.label || action.title}
+          </Button>
+        ))}
       </div>
     </section>
   );
 }
 
-export function SectionRenderer({ section, onPrompt, onCompareRequest }: { section: Section; onPrompt: (prompt: string) => void; onCompareRequest?: () => void }) {
+export function SectionRenderer({ section, onPrompt }: { section: Section; onPrompt: (prompt: string) => void }) {
   if (section.type === "course_cards") return <CoursesSection section={section} onPrompt={onPrompt} />;
   if (section.type === "course_detail") return <DetailSection section={section} />;
   if (section.type === "course_compare") return <CompareSection section={section} />;
@@ -403,6 +382,6 @@ export function SectionRenderer({ section, onPrompt, onCompareRequest }: { secti
   if (["events"].includes(section.type)) return <ListCards section={section} icon={<CalendarDays className="h-4 w-4 text-muted-foreground" />} />;
   if (["scholarships", "course_differentials", "school_recognitions", "prep_materials", "warning"].includes(section.type)) return <ListCards section={section} icon={<Sparkles className="h-4 w-4 text-muted-foreground" />} />;
   if (section.type === "lead_form") return <LeadForm section={section} />;
-  if (section.type === "next_step") return <NextStep section={section} onPrompt={onPrompt} onCompareRequest={onCompareRequest} />;
+  if (section.type === "next_step") return <NextStep section={section} onPrompt={onPrompt} />;
   return null;
 }
