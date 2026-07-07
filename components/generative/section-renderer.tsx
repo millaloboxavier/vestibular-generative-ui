@@ -264,8 +264,9 @@ function DetailSection({ section }: { section: Section }) {
   );
 }
 
-function ListCards({ section, icon }: { section: Section; icon?: React.ReactNode }) {
+function ListCards({ section, icon, onPrompt }: { section: Section; icon?: React.ReactNode; onPrompt?: (prompt: string) => void }) {
   const items = safeItems(section);
+  const showLearnMore = section.type === "admission_options" && Boolean(onPrompt);
   return (
     <SectionShell section={section}>
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
@@ -284,6 +285,12 @@ function ListCards({ section, icon }: { section: Section; icon?: React.ReactNode
               {item.cycle ? <p><strong className="text-foreground">Ciclo:</strong> {item.cycle}</p> : null}
               {item.displayDate || item.displayTime ? <p><strong className="text-foreground">Quando:</strong> {[item.displayDate, item.displayTime].filter(Boolean).join(" · ")}</p> : null}
               {item.city ? <p className="flex items-center gap-1"><MapPin className="h-4 w-4" /> {item.city}</p> : null}
+              {showLearnMore && item.label ? (
+                <Button variant="outline" size="sm" onClick={() => onPrompt!(`saiba mais sobre ${item.label} como forma de ingresso`)}>
+                  Saiba mais
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              ) : null}
             </CardContent>
           </Card>
         ))}
@@ -406,7 +413,7 @@ export function SectionRenderer({ section, onPrompt, onCompareRequest }: { secti
   if (section.type === "course_detail") return <DetailSection section={section} />;
   if (section.type === "course_compare") return <CompareSection section={section} />;
   if (section.type === "timeline") return <TimelineSection section={section} />;
-  if (["admission_options", "admission_details"].includes(section.type)) return <ListCards section={section} icon={<GraduationCap className="h-4 w-4 text-muted-foreground" />} />;
+  if (["admission_options", "admission_details"].includes(section.type)) return <ListCards section={section} icon={<GraduationCap className="h-4 w-4 text-muted-foreground" />} onPrompt={onPrompt} />;
   if (["events"].includes(section.type)) return <ListCards section={section} icon={<CalendarDays className="h-4 w-4 text-muted-foreground" />} />;
   if (["scholarships", "course_differentials", "school_recognitions", "prep_materials", "warning"].includes(section.type)) return <ListCards section={section} icon={<Sparkles className="h-4 w-4 text-muted-foreground" />} />;
   if (section.type === "faq") return <FaqSection section={section} />;
