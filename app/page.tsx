@@ -1,11 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUp, History, Loader2, Menu, Sparkles, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { GenerativeSkeleton, Section, SectionRenderer, SkeletonVariant } from "@/components/generative/section-renderer";
+import siteData from "@/data/vestibular-content.json";
 
 const suggestions = [
   "quais cursos de graduação a FGV oferece?",
@@ -51,51 +53,41 @@ function TypingDots() {
 }
 
 const primaryNavItems = [
-  { label: "Cursos", prompt: "quais cursos de graduação a FGV oferece?" },
-  { label: "Formas de Ingresso", prompt: "quais são as formas de ingresso da graduação FGV?" },
-  { label: "Eventos", prompt: "eventos da graduação FGV" },
-  { label: "BLOG", prompt: "conteúdos do blog sobre graduação FGV" },
+  { label: "Cursos", href: "/cursos" },
+  { label: "Formas de Ingresso", href: "/formas-de-ingresso" },
+  { label: "Eventos", href: "/eventos" },
+  { label: "BLOG", href: "/blog" },
 ];
 
 const completeMenuItems = [
-  { label: "Cursos", prompt: "quais cursos de graduação a FGV oferece?" },
-  { label: "Formas de Ingresso", prompt: "quais são as formas de ingresso da graduação FGV?" },
-  { label: "Editais", prompt: "editais do processo seletivo da graduação FGV" },
-  { label: "Provas e Gabaritos", prompt: "provas e gabaritos do Vestibular FGV" },
-  { label: "Resultados", prompt: "resultados do processo seletivo da graduação FGV" },
-  { label: "Locais de Prova", prompt: "locais de prova do Vestibular FGV" },
-  { label: "Acompanhe sua Inscrição", prompt: "acompanhar minha inscrição no Vestibular FGV" },
-  { label: "Bolsas de Estudo", prompt: "bolsas de estudo da graduação FGV" },
-  { label: "Eventos", prompt: "eventos da graduação FGV" },
-  { label: "Contato", prompt: "contato do Vestibular FGV" },
+  { label: "Cursos", href: "/cursos" },
+  { label: "Formas de Ingresso", href: "/formas-de-ingresso" },
+  { label: "Editais", href: "/editais" },
+  { label: "Provas e Gabaritos", href: "/provas-gabaritos" },
+  { label: "Resultados", href: "/resultados" },
+  { label: "Locais de Prova", href: "/locais-de-prova" },
+  { label: "Acompanhe sua Inscrição", href: "/acompanhe-sua-inscricao" },
+  { label: "Bolsas de Estudo", href: "/bolsas-de-estudo" },
+  { label: "Eventos", href: "/eventos" },
+  { label: "Contato", href: "/contato" },
 ];
 
-function Header({ hasResult, onPrompt }: { hasResult: boolean; onPrompt: (prompt: string) => void }) {
+function Header({ hasResult }: { hasResult: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  function goTo(prompt: string) {
-    setMenuOpen(false);
-    onPrompt(prompt);
-  }
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6">
-        <a href="/" className="flex items-center gap-3 font-semibold transition-opacity hover:opacity-75" aria-label="Ir para a página inicial do Vestibular FGV">
+        <Link href="/" className="flex items-center gap-3 font-semibold transition-opacity hover:opacity-75" aria-label="Ir para a página inicial do Vestibular FGV">
           <span className="h-8 w-8 rounded-full bg-foreground md:h-9 md:w-9" />
           <span className="text-lg md:text-xl">Vestibular FGV</span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-5 text-sm font-medium text-muted-foreground md:flex">
           {primaryNavItems.map((item) => (
-            <button
-              key={item.label}
-              type="button"
-              onClick={() => goTo(item.prompt)}
-              className="transition-colors hover:text-foreground"
-            >
+            <Link key={item.label} href={item.href} className="transition-colors hover:text-foreground">
               {item.label}
-            </button>
+            </Link>
           ))}
         </nav>
 
@@ -124,14 +116,14 @@ function Header({ hasResult, onPrompt }: { hasResult: boolean; onPrompt: (prompt
               </div>
               <div className="grid gap-1">
                 {completeMenuItems.map((item) => (
-                  <button
+                  <Link
                     key={item.label}
-                    type="button"
-                    onClick={() => goTo(item.prompt)}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
                     className="rounded-2xl px-4 py-3 text-left text-sm font-medium transition-colors hover:bg-muted"
                   >
                     {item.label}
-                  </button>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -614,6 +606,84 @@ function JourneyDrawer({
   );
 }
 
+
+function courseOptionLabel(course: any) {
+  return `${course.displayName || course.name} — ${course.city}${course.state ? ` / ${course.state}` : ""}`;
+}
+
+function CompareCourseModal({
+  open,
+  onClose,
+  onCompare,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onCompare: (question: string) => void;
+}) {
+  const courses = (siteData as any).courses || [];
+  const [firstCourseId, setFirstCourseId] = useState(courses[0]?.id || "");
+  const [secondCourseId, setSecondCourseId] = useState(courses[1]?.id || courses[0]?.id || "");
+
+  useEffect(() => {
+    if (!open) return;
+    if (!firstCourseId && courses[0]?.id) setFirstCourseId(courses[0].id);
+    if (!secondCourseId && courses[1]?.id) setSecondCourseId(courses[1].id);
+  }, [open, firstCourseId, secondCourseId, courses]);
+
+  if (!open) return null;
+
+  const firstCourse = courses.find((course: any) => course.id === firstCourseId);
+  const secondCourse = courses.find((course: any) => course.id === secondCourseId);
+  const canCompare = firstCourse && secondCourse && firstCourse.id !== secondCourse.id;
+
+  function submitComparison(event: FormEvent) {
+    event.preventDefault();
+    if (!canCompare) return;
+    onClose();
+    onCompare(`compare ${courseOptionLabel(firstCourse)} com ${courseOptionLabel(secondCourse)}`);
+  }
+
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 py-6">
+      <button className="absolute inset-0 bg-foreground/35 backdrop-blur-[2px]" onClick={onClose} aria-label="Fechar comparação" />
+      <form onSubmit={submitComparison} className="relative z-10 w-full max-w-2xl rounded-[2rem] border bg-background p-5 shadow-2xl md:p-7">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Comparar cursos</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">Escolha duas opções para comparar</h2>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">A comparação será montada a partir dos dados da graduação FGV, com cidade, escola, duração e formas de ingresso.</p>
+          </div>
+          <Button type="button" variant="ghost" size="icon" onClick={onClose} aria-label="Fechar">
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <label className="grid gap-2 text-sm font-medium">
+            Primeiro curso
+            <select value={firstCourseId} onChange={(event) => setFirstCourseId(event.target.value)} className="h-12 rounded-2xl border bg-muted px-4 text-sm outline-none focus:border-foreground focus:bg-background">
+              {courses.map((course: any) => <option key={course.id} value={course.id}>{courseOptionLabel(course)}</option>)}
+            </select>
+          </label>
+          <label className="grid gap-2 text-sm font-medium">
+            Segundo curso
+            <select value={secondCourseId} onChange={(event) => setSecondCourseId(event.target.value)} className="h-12 rounded-2xl border bg-muted px-4 text-sm outline-none focus:border-foreground focus:bg-background">
+              {courses.map((course: any) => <option key={course.id} value={course.id}>{courseOptionLabel(course)}</option>)}
+            </select>
+          </label>
+        </div>
+
+        {!canCompare ? <p className="mt-3 text-sm text-muted-foreground">Escolha dois cursos diferentes para continuar.</p> : null}
+
+        <div className="mt-6 flex flex-wrap justify-end gap-2">
+          <Button type="button" variant="outline" onClick={onClose}>Cancelar</Button>
+          <Button type="submit" disabled={!canCompare}>Comparar agora</Button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 export default function Page() {
   const [input, setInput] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState("");
@@ -628,6 +698,7 @@ export default function Page() {
   const [leadName, setLeadName] = useState("");
   const [leadEmail, setLeadEmail] = useState("");
   const [summaryUnlocked, setSummaryUnlocked] = useState(false);
+  const [compareOpen, setCompareOpen] = useState(false);
   const topRef = useRef<HTMLDivElement>(null);
 
   const sections = useMemo(() => plan?.sections || [], [plan]);
@@ -665,6 +736,15 @@ export default function Page() {
   async function submitQuestion(question: string) {
     const message = question.trim();
     if (!message || loading) return;
+
+    const normalizedMessage = normalize(message);
+    const isGenericCompareRequest = /comparar cursos|comparar curso|quero comparar|comparacao de cursos|comparação de cursos/.test(normalizedMessage) && !/ com | entre | versus | vs /.test(normalizedMessage);
+    if (isGenericCompareRequest) {
+      setInput("");
+      setCompareOpen(true);
+      return;
+    }
+
     setError("");
     setLoading(true);
     setPlan(null);
@@ -757,7 +837,7 @@ export default function Page() {
 
   return (
     <main ref={topRef} className="min-h-screen bg-background">
-      <Header hasResult={hasResult} onPrompt={submitQuestion} />
+      <Header hasResult={hasResult} />
       <JourneyDrawer
         open={drawerOpen}
         journeys={journeys}
@@ -773,6 +853,11 @@ export default function Page() {
         onUnlockSummary={unlockSummary}
         onDownloadSummary={downloadSummary}
         onShareWhatsApp={shareWhatsAppSummary}
+      />
+      <CompareCourseModal
+        open={compareOpen}
+        onClose={() => setCompareOpen(false)}
+        onCompare={submitQuestion}
       />
 
       {!hasResult ? (
@@ -850,7 +935,7 @@ export default function Page() {
                   {plan.answer ? <p className="mt-3 text-base leading-7 text-muted-foreground md:text-lg">{plan.answer}</p> : null}
                 </div>
                 {sections.slice(0, visibleCount).map((section, index) => (
-                  <SectionRenderer key={`${section.type}-${index}-${section.title}`} section={section} onPrompt={submitQuestion} />
+                  <SectionRenderer key={`${section.type}-${index}-${section.title}`} section={section} onPrompt={submitQuestion} onCompareRequest={() => setCompareOpen(true)} />
                 ))}
               </div>
             ) : null}

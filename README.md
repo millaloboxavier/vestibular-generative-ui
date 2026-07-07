@@ -1,85 +1,43 @@
 # Vestibular IA — Next.js
 
-Protótipo em Next.js + React + Tailwind + componentes no padrão shadcn/Radix para testar navegação generativa na jornada do candidato da graduação FGV.
+Protótipo em Next.js + React + Tailwind para navegação generativa da jornada do candidato de graduação.
 
 ## O que esta versão inclui
 
-- Interface em React/Next.js, pronta para Vercel.
-- API route em `app/api/generate-ui/route.ts` chamando a OpenAI.
-- Renderização por seções: a IA retorna um plano estruturado e o React renderiza componentes controlados.
-- Loader atual preservado: “Montando sua experiência”.
-- Skeleton screens adaptativos por tipo provável de pergunta:
-  - cursos;
-  - datas/timeline;
-  - formas de ingresso;
-  - bolsas;
-  - eventos;
-  - detalhe de curso.
-- Drawer lateral **Sua jornada**, com histórico das experiências geradas.
-- Clique no histórico restaura a visualização anterior sem chamar a IA novamente.
-- Histórico salvo no `localStorage` do navegador.
+- Home generativa com busca em linguagem natural.
+- OpenAI via rota segura em `app/api/generate-ui/route.ts`.
+- Respostas renderizadas por componentes React.
+- Skeletons adaptativos durante o carregamento.
+- Histórico lateral com restauração de respostas anteriores.
+- Captura de nome/e-mail para liberar resumo em PDF.
+- Menu principal e Menu completo como navegação estática, sem acionar a IA.
+- Rotas estáticas para conteúdo âncora/SEO: cursos, formas de ingresso, eventos, blog, editais, provas e gabaritos, resultados, locais de prova, acompanhamento de inscrição, bolsas e contato.
+- Modal de comparação de cursos: quando a IA sugere comparação, o usuário escolhe quais cursos quer comparar.
 
-## Variáveis de ambiente na Vercel
+## Variáveis de ambiente
 
-Configure no projeto:
+Configure na Vercel:
 
-```text
-OPENAI_API_KEY=sua_chave_da_openai
+```txt
+OPENAI_API_KEY=sua-chave
 OPENAI_MODEL=gpt-4.1-mini
 ```
 
-A variável `OPENAI_MODEL` é opcional. Se não existir, o projeto usa o modelo definido no código.
+Para voltar ao modelo anterior:
 
-## Como rodar localmente
-
-```bash
-npm install
-npm run dev
+```txt
+OPENAI_MODEL=gpt-4o-mini
 ```
 
-Depois acesse:
+## Deploy na Vercel
 
-```text
-http://localhost:3000
-```
+Framework Preset: Next.js  
+Build Command: padrão  
+Output Directory: vazio  
+Install Command: padrão  
 
-## Como publicar na Vercel
+Não use `public` como Output Directory.
 
-1. Suba os arquivos para um repositório no GitHub.
-2. Importe o repositório na Vercel.
-3. Em Framework Preset, use `Next.js`.
-4. Deixe Output Directory em branco.
-5. Configure as variáveis de ambiente.
-6. Faça o deploy.
+## Observações
 
-## Observação sobre o skeleton
-
-O skeleton é apenas um feedback visual de carregamento. Ele não substitui a resposta da OpenAI e não funciona como fallback. A resposta real continua vindo da API `/api/generate-ui`.
-
-
-## Ajuste V3
-
-- O botão do histórico saiu do cabeçalho e passou a ficar ao lado do campo de busca após a primeira consulta.
-- A nomenclatura foi simplificada de “Sua jornada” para “Histórico”, para facilitar o entendimento do usuário neste primeiro protótipo.
-- O drawer agora usa o título “Histórico” e lista as consultas recentes.
-
-
-## V4 — Resumo do resultado no Histórico
-
-Esta versão adiciona uma área de captação dentro do drawer de Histórico. Quando já existem consultas salvas, a pessoa pode preencher nome e e-mail para liberar:
-
-- download de um PDF gerado no navegador;
-- compartilhamento de uma versão curta por WhatsApp.
-
-O PDF não é apenas uma lista de perguntas. Ele reúne o conteúdo das respostas renderizadas pela IA: títulos, textos, cursos, datas, formas de ingresso, eventos, bolsas, diferenciais e próximos caminhos exibidos na interface.
-
-No protótipo, nome e e-mail ficam salvos somente no `localStorage`. Em produção, esse ponto pode ser conectado a CRM, RD Station, Salesforce, Drupal ou outro endpoint de leads.
-
-## Ajuste de menu
-
-Esta versão inclui:
-- logotipo "Vestibular FGV" com link para a home;
-- menu principal com Cursos, Formas de Ingresso, Eventos e BLOG;
-- botão "Menu completo" com os itens: Cursos, Formas de Ingresso, Editais, Provas e Gabaritos, Resultados, Locais de Prova, Acompanhe sua Inscrição, Bolsas de Estudo, Eventos e Contato.
-
-Como o protótipo é uma navegação generativa em página única, os itens do menu acionam a própria experiência conversacional/renderização por intenção, em vez de navegar para outro site.
+O menu estático funciona como uma âncora de navegação tradicional para o candidato e como base para SEO/GEO. A experiência generativa continua na home e nos fluxos iniciados pelo campo de busca.
