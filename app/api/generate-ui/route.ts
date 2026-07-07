@@ -359,6 +359,16 @@ function admissionItems(message, courses = [], admissionIds = []) {
   }));
 }
 
+function coursesAcceptingAdmission(admissionItem) {
+  if (!admissionItem) return [];
+  const label = normalize(admissionItem.label || admissionItem.name || "");
+  if (!label) return [];
+  return safeArray(data.courses).filter((course) => safeArray(course.admissions).some((name) => {
+    const n = normalize(name);
+    return label.includes(n.slice(0, 8)) || n.includes(label.slice(0, 8));
+  }));
+}
+
 function representativeCourses(limit = 999) {
   const seen = new Set();
   const preferredCities = ["Rio de Janeiro", "São Paulo", "Brasília"];
@@ -558,6 +568,7 @@ function resolveSections(plan, message) {
   const selectedAdmissions = matchAdmissionTypes(message, plan.entities?.admissionTypeIds || plan.entities?.admissionTypes || []);
   const specificCourseContext = () => isSpecificCourseContext(message, selectedCourses, cityHints);
   const broadCourseContext = () => isBroadCourseExploration(message, selectedCourses, cityHints);
+  const specificAdmissionContext = selectedAdmissions.length === 1;
   const resolved = [];
   const addSection = (section) => {
     if (!section) return;
@@ -673,7 +684,12 @@ function resolveSections(plan, message) {
     }
 
     if (section.type === "admission_options") {
-      addSection({ ...sectionBase(section, "admission_options", "Formas de ingresso", "Confira as modalidades relacionadas à sua busca."), items: admissionItems(message, selectedCourses, section.admissionTypeIds) });
+      if (specificAdmissionContext) {
+        const acceptingCourses = coursesAcceptingAdmission(selectedAdmissions[0]);
+        if (acceptingCourses.length) addSection({ type: "course_cards", title: `Cursos que aceitam ${selectedAdmissions[0].label}`, intro: "Veja em quais cursos você pode usar essa forma de ingresso.", layout: acceptingCourses.length > 3 ? "tabs_by_city" : "cards", items: acceptingCourses, actions: [] });
+      } else {
+        addSection({ ...sectionBase(section, "admission_options", "Formas de ingresso", "Confira as modalidades relacionadas à sua busca."), items: admissionItems(message, selectedCourses, section.admissionTypeIds) });
+      }
     }
 
     if (section.type === "timeline") {
@@ -737,7 +753,10 @@ function resolveSections(plan, message) {
     }
   }
 
-  if ((sig.asksAdmission || sig.asksDate) && !resolved.some((section) => section.type === "admission_options") && !selectedCourses.length) {
+  if (specificAdmissionContext && !selectedCourses.length && !resolved.some((section) => section.type === "course_cards")) {
+    const acceptingCourses = coursesAcceptingAdmission(selectedAdmissions[0]);
+    if (acceptingCourses.length) addSection({ type: "course_cards", title: `Cursos que aceitam ${selectedAdmissions[0].label}`, intro: "Veja em quais cursos você pode usar essa forma de ingresso.", layout: acceptingCourses.length > 3 ? "tabs_by_city" : "cards", items: acceptingCourses, actions: [] });
+  } else if ((sig.asksAdmission || sig.asksDate) && !resolved.some((section) => section.type === "admission_options") && !selectedCourses.length) {
     addSection({ type: "admission_options", title: "Formas de ingresso", intro: "Veja as modalidades e períodos informados para este processo seletivo.", layout: "cards", items: admissionItems(message, selectedCourses, selectedAdmissions.map((item) => item.id)), actions: [] });
   }
 
@@ -989,6 +1008,7 @@ Regras obrigatórias:
 - Não escreva como mecanismo de busca. Evite "resultado da busca", "sua busca", "a partir desta busca" e linguagem de sistema. Escreva como uma conversa útil com o candidato.
 - O texto deve parecer interface final para vestibulandos: claro, humano, útil, sem mencionar IA, JSON, componente, intenção, confiança, protótipo ou sistema.
 - A resposta inicial deve explicar o caminho encontrado e antecipar o que a pessoa pode fazer em seguida, sem ser seca.
+- Mantenha o texto leve e escaneável: answer com no máximo 2-3 frases curtas; intro de cada seção com no máximo 1 frase curta. Detalhes específicos (datas, documentos, valores) ficam nos cards e listas, não amontoados no texto corrido.
 
 Matriz de navegação por intenção:
 1. Se a pessoa pergunta genericamente por cursos, cursos por cidade ou por uma área ampla:
@@ -1012,6 +1032,7 @@ Matriz de navegação por intenção:
    - Não mostre todas as formas de ingresso nesse caso.
    - Use timeline primeiro, depois admission_details, prep_materials e events quando houver.
    - Se a base tiver startDate e endDate, cite o período explicitamente no answer.
+4b. De forma geral, quando a pessoa já está vendo os detalhes de uma forma de ingresso específica (Vestibular FGV, ENEM, Processo Seletivo Internacional, Demanda Social, Olimpíadas, Transferência), não use admission_options — repetir a mesma modalidade que já é o assunto da página não ajuda. Se fizer sentido, sugira em next_step ver os cursos que aceitam essa modalidade.
 5. Para pergunta ampla sobre datas, inscrição, prazo ou processo seletivo:
    - Use timeline primeiro.
    - Depois use admission_options e course_cards quando for útil.
