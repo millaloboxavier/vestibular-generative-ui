@@ -211,7 +211,8 @@ function querySignals(message) {
     asksPrep: /(prova|gabarito|treinar|preparar|conteudo programatico|conteúdo programático|edital)/.test(q),
     asksCompare: /(comparar|diferenca|diferença|versus| vs |qual e melhor|qual é melhor)/.test(q),
     asksDifferentials: /(diferencial|diferenciais|reconhecimento|reconhecida|internacional|duplo diploma|dupla graduacao|dupla graduação|carreira|vale a pena|ingles|inglês)/.test(q),
-    asksLead: /(avis|avise|receber|notifica|notificar|quando abrir|em breve)/.test(q)
+    asksLead: /(avis|avise|receber|notifica|notificar|quando abrir|em breve)/.test(q),
+    asksFaq: /(duvida|dúvida|duvidas|dúvidas|pergunta frequente|perguntas frequentes|\bfaq\b|posso levar|pode levar|e presencial|é presencial)/.test(q)
   };
 }
 
@@ -397,6 +398,15 @@ function vestibularDetailsItems() {
   return rows.slice(0, 5);
 }
 
+function vestibularFaqItems() {
+  const item = vestibularAdmission();
+  return safeArray(item?.faq).map((entry, index) => ({
+    id: `faq-${index}`,
+    question: cleanCopy(entry.question || ""),
+    answer: cleanCopy(entry.answer || "")
+  })).filter((entry) => entry.question && entry.answer);
+}
+
 
 function isSpecificCourseContext(message, courses = [], cityHints = []) {
   const sig = querySignals(message);
@@ -551,7 +561,7 @@ function resolveSections(plan, message) {
   const resolved = [];
   const addSection = (section) => {
     if (!section) return;
-    if (["course_cards", "course_detail", "timeline", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_compare", "prep_materials", "admission_details", "warning", "lead_form"].includes(section.type)) {
+    if (["course_cards", "course_detail", "timeline", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_compare", "prep_materials", "admission_details", "faq", "warning", "lead_form"].includes(section.type)) {
       const already = resolved.some((item) => item.type === section.type);
       if (already && !["course_cards"].includes(section.type)) return;
     }
@@ -707,6 +717,11 @@ function resolveSections(plan, message) {
       if (items.length) addSection({ ...sectionBase(section, "admission_details", "Como funciona o Vestibular FGV", "Veja o essencial sobre a prova, a inscrição e a preparação para essa forma de ingresso.", "cards"), items });
     }
 
+    if (section.type === "faq") {
+      const items = vestibularFaqItems();
+      if (items.length) addSection({ ...sectionBase(section, "faq", "Perguntas frequentes sobre o Vestibular FGV", "Tire suas dúvidas antes de se inscrever.", "accordion"), items });
+    }
+
     if (section.type === "warning" && !sig.asksDate && !sig.asksCourse && !sig.asksAdmission && !sig.asksScholarship && !sig.asksEvent) {
       addSection({ ...sectionBase(section, "warning", "Não encontrei esse caminho no Vestibular FGV", "Tente buscar por cursos, formas de ingresso, bolsas, provas, eventos ou inscrição.", "single"), items: safeArray(section.textItems).map((text) => ({ text: cleanCopy(text) })) });
     }
@@ -764,6 +779,11 @@ function resolveSections(plan, message) {
   if (sig.asksVestibularSpecific && !resolved.some((section) => section.type === "prep_materials")) {
     const items = safeArray(data.materials).filter((item) => normalize(item.label || item.title).includes("prova") || normalize(item.label || item.title).includes("gabarito") || normalize(item.label || item.title).includes("edital"));
     if (items.length) addSection({ type: "prep_materials", title: "Prepare-se para o Vestibular FGV", intro: "Use provas anteriores, gabaritos e materiais do processo seletivo para organizar seus estudos.", layout: "cards", items: items.slice(0, 4), actions: [] });
+  }
+
+  if (sig.asksFaq && !resolved.some((section) => section.type === "faq")) {
+    const items = vestibularFaqItems();
+    if (items.length) addSection({ type: "faq", title: "Perguntas frequentes sobre o Vestibular FGV", intro: "Tire suas dúvidas antes de se inscrever.", layout: "accordion", items, actions: [] });
   }
 
   const visibleTypes = resolved.map((section) => section.type);
@@ -931,10 +951,10 @@ const RESPONSE_SCHEMA = {
         additionalProperties: false,
         required: ["type", "title", "intro", "layout", "courseIds", "admissionTypeIds", "materialIds", "eventIds", "scholarshipIds", "textItems"],
         properties: {
-          type: { type: "string", enum: ["course_cards", "course_detail", "course_compare", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "timeline", "prep_materials", "admission_details", "next_step", "lead_form", "warning"] },
+          type: { type: "string", enum: ["course_cards", "course_detail", "course_compare", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "timeline", "prep_materials", "admission_details", "faq", "next_step", "lead_form", "warning"] },
           title: { type: "string" },
           intro: { type: "string" },
-          layout: { type: "string", enum: ["cards", "tabs_by_city", "list", "table", "single", "form", "chips"] },
+          layout: { type: "string", enum: ["cards", "tabs_by_city", "list", "table", "single", "form", "chips", "accordion"] },
           courseIds: { type: "array", items: { type: "string" } },
           admissionTypeIds: { type: "array", items: { type: "string" } },
           materialIds: { type: "array", items: { type: "string" } },
@@ -998,9 +1018,10 @@ Matriz de navegação por intenção:
    - Se a base tiver startDate e endDate, cite o período explicitamente no answer.
 6. Para pergunta sobre bolsa, inclua scholarships.
 7. Para pergunta sobre preparação, prova, gabarito ou Vestibular FGV, inclua prep_materials quando houver materiais úteis na base.
-8. Enquanto qualquer modalidade estiver com status de inscrições em breve, a experiência deve oferecer cadastro para aviso. Use leadCapture.show=true sempre que a pessoa pedir aviso, perguntar por abertura de inscrição, datas, curso, formas de ingresso, bolsas ou processo seletivo. O backend também forçará esse bloco quando houver inscrições em breve.
-9. Nunca termine uma renderização sem oferecer alguma continuidade útil para a pessoa. Use next_step com poucas opções contextuais, variadas e relacionadas ao que apareceu na página.
-10. Se o pedido estiver fora do escopo do Vestibular FGV, use warning e ofereça caminhos de cursos, formas de ingresso, bolsas, eventos ou provas.
+8. Para dúvidas comuns sobre a prova do Vestibular FGV (se é presencial, o que pode levar, conteúdo programático, mudança de cidade de prova), use o tipo faq com as perguntas e respostas de admissionTypes[].faq na BASE_DO_SITE. Não invente perguntas nem respostas fora dessa lista.
+9. Enquanto qualquer modalidade estiver com status de inscrições em breve, a experiência deve oferecer cadastro para aviso. Use leadCapture.show=true sempre que a pessoa pedir aviso, perguntar por abertura de inscrição, datas, curso, formas de ingresso, bolsas ou processo seletivo. O backend também forçará esse bloco quando houver inscrições em breve.
+10. Nunca termine uma renderização sem oferecer alguma continuidade útil para a pessoa. Use next_step com poucas opções contextuais, variadas e relacionadas ao que apareceu na página.
+11. Se o pedido estiver fora do escopo do Vestibular FGV, use warning e ofereça caminhos de cursos, formas de ingresso, bolsas, eventos ou provas.
 
 BASE_DO_SITE:
 ${JSON.stringify(dataCatalog)}`;

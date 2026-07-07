@@ -34,10 +34,20 @@ const config: Config = {
           "0%, 80%, 100%": { opacity: "0.35", transform: "scale(0.85)" },
           "40%": { opacity: "1", transform: "scale(1)" },
         },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
       },
       animation: {
         "fade-up": "fade-up 420ms ease-out both",
         "pulse-dot": "pulse-dot 1.2s infinite ease-in-out",
+        "accordion-down": "accordion-down 200ms ease-out",
+        "accordion-up": "accordion-up 200ms ease-out",
       },
     },
   },

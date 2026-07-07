@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Bell, CalendarDays, GraduationCap, MapPin, Sparkles } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -343,6 +344,22 @@ function CompareSection({ section }: { section: Section }) {
   );
 }
 
+function FaqSection({ section }: { section: Section }) {
+  const items = safeItems(section);
+  return (
+    <SectionShell section={section}>
+      <Accordion type="single" collapsible className="w-full">
+        {items.map((item, index) => (
+          <AccordionItem key={item.id || index} value={item.id || `faq-${index}`}>
+            <AccordionTrigger>{item.question}</AccordionTrigger>
+            <AccordionContent>{item.answer}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </SectionShell>
+  );
+}
+
 function LeadForm({ section }: { section: Section }) {
   return (
     <SectionShell section={section} className="bg-muted/40">
@@ -392,6 +409,7 @@ export function SectionRenderer({ section, onPrompt, onCompareRequest }: { secti
   if (["admission_options", "admission_details"].includes(section.type)) return <ListCards section={section} icon={<GraduationCap className="h-4 w-4 text-muted-foreground" />} />;
   if (["events"].includes(section.type)) return <ListCards section={section} icon={<CalendarDays className="h-4 w-4 text-muted-foreground" />} />;
   if (["scholarships", "course_differentials", "school_recognitions", "prep_materials", "warning"].includes(section.type)) return <ListCards section={section} icon={<Sparkles className="h-4 w-4 text-muted-foreground" />} />;
+  if (section.type === "faq") return <FaqSection section={section} />;
   if (section.type === "lead_form") return <LeadForm section={section} />;
   if (section.type === "next_step") return <NextStep section={section} onPrompt={onPrompt} onCompareRequest={onCompareRequest} />;
   return null;
