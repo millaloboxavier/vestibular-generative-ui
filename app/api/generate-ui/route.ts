@@ -1017,7 +1017,7 @@ const RESPONSE_SCHEMA = {
     sections: {
       type: "array",
       minItems: 1,
-      maxItems: 8,
+      maxItems: 11,
       items: {
         type: "object",
         additionalProperties: false,
@@ -1072,10 +1072,13 @@ Matriz de navegação por intenção:
    - Ofereça continuidade para comparar cursos, entender formas de ingresso, ver bolsas ou conhecer eventos.
 2. Se a pessoa pergunta por um curso específico com cidade clara, por exemplo "Administração de Empresas em São Paulo":
    - Use course_detail como primeiro bloco, não um card repetido.
-   - Pode usar course_differentials apenas se houver exatamente um curso identificado e esse curso tiver diferenciais no JSON.
-   - Pode usar school_recognitions apenas se houver exatamente um curso identificado.
-   - Pode usar course_numbers, course_careers e course_testimonials apenas se houver exatamente um curso identificado e o campo correspondente (hasNumbers, hasCareerPaths, hasTestimonials) for true para esse curso na BASE_DO_SITE.
-   - Pode usar course_videos apenas se houver exatamente um curso identificado e hasVideos for true para esse curso. Não escreva texto listando os vídeos no answer nem em outra seção — o vídeo é renderizado pelo próprio componente da seção.
+   - Isso só se aplica quando houver exatamente um curso identificado. Nesse caso, monte uma página completa: inclua TODAS as seções abaixo cujo campo correspondente for true para esse curso na BASE_DO_SITE, não só uma ou duas. Cada uma existe porque a pessoa se beneficia de ver esse tipo de informação ao conhecer um curso específico:
+     - course_differentials, se hasDifferentials.
+     - school_recognitions, se a escola desse curso tiver recognitions na BASE_DO_SITE.
+     - course_numbers, se hasNumbers.
+     - course_careers, se hasCareerPaths.
+     - course_testimonials, se hasTestimonials.
+     - course_videos, se hasVideos. Não escreva texto listando os vídeos no answer nem em outra seção — o vídeo é renderizado pelo próprio componente da seção.
    - Pode usar events da cidade desse curso.
 3. Se a pessoa pergunta "curso de administração" sem cidade clara:
    - Trate como exploração ampla de opções de Administração.
