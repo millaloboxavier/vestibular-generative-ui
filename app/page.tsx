@@ -15,6 +15,19 @@ const suggestions = [
   "quero me inscrever",
 ];
 
+function upcomingAdmissionNotice(): string | null {
+  const admissionTypes = ((siteData as any).admissionTypes || []) as any[];
+  const today = new Date().toISOString().slice(0, 10);
+  const upcoming = admissionTypes
+    .filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(item.startDate || "") && item.startDate >= today)
+    .sort((a, b) => a.startDate.localeCompare(b.startDate));
+  const next = upcoming[0];
+  if (!next) return null;
+  const [, month, day] = next.startDate.split("-");
+  const cycle = next.cycle ? `${next.cycle} ` : "";
+  return `Processo seletivo ${cycle}— inscrições a partir de ${day}/${month}.`;
+}
+
 const loadingSteps = [
   "Entendendo o que você procura",
   "Identificando curso, cidade e forma de ingresso",
@@ -699,6 +712,7 @@ export default function Page() {
   const isFirstJourneysWriteRef = useRef(true);
 
   const sections = useMemo(() => plan?.sections || [], [plan]);
+  const admissionNotice = useMemo(() => upcomingAdmissionNotice(), []);
 
   useEffect(() => {
     try {
@@ -879,6 +893,9 @@ export default function Page() {
           <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-foreground text-background">
             <Sparkles className="h-7 w-7" />
           </div>
+          {admissionNotice ? (
+            <p className="mb-4 rounded-full border bg-muted px-4 py-1.5 text-sm font-medium text-muted-foreground">{admissionNotice}</p>
+          ) : null}
           <h1 className="max-w-3xl text-3xl font-semibold tracking-tight md:text-5xl">Comece sua jornada para a Graduação FGV</h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">Pergunte sobre cursos, inscrições, formas de ingresso, provas e prepare-se seu futuro na FGV.</p>
           <form onSubmit={onSubmit} className="mt-10 flex w-full max-w-2xl gap-2 rounded-full border bg-muted p-2">
@@ -944,8 +961,8 @@ export default function Page() {
 
             {plan ? (
               <div className="mt-6 space-y-6">
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Esta página foi gerada pela IA baseada na sua pergunta.</p>
                 <div className="rounded-[1.5rem] border p-5 md:p-6">
-                  <p className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Esta página foi criada baseada na sua pergunta</p>
                   <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{plan.pageTitle}</h1>
                   {plan.answer ? <p className="mt-3 text-base leading-7 text-muted-foreground md:text-lg">{plan.answer}</p> : null}
                 </div>
