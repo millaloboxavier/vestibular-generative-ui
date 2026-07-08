@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Bell, CalendarDays, GraduationCap, MapPin, Play, Sparkles } from "lucide-react";
+import { ArrowRight, Bell, CalendarDays, FileText, GraduationCap, MapPin, Play, Sparkles } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -247,6 +247,7 @@ function CoursesSection({ section, onPrompt }: { section: Section; onPrompt: (pr
 
 function DetailSection({ section }: { section: Section }) {
   const items = safeItems(section);
+  const curriculumUrl = section.course?.curriculumUrl;
   return (
     <SectionShell section={section}>
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
@@ -261,6 +262,14 @@ function DetailSection({ section }: { section: Section }) {
           </Card>
         ))}
       </div>
+      {curriculumUrl ? (
+        <Button asChild variant="outline" className="mt-4 gap-2">
+          <a href={curriculumUrl} target="_blank" rel="noopener noreferrer">
+            <FileText className="h-4 w-4" />
+            Ver grade curricular
+          </a>
+        </Button>
+      ) : null}
     </SectionShell>
   );
 }
