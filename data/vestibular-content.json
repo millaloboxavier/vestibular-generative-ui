@@ -745,7 +745,8 @@
           "title": "FGV EAESP | Germano Guimarães, aluno formado em Administração Pública",
           "videoId": "-96uFGU3WkE"
         }
-      ]
+      ],
+      "candidatePerSeat": "3,4 (2025.1)"
     },
     {
       "id": "direito-sp",
@@ -756,10 +757,10 @@
       "school": "FGV Direito SP",
       "url": "https://vestibular.fgv.br/cursos/sao-paulo/direito",
       "entry": "2027.1",
-      "duration": "Consultar página do curso",
-      "period": "Consultar página do curso",
-      "tuition": "Consultar página do curso",
-      "campus": "São Paulo",
+      "duration": "05 anos",
+      "period": "Integral nos três primeiros anos; matutino nos anos finais",
+      "tuition": "R$ 8.335,70/mês (*2026.1)",
+      "campus": "FGV Direito SP - Rua Dr. Plínio Barreto, 365, Bela Vista, São Paulo - SP",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -842,7 +843,8 @@
           "title": "Dupla Graduação Direito e Administração",
           "videoId": "05OsSTJW5Tc"
         }
-      ]
+      ],
+      "candidatePerSeat": "20 (2026.1)"
     },
     {
       "id": "economia-sp",
@@ -853,10 +855,10 @@
       "school": "FGV EESP",
       "url": "https://vestibular.fgv.br/cursos/sao-paulo/economia",
       "entry": "2027.1",
-      "duration": "Consultar página do curso",
-      "period": "Consultar página do curso",
-      "tuition": "Consultar página do curso",
-      "campus": "São Paulo",
+      "duration": "04 anos",
+      "period": "Integral",
+      "tuition": "R$ 9.885,00/mês (*2026.1)",
+      "campus": "FGV EESP - Rua Dr. Plínio Barreto, 365, Bela Vista, São Paulo - SP",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -934,7 +936,8 @@
           "title": "Webinar | Conheça o novo currículo da graduação em Economia",
           "videoId": "z3OEMHeCEpE"
         }
-      ]
+      ],
+      "candidatePerSeat": "17,2 (2023.1)"
     },
     {
       "id": "relacoes-internacionais-sp",
@@ -1037,7 +1040,8 @@
           "title": "FGV Undergraduate | International Relations",
           "videoId": "R0ahG6ROJeQ"
         }
-      ]
+      ],
+      "candidatePerSeat": "9,7 (2023.1)"
     },
     {
       "id": "administracao-rj",
@@ -1048,10 +1052,10 @@
       "school": "FGV EBAPE",
       "url": "https://vestibular.fgv.br/cursos/rio-de-janeiro/administracao",
       "entry": "2026.2 indicado na página",
-      "duration": "Consultar página do curso",
-      "period": "Consultar página do curso",
-      "tuition": "Consultar página do curso",
-      "campus": "Rio de Janeiro",
+      "duration": "04 anos",
+      "period": "Integral",
+      "tuition": "R$ 7.834,33/mês (*2026.1)",
+      "campus": "FGV EBAPE Botafogo e Barra da Tijuca - Rio de Janeiro - RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -1138,7 +1142,8 @@
           "title": "Aula do curso de graduação em Administração - Vestibular EBAPE/FGV",
           "videoId": "-LVnVzzw2jI"
         }
-      ]
+      ],
+      "candidatePerSeat": "4,58 (2025.1)"
     },
     {
       "id": "ciencia-dados-ia-rj",
@@ -1223,7 +1228,8 @@
           "title": "DIA FGV LIVE | Palestra do curso de Ciências de Dados",
           "videoId": "hcrZSuPw9Sc"
         }
-      ]
+      ],
+      "candidatePerSeat": "5,86 (2025.1)"
     },
     {
       "id": "ciencias-sociais-rj",
@@ -1234,10 +1240,10 @@
       "school": "FGV CPDOC",
       "url": "https://vestibular.fgv.br/cursos/rio-de-janeiro/ciencias-sociais",
       "entry": "Consultar página do curso",
-      "duration": "Consultar página do curso",
-      "period": "Consultar página do curso",
-      "tuition": "Consultar página do curso",
-      "campus": "Rio de Janeiro",
+      "duration": "04 anos",
+      "period": "Diurno",
+      "tuition": "R$ 2.162,21/mês (*2026.1)",
+      "campus": "FGV Botafogo - Praia de Botafogo, 190, 14º andar, Rio de Janeiro - RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -1321,7 +1327,8 @@
           "title": "Aula de graduação em Ciências Sociais - Vestibular CPDOC/FGV",
           "videoId": "NfhDY6gkkos"
         }
-      ]
+      ],
+      "candidatePerSeat": "1,11 (2025.1)"
     },
     {
       "id": "comunicacao-digital-rj",
@@ -1332,10 +1339,10 @@
       "school": "FGV Comunicação",
       "url": "https://vestibular.fgv.br/cursos/rio-de-janeiro/comunicacao-digital",
       "entry": "2027.1 indicado na página de processo seletivo",
-      "duration": "Consultar página do curso",
-      "period": "Consultar página do curso",
-      "tuition": "Consultar página do curso",
-      "campus": "Rio de Janeiro",
+      "duration": "04 anos",
+      "period": "Integral",
+      "tuition": "R$ 4.600,00/mês (*2026.1)",
+      "campus": "FGV Botafogo - Praia de Botafogo, 190, Rio de Janeiro - RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -1412,7 +1419,8 @@
           "title": "Inteligência Artificial, cultura visual e criação no digital",
           "videoId": "vxm9QEpvGbw"
         }
-      ]
+      ],
+      "candidatePerSeat": "1,4 (2025.1)"
     },
     {
       "id": "direito-rj",
@@ -1521,7 +1529,8 @@
           "title": "Depoimento sobre o curso de graduação em Direito - FGV",
           "videoId": "5QFHPz-yZK8"
         }
-      ]
+      ],
+      "candidatePerSeat": "8,2 (2025.1)"
     },
     {
       "id": "economia-rj",
@@ -1534,8 +1543,8 @@
       "entry": "2027.1",
       "duration": "04 anos",
       "period": "Integral",
-      "tuition": "Consultar página do curso",
-      "campus": "Rio de Janeiro",
+      "tuition": "R$ 7.186,00/mês (*2026.1)",
+      "campus": "FGV Botafogo - Praia de Botafogo, 190, Rio de Janeiro - RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -1629,7 +1638,8 @@
           "title": "Graduação | Curso de Ciências Econômicas da FGV EPGE",
           "videoId": "QlAK7ASr798"
         }
-      ]
+      ],
+      "candidatePerSeat": "8 (2026.1)"
     },
     {
       "id": "matematica-aplicada-rj",
@@ -1640,10 +1650,10 @@
       "school": "FGV EMAp",
       "url": "https://vestibular.fgv.br/cursos/rio-de-janeiro/matematica-aplicada",
       "entry": "2027.1 indicado na página de processo seletivo",
-      "duration": "Consultar página do curso",
-      "period": "Consultar página do curso",
-      "tuition": "Consultar página do curso",
-      "campus": "Rio de Janeiro",
+      "duration": "04 anos",
+      "period": "Diurno",
+      "tuition": "R$ 3.000,00/mês (*2026.1)",
+      "campus": "FGV Botafogo - Praia de Botafogo, 190, 5º andar, Rio de Janeiro - RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -1718,7 +1728,8 @@
           "title": "Carreiras - Graduação em Matemática Aplicada",
           "videoId": "0mfvvjBVjUU"
         }
-      ]
+      ],
+      "candidatePerSeat": "3,17 (2025.1)"
     },
     {
       "id": "administracao-df",
@@ -1808,7 +1819,8 @@
           "title": "FGV EPPG: Transformando Líderes com Excelência e Inovação",
           "videoId": "xhiJUSNoymM"
         }
-      ]
+      ],
+      "candidatePerSeat": "1,17 (2026.1)"
     },
     {
       "id": "administracao-publica-df",
@@ -1819,10 +1831,10 @@
       "school": "FGV EPPG",
       "url": "https://vestibular.fgv.br/cursos/brasilia/administracao-publica",
       "entry": "2026.2 indicado na página",
-      "duration": "Consultar página do curso",
-      "period": "Consultar página do curso",
-      "tuition": "Consultar página do curso",
-      "campus": "Brasília",
+      "duration": "04 anos",
+      "period": "Integral",
+      "tuition": "R$ 5.311,36/mês (*2026.1)",
+      "campus": "Campus FGV EPPG - SGAN Quadra 602, Módulos A, B e C, Asa Norte, Brasília - DF",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -1913,7 +1925,8 @@
           "title": "FGV EPPG | Depoimento aluna Sara",
           "videoId": "5NLuMxk2fBs"
         }
-      ]
+      ],
+      "candidatePerSeat": "2,08 (2026.1)"
     }
   ],
   "materials": [
