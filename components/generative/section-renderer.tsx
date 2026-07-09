@@ -274,36 +274,61 @@ function DetailSection({ section }: { section: Section }) {
   );
 }
 
+function ItemTable({ table }: { table: { columns: string[]; rows: string[][] } }) {
+  return (
+    <div className="overflow-x-auto rounded-2xl border">
+      <table className="w-full min-w-[560px] text-left text-sm">
+        <thead className="bg-muted">
+          <tr>
+            {table.columns.map((column) => <th key={column} className="p-3 font-medium">{column}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row, rowIndex) => (
+            <tr key={rowIndex} className="border-t align-top">
+              {row.map((cell, cellIndex) => <td key={cellIndex} className="p-3">{cell}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function ListCards({ section, icon, onPrompt }: { section: Section; icon?: React.ReactNode; onPrompt?: (prompt: string) => void }) {
   const items = safeItems(section);
   const showLearnMore = section.type === "admission_options" && Boolean(onPrompt);
   return (
     <SectionShell section={section}>
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {items.map((item, index) => (
-          <Card key={item.id || index}>
-            <CardHeader>
-              <div className="mb-2 flex items-center gap-2">
-                {icon}
-                {item.type ? <Badge>{item.type}</Badge> : item.status ? <Badge>{item.status}</Badge> : null}
-              </div>
-              <CardTitle>{item.label || item.name || item.title}</CardTitle>
-              <CardDescription>{item.description || item.shortDescription}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2 text-sm text-muted-foreground">
-              {item.period ? <p><strong className="text-foreground">Período:</strong> {item.period}</p> : null}
-              {item.cycle ? <p><strong className="text-foreground">Ciclo:</strong> {item.cycle}</p> : null}
-              {item.displayDate || item.displayTime ? <p><strong className="text-foreground">Quando:</strong> {[item.displayDate, item.displayTime].filter(Boolean).join(" · ")}</p> : null}
-              {item.city ? <p className="flex items-center gap-1"><MapPin className="h-4 w-4" /> {item.city}</p> : null}
-              {showLearnMore && item.label ? (
-                <Button variant="outline" size="sm" onClick={() => onPrompt!(`saiba mais sobre ${item.label} como forma de ingresso`)}>
-                  Saiba mais
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              ) : null}
-            </CardContent>
-          </Card>
-        ))}
+        {items.map((item, index) => {
+          const hasTable = item.table && Array.isArray(item.table.rows) && item.table.rows.length;
+          return (
+            <Card key={item.id || index} className={hasTable ? "min-w-0 md:col-span-2 xl:col-span-3" : undefined}>
+              <CardHeader>
+                <div className="mb-2 flex items-center gap-2">
+                  {icon}
+                  {item.type ? <Badge>{item.type}</Badge> : item.status ? <Badge>{item.status}</Badge> : null}
+                </div>
+                <CardTitle>{item.label || item.name || item.title}</CardTitle>
+                <CardDescription>{item.description || item.shortDescription}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2 text-sm text-muted-foreground">
+                {item.period ? <p><strong className="text-foreground">Período:</strong> {item.period}</p> : null}
+                {item.cycle ? <p><strong className="text-foreground">Ciclo:</strong> {item.cycle}</p> : null}
+                {item.displayDate || item.displayTime ? <p><strong className="text-foreground">Quando:</strong> {[item.displayDate, item.displayTime].filter(Boolean).join(" · ")}</p> : null}
+                {item.city ? <p className="flex items-center gap-1"><MapPin className="h-4 w-4" /> {item.city}</p> : null}
+                {hasTable ? <ItemTable table={item.table} /> : null}
+                {showLearnMore && item.label ? (
+                  <Button variant="outline" size="sm" onClick={() => onPrompt!(`saiba mais sobre ${item.label} como forma de ingresso`)}>
+                    Saiba mais
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                ) : null}
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </SectionShell>
   );

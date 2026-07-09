@@ -168,7 +168,23 @@
       "cycle": "2027.1",
       "startDate": "2026-07-27",
       "endDate": "2026-09-16",
-      "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/enem"
+      "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/enem",
+      "registrationFrequency": "O ingresso pelo ENEM ocorre anualmente para a maioria dos cursos de Graduação FGV. Para Administração de Empresas da FGV EAESP, Administração da FGV EBAPE e Comunicação Digital da FGV ECMI, os processos seletivos são realizados semestralmente.",
+      "seatsByCourse": [
+        { "courseId": "administracao-rj", "seats": 15, "registrationFee": "R$ 135,00" },
+        { "courseId": "ciencia-dados-ia-rj", "seats": 8, "registrationFee": "R$ 125,00" },
+        { "courseId": "ciencias-sociais-rj", "seats": 16, "registrationFee": "R$ 125,00" },
+        { "courseId": "comunicacao-digital-rj", "seats": 15, "registrationFee": "R$ 135,00" },
+        { "courseId": "direito-rj", "seats": 20, "registrationFee": "R$ 125,00" },
+        { "courseId": "matematica-aplicada-rj", "seats": 8, "registrationFee": "R$ 125,00" },
+        { "courseId": "administracao-empresas-sp", "seats": 12, "registrationFee": "R$ 135,00" },
+        { "courseId": "administracao-publica-sp", "seats": 10, "registrationFee": "R$ 125,00" },
+        { "courseId": "direito-sp", "seats": 8, "registrationFee": "R$ 250,00" },
+        { "courseId": "economia-sp", "seats": 3, "registrationFee": "R$ 250,00" },
+        { "courseId": "relacoes-internacionais-sp", "seats": 5, "registrationFee": "R$ 125,00" },
+        { "courseId": "administracao-df", "seats": 15, "registrationFee": "R$ 125,00" },
+        { "courseId": "administracao-publica-df", "seats": 20, "registrationFee": "R$ 125,00" }
+      ]
     },
     {
       "id": "exames-internacionais",
@@ -178,7 +194,28 @@
       "cycle": "2027.1",
       "startDate": "2026-07-27",
       "endDate": "2026-09-16",
-      "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/processo-seletivo-internacional"
+      "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/processo-seletivo-internacional",
+      "registrationFrequency": "O ingresso pela modalidade internacional ocorre anualmente para a maioria dos cursos de Graduação FGV. Para Administração de Empresas da FGV EAESP, Administração da FGV EBAPE e Comunicação Digital da FGV ECMI, os processos seletivos são realizados semestralmente.",
+      "eligibility": [
+        "Destinada a candidatos brasileiros e estrangeiros que tenham realizado, nos últimos dois anos, um ou mais dos seguintes exames: International Baccalaureate Diploma Programme (IB), ABITUR, Advanced Placement (AP), Baccalauréat (BAC), Esame di Stato (Maturità Liceo Scientifico) ou SAT.",
+        "Para Administração e Administração Pública da FGV EPPG (Brasília), Relações Internacionais da FGV RI (São Paulo), Administração da FGV EBAPE, Ciências Sociais do FGV CPDOC (Rio de Janeiro) e Comunicação Digital da FGV ECMI, também são aceitos outros exames equivalentes, como Ciclo Básico Común (Argentina), Prueba de Selección Universitaria (Chile) e EXANI-II Admisión (México)."
+      ],
+      "internationalDiplomasByCourse": [
+        { "courseId": "administracao-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
+        { "courseId": "ciencia-dados-ia-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
+        { "courseId": "ciencias-sociais-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
+        { "courseId": "comunicacao-digital-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
+        { "courseId": "direito-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
+        { "courseId": "economia-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
+        { "courseId": "matematica-aplicada-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
+        { "courseId": "administracao-empresas-sp", "diplomas": ["ABITUR", "BAC", "Esame di Stato", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
+        { "courseId": "administracao-publica-sp", "diplomas": ["ABITUR", "BAC", "Esame di Stato", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
+        { "courseId": "direito-sp", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
+        { "courseId": "economia-sp", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
+        { "courseId": "relacoes-internacionais-sp", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
+        { "courseId": "administracao-df", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
+        { "courseId": "administracao-publica-df", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true }
+      ]
     },
     {
       "id": "demanda-social-diversidade",
@@ -188,7 +225,22 @@
       "cycle": "2027.1",
       "startDate": "2026-07-27",
       "endDate": "2026-09-16",
-      "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/vestibular-por-demanda-social-e-diversidade"
+      "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/vestibular-por-demanda-social-e-diversidade",
+      "registrationFrequency": "O ingresso para Administração e Administração Pública da FGV EPPG, Administração Pública da FGV EAESP e Direito da FGV Direito SP ocorre anualmente. Para Administração de Empresas da FGV EAESP, os processos seletivos são realizados semestralmente.",
+      "eligibility": [
+        "Ter cursado o Ensino Médio integralmente em escola pública no Brasil.",
+        "Ou ter cursado o Ensino Médio integralmente em escola privada, com 100% de bolsa concedida por necessidade econômica.",
+        "Ou se autodeclarar preto, pardo ou indígena.",
+        "É admitida uma composição entre as condições de escola pública e escola privada com bolsa.",
+        "O processo seletivo dos candidatos do Vestibular DSD é o mesmo do Vestibular regular."
+      ],
+      "seatsByCourse": [
+        { "courseId": "administracao-empresas-sp", "seats": 12, "registrationFee": "R$ 275,00" },
+        { "courseId": "administracao-publica-sp", "seats": 6, "registrationFee": "R$ 250,00" },
+        { "courseId": "direito-sp", "seats": 12, "registrationFee": "R$ 250,00" },
+        { "courseId": "administracao-df", "seats": 3, "registrationFee": "R$ 250,00" },
+        { "courseId": "administracao-publica-df", "seats": 3, "registrationFee": "R$ 250,00" }
+      ]
     },
     {
       "id": "olimpiadas",
@@ -198,7 +250,17 @@
       "cycle": "2027.1",
       "startDate": "2026-07-27",
       "endDate": "2026-09-16",
-      "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/olimpiadas-do-conhecimento"
+      "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/olimpiadas-do-conhecimento",
+      "registrationFrequency": "O ingresso pela modalidade Olimpíadas do Conhecimento ocorre anualmente.",
+      "eligibility": [
+        "Podem concorrer candidatos que tenham participado de: Olimpíada Brasileira de Economia (OBECON), Olimpíada Brasileira de Matemática (OBM), Olimpíada Brasileira de Matemática das Escolas Públicas e Privadas (OBMEP), Olimpíada Brasileira de Física (OBF), Olimpíada Brasileira de Física das Escolas Públicas (OBFEP), International Economics Olympiad (IEO), International Mathematical Olympiad (IMO), International Physics Olympiad (IPhO) ou Olimpíada do Bem Público (OBP).",
+        "Só são aceitas competições realizadas para estudantes de Ensino Médio ou níveis equivalentes; pontuação de competições de nível superior ou fundamental não é aceita."
+      ],
+      "seatsByCourse": [
+        { "courseId": "economia-sp", "seats": 4, "registrationFee": "R$ 250,00" },
+        { "courseId": "administracao-df", "seats": 15, "registrationFee": "R$ 250,00" },
+        { "courseId": "administracao-publica-df", "seats": 15, "registrationFee": "R$ 250,00" }
+      ]
     },
     {
       "id": "transferencia-externa",

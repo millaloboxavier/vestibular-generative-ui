@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { GenerativeSkeleton, Section, SectionRenderer, SkeletonVariant } from "@/components/generative/section-renderer";
-import siteData from "@/data/vestibular-content.json";
+import siteData from "@/data/graduacao-content.json";
 
 const suggestions = [
   "quais cursos de graduação a FGV oferece?",

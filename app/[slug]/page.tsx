@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import data from "@/data/vestibular-content.json";
+import data from "@/data/graduacao-content.json";
 
 const primaryNavItems = [
   { label: "Cursos", href: "/cursos" },
