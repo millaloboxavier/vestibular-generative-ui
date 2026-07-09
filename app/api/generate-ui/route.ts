@@ -120,6 +120,7 @@ function catalog() {
     tags: safeArray(course.tags),
     hasDifferentials: safeArray(course.courseDifferentials).length > 0,
     hasNumbers: safeArray(course.numbers).length > 0,
+    careerPaths: safeArray(course.careerPaths),
     hasCareerPaths: safeArray(course.careerPaths).length > 0,
     hasTestimonials: safeArray(course.testimonials).length > 0,
     hasVideos: safeArray(course.videos).length > 0
@@ -472,10 +473,15 @@ function courseNumbers(courses = []) {
   })).slice(0, 6);
 }
 
-function courseCareerPaths(courses = []) {
+function courseCareerPaths(courses = [], descriptions = []) {
   const courseList = safeArray(courses);
   if (courseList.length !== 1) return [];
-  return safeArray(courseList[0].careerPaths).map((text, index) => ({ id: `career-${index}`, label: text }));
+  return safeArray(courseList[0].careerPaths).map((text, index) => {
+    const description = cleanCopy(safeArray(descriptions)[index] || "");
+    // Se o modelo só repetiu o nome da carreira como "descrição", não mostra nada em vez de duplicar o texto.
+    const isRedundant = normalize(description) === normalize(text);
+    return { id: `career-${index}`, label: text, description: isRedundant ? "" : description };
+  });
 }
 
 function courseTestimonials(courses = []) {
@@ -764,7 +770,7 @@ function resolveSections(plan, message) {
     }
 
     if (section.type === "course_careers") {
-      const items = courseCareerPaths(selectedCourses);
+      const items = courseCareerPaths(selectedCourses, section.textItems);
       if (items.length) addSection({ ...sectionBase(section, "course_careers", "Possibilidades de carreira", "Áreas em que quem se forma nesse curso pode atuar.", "list"), items });
     }
 
@@ -1026,7 +1032,7 @@ const RESPONSE_SCHEMA = {
           type: { type: "string", enum: ["course_cards", "course_detail", "course_compare", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_numbers", "course_careers", "course_testimonials", "course_videos", "timeline", "prep_materials", "admission_details", "faq", "next_step", "lead_form", "warning"] },
           title: { type: "string" },
           intro: { type: "string" },
-          layout: { type: "string", enum: ["cards", "tabs_by_city", "list", "table", "single", "form", "chips", "accordion"] },
+          layout: { type: "string", enum: ["cards", "tabs_by_city", "list", "table", "single", "form", "chips", "accordion", "destaque", "spotlight", "foto"] },
           courseIds: { type: "array", items: { type: "string" } },
           admissionTypeIds: { type: "array", items: { type: "string" } },
           materialIds: { type: "array", items: { type: "string" } },
@@ -1076,10 +1082,15 @@ Matriz de navegação por intenção:
      - course_differentials, se hasDifferentials.
      - school_recognitions, se a escola desse curso tiver recognitions na BASE_DO_SITE.
      - course_numbers, se hasNumbers.
-     - course_careers, se hasCareerPaths.
+     - course_careers, se hasCareerPaths. Regra obrigatória de formatação: veja 2c abaixo.
      - course_testimonials, se hasTestimonials.
      - course_videos, se hasVideos. Não escreva texto listando os vídeos no answer nem em outra seção — o vídeo é renderizado pelo próprio componente da seção.
    - Pode usar events da cidade desse curso.
+2b. Layouts alternativos para variar o visual da página (use com moderação, nem toda seção precisa de um layout diferente):
+   - school_recognitions: layout "foto" é uma composição com imagem, mais humanizada, para usar de vez em quando em vez de "cards".
+   - course_numbers: layout "destaque" é uma faixa maior com os números em evidência, para usar quando os números forem um argumento forte.
+   - course_testimonials: layout "spotlight" dá destaque a um único depoimento — use quando houver exatamente 1 depoimento; com 2 ou mais, não use "spotlight".
+2c. Regra obrigatória para course_careers: o campo textItems é OBRIGATÓRIO e deve ter o mesmo número de itens que careerPaths do curso, na mesma ordem. Cada item de textItems é uma frase curta (1 frase) explicando de forma genérica do que se trata aquela área de atuação — nunca repita o nome da carreira, escreva uma frase nova. Não é sobre a FGV, é sobre a carreira em si. Exemplo: se careerPaths tem ["Consultoria estratégica", "Mercado financeiro"], textItems deve ser algo como ["Ajudar empresas a resolver problemas de negócio e tomar decisões mais assertivas.", "Atuar com investimentos, análise de risco e gestão de recursos financeiros."].
 3. Se a pessoa pergunta "curso de administração" sem cidade clara:
    - Trate como exploração ampla de opções de Administração.
    - Mostre cursos por cidade.
@@ -1095,7 +1106,7 @@ Matriz de navegação por intenção:
    - Use timeline primeiro.
    - Depois use admission_options e course_cards quando for útil.
    - Se a base tiver startDate e endDate, cite o período explicitamente no answer.
-6. Para pergunta sobre bolsa, inclua scholarships. As bolsas de estudo da BASE_DO_SITE não têm relação com nenhuma forma de ingresso. Ao mostrar bolsas numa página sobre uma forma de ingresso específica, escreva o título e a intro dessa seção exatamente como escreveria numa página geral sobre bolsas — por exemplo "Bolsas de estudo" / "Conheça as bolsas de estudo disponíveis para a graduação FGV" — sem mencionar a modalidade de ingresso da página atual.
+6. Só inclua a seção scholarships quando a pergunta for especificamente sobre bolsa, financiamento ou auxílio financeiro. Bolsa não é o foco principal da audiência do Vestibular FGV — em página sobre curso, forma de ingresso ou qualquer outro tema, NÃO monte a seção completa de scholarships, mesmo que pareça um complemento útil. Nesses outros casos, bolsas podem aparecer só como uma opção dentro de next_step (ex: "Ver bolsas de estudo"), nunca como seção própria. Quando a pergunta for mesmo sobre bolsa, inclua scholarships: as bolsas de estudo da BASE_DO_SITE não têm relação com nenhuma forma de ingresso, então, ao mostrar bolsas numa página sobre uma forma de ingresso específica, escreva o título e a intro dessa seção exatamente como escreveria numa página geral sobre bolsas — por exemplo "Bolsas de estudo" / "Conheça as bolsas de estudo disponíveis para a graduação FGV" — sem mencionar a modalidade de ingresso da página atual.
 7. Para pergunta sobre preparação, prova, gabarito ou Vestibular FGV, inclua prep_materials quando houver materiais úteis na base.
 8. O FAQ em admissionTypes[].faq só existe para a modalidade Vestibular FGV — use o tipo faq apenas quando a pergunta for sobre dúvidas comuns dessa modalidade específica (se é presencial, o que pode levar, conteúdo programático, mudança de cidade de prova). Não use faq para ENEM, Processo Seletivo Internacional, Demanda Social, Olimpíadas ou Transferência: não há dados de dúvidas frequentes para essas modalidades na base, e usar o FAQ do Vestibular FGV nelas estaria errado. Nunca invente perguntas nem respostas fora da lista.
 9. Enquanto qualquer modalidade estiver com status de inscrições em breve, a experiência deve oferecer cadastro para aviso. Use leadCapture.show=true sempre que a pessoa pedir aviso, perguntar por abertura de inscrição, datas, curso, formas de ingresso, bolsas ou processo seletivo. O backend também forçará esse bloco quando houver inscrições em breve.

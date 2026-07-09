@@ -393,15 +393,36 @@ function NumbersSection({ section }: { section: Section }) {
   );
 }
 
+function NumbersBanner({ section }: { section: Section }) {
+  const items = safeItems(section);
+  return (
+    <section className="animate-fade-up rounded-[1.35rem] bg-foreground p-6 text-background shadow-sm md:p-10">
+      <div className="mb-6 max-w-3xl">
+        <h2 className="text-xl font-semibold tracking-tight md:text-2xl">{section.title}</h2>
+        {section.intro ? <p className="mt-2 text-sm leading-6 text-background/70 md:text-base">{section.intro}</p> : null}
+      </div>
+      <div className="flex flex-wrap gap-x-10 gap-y-6">
+        {items.map((item, index) => (
+          <div key={item.id || index} className="min-w-[7rem]">
+            <p className="text-3xl font-semibold tracking-tight md:text-5xl">{item.value}</p>
+            <p className="mt-1 text-sm text-background/70 md:text-base">{item.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function CareerPathsSection({ section }: { section: Section }) {
   const items = safeItems(section);
   return (
     <SectionShell section={section}>
-      <div className="flex flex-wrap gap-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {items.map((item, index) => (
-          <span key={item.id || index} className="rounded-full border bg-muted/40 px-4 py-2 text-sm">
-            {item.label}
-          </span>
+          <div key={item.id || index}>
+            <p className="font-semibold">{item.label}</p>
+            {item.description ? <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.description}</p> : null}
+          </div>
         ))}
       </div>
     </SectionShell>
@@ -422,6 +443,46 @@ function TestimonialsSection({ section }: { section: Section }) {
             </CardContent>
           </Card>
         ))}
+      </div>
+    </SectionShell>
+  );
+}
+
+function TestimonialSpotlight({ section }: { section: Section }) {
+  const items = safeItems(section);
+  const item = items[0];
+  if (!item) return null;
+  return (
+    <SectionShell section={section}>
+      <div className="mx-auto max-w-2xl text-center">
+        <span className="font-serif text-6xl leading-none text-muted-foreground/30">&ldquo;</span>
+        <p className="-mt-3 text-xl font-medium leading-8 text-foreground md:text-2xl">{item.quote}</p>
+        <p className="mt-6 text-sm font-semibold">{item.name}</p>
+        {item.role ? <p className="text-xs text-muted-foreground">{item.role}</p> : null}
+      </div>
+    </SectionShell>
+  );
+}
+
+function RecognitionsWithPhoto({ section }: { section: Section }) {
+  const items = safeItems(section);
+  return (
+    <SectionShell section={section}>
+      <div className="grid gap-6 md:grid-cols-2 md:items-center">
+        <div className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-muted to-muted-foreground/20">
+          <GraduationCap className="h-16 w-16 text-muted-foreground/50" />
+        </div>
+        <div className="space-y-4">
+          {items.map((item, index) => (
+            <div key={item.id || index} className="flex gap-3">
+              <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" />
+              <div>
+                <p className="font-semibold">{item.title}</p>
+                {item.description ? <p className="text-sm text-muted-foreground">{item.description}</p> : null}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </SectionShell>
   );
@@ -522,11 +583,12 @@ export function SectionRenderer({ section, onPrompt, onCompareRequest }: { secti
   if (section.type === "timeline") return <TimelineSection section={section} />;
   if (["admission_options", "admission_details"].includes(section.type)) return <ListCards section={section} icon={<GraduationCap className="h-4 w-4 text-muted-foreground" />} onPrompt={onPrompt} />;
   if (["events"].includes(section.type)) return <ListCards section={section} icon={<CalendarDays className="h-4 w-4 text-muted-foreground" />} />;
-  if (["scholarships", "course_differentials", "school_recognitions", "prep_materials", "warning"].includes(section.type)) return <ListCards section={section} icon={<Sparkles className="h-4 w-4 text-muted-foreground" />} />;
+  if (["scholarships", "course_differentials", "prep_materials", "warning"].includes(section.type)) return <ListCards section={section} icon={<Sparkles className="h-4 w-4 text-muted-foreground" />} />;
+  if (section.type === "school_recognitions") return section.layout === "foto" ? <RecognitionsWithPhoto section={section} /> : <ListCards section={section} icon={<Sparkles className="h-4 w-4 text-muted-foreground" />} />;
   if (section.type === "faq") return <FaqSection section={section} />;
-  if (section.type === "course_numbers") return <NumbersSection section={section} />;
+  if (section.type === "course_numbers") return section.layout === "destaque" ? <NumbersBanner section={section} /> : <NumbersSection section={section} />;
   if (section.type === "course_careers") return <CareerPathsSection section={section} />;
-  if (section.type === "course_testimonials") return <TestimonialsSection section={section} />;
+  if (section.type === "course_testimonials") return section.layout === "spotlight" ? <TestimonialSpotlight section={section} /> : <TestimonialsSection section={section} />;
   if (section.type === "course_videos") return <VideosSection section={section} />;
   if (section.type === "lead_form") return <LeadForm section={section} />;
   if (section.type === "next_step") return <NextStep section={section} onPrompt={onPrompt} onCompareRequest={onCompareRequest} />;
