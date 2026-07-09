@@ -878,7 +878,12 @@ function resolveSections(plan, message) {
     let title = "Receba um aviso quando as inscrições abrirem";
     let intro = "Deixe seu nome e e-mail para acompanhar a abertura das inscrições e novidades do processo seletivo.";
 
-    if (specificCourseContext() && selectedCourses[0]) {
+    // Enquanto não há inscrições abertas, o pedido de contato precisa ser sempre
+    // sobre avisar a abertura — não sobre "receber informações do curso", que soa
+    // como um interesse genérico e não comunica o que a pessoa está esperando.
+    if (hasUpcomingAdmissions) {
+      // mantém o título/intro genéricos definidos acima
+    } else if (specificCourseContext() && selectedCourses[0]) {
       title = `Receba novidades sobre ${courseName(selectedCourses[0])}`;
       intro = `Deixe seu contato para acompanhar atualizações sobre ${courseName(selectedCourses[0])} em ${selectedCourses[0].city}, formas de ingresso e período de inscrição.`;
     } else if (sig.asksVestibularSpecific) {

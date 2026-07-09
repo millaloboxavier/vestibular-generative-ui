@@ -333,8 +333,8 @@ function CompareSection({ section }: { section: Section }) {
   const items = safeItems(section);
   return (
     <SectionShell section={section}>
-      <div className="overflow-hidden rounded-2xl border">
-        <table className="w-full min-w-[720px] text-left text-sm">
+      <div className="overflow-x-auto rounded-2xl border">
+        <table className="w-full min-w-[860px] text-left text-sm">
           <thead className="bg-muted">
             <tr>
               <th className="p-4 font-medium">Curso</th>
@@ -342,6 +342,7 @@ function CompareSection({ section }: { section: Section }) {
               <th className="p-4 font-medium">Escola</th>
               <th className="p-4 font-medium">Duração</th>
               <th className="p-4 font-medium">Formas de ingresso</th>
+              <th className="p-4 font-medium">Áreas de atuação</th>
             </tr>
           </thead>
           <tbody>
@@ -352,6 +353,7 @@ function CompareSection({ section }: { section: Section }) {
                 <td className="p-4">{course.school}</td>
                 <td className="p-4">{course.duration || "—"}</td>
                 <td className="p-4">{Array.isArray(course.admissions) ? course.admissions.join(", ") : "—"}</td>
+                <td className="p-4">{Array.isArray(course.careerPaths) && course.careerPaths.length ? course.careerPaths.join(", ") : "—"}</td>
               </tr>
             ))}
           </tbody>
@@ -417,12 +419,11 @@ function CareerPathsSection({ section }: { section: Section }) {
   const items = safeItems(section);
   return (
     <SectionShell section={section}>
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="flex flex-wrap gap-2">
         {items.map((item, index) => (
-          <div key={item.id || index}>
-            <p className="font-semibold">{item.label}</p>
-            {item.description ? <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.description}</p> : null}
-          </div>
+          <span key={item.id || index} className="rounded-full border bg-muted/40 px-4 py-2 text-sm">
+            {item.label}
+          </span>
         ))}
       </div>
     </SectionShell>
