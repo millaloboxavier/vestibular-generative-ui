@@ -234,7 +234,8 @@ function matchAdmissionTypes(message, ids = []) {
   }
 
   if (q.includes("enem")) return all.filter((item) => normalize(item.label || item.name || "").includes("enem"));
-  if (q.includes("internacional")) return all.filter((item) => normalize(item.label || item.name || "").includes("internacional"));
+  // "internacional" no singular não é substring de "internacionais" no plural — usa o radical.
+  if (q.includes("internacion")) return all.filter((item) => normalize(item.label || item.name || "").includes("internacion"));
   if (q.includes("transfer")) return all.filter((item) => normalize(item.label || item.name || "").includes("transfer"));
   if (q.includes("demanda")) return all.filter((item) => normalize(item.label || item.name || "").includes("demanda"));
   if (q.includes("olimpiada") || q.includes("olimpíada")) return all.filter((item) => normalize(item.label || item.name || "").includes("olimpi"));
@@ -331,6 +332,15 @@ function buildTimelineItems(message, courses = [], admissionIds = []) {
   return items.slice(0, 8);
 }
 
+// CTA de inscrição pra uma modalidade sem curso definido — "Inscreva-se" leva pra
+// /inscreva-se já com a modalidade selecionada; "Avise-me" dispara o mesmo fluxo de
+// aviso de sempre.
+function admissionTypeCta(item) {
+  const open = normalize(item.status).includes("abert");
+  if (open) return { open: true, href: `/inscreva-se?forma=${encodeURIComponent(item.id)}` };
+  return { open: false, prompt: `quero receber aviso quando as inscrições de ${item.label || item.name} abrirem` };
+}
+
 function admissionItems(message, courses = [], admissionIds = []) {
   const selectedAdmissions = matchAdmissionTypes(message, admissionIds);
   if (!courses.length) {
@@ -340,7 +350,8 @@ function admissionItems(message, courses = [], admissionIds = []) {
       description: item.description || "",
       status: labelStatus(item.status),
       cycle: item.cycle || "",
-      period: formatPeriod(item.startDate, item.endDate)
+      period: formatPeriod(item.startDate, item.endDate),
+      ...admissionTypeCta(item)
     }));
   }
 
@@ -360,7 +371,8 @@ function admissionItems(message, courses = [], admissionIds = []) {
     description: item.description || "",
     status: labelStatus(item.status),
     cycle: item.cycle || "",
-    period: formatPeriod(item.startDate, item.endDate)
+    period: formatPeriod(item.startDate, item.endDate),
+    ...admissionTypeCta(item)
   }));
 }
 
@@ -409,7 +421,11 @@ function courseRefParts(courseId) {
 function admissionTypeDetailsItems(item) {
   if (!item) return [];
   const rows = [];
+  // CTA obrigatório no contexto de forma de ingresso: Inscreva-se quando está aberta,
+  // Avise-me caso contrário.
+  rows.push({ title: "Inscrição", type: "inscrição", ctaAdmission: { label: item.label || item.name, ...admissionTypeCta(item) } });
   if (item.registrationFrequency) rows.push({ title: "Quando acontece", shortDescription: item.registrationFrequency, type: "calendário" });
+  if (item.examDate) rows.push({ title: "Data da prova", shortDescription: item.examDate, type: "prova" });
   if (safeArray(item.eligibility).length) rows.push({ title: "Quem pode participar", shortDescription: safeArray(item.eligibility).join(" "), type: "elegibilidade" });
   if (safeArray(item.examFormat).length) rows.push({ title: "Como são as provas", shortDescription: safeArray(item.examFormat).join(", ") + ".", type: "prova" });
   if (item.examPhases) rows.push({ title: "Fases do processo", shortDescription: item.examPhases, type: "etapas" });
@@ -440,7 +456,7 @@ function admissionTypeDetailsItems(item) {
       table: { columns: ["Curso", "Cidade", "Diplomas aceitos"], rows: tableRows }
     });
   }
-  return rows.slice(0, 6);
+  return rows.slice(0, 7);
 }
 
 function vestibularDetailsItems() {
@@ -536,6 +552,36 @@ function courseVideos(courses = []) {
     .map((item) => ({ id: item.id, title: item.title || "", videoId: item.videoId || "" }))
     .filter((item) => item.videoId)
     .slice(0, 6);
+}
+
+function admissionTypeForCourseLabel(name) {
+  const n = normalize(name);
+  const byId = (id) => safeArray(data.admissionTypes).find((item) => item.id === id) || null;
+  // Precisa checar "demanda" antes de "vestibular", porque o rótulo da DSD também
+  // começa com "Vestibular". "internacional" no singular não é substring de
+  // "internacionais" no plural, então usa o radical "internacion".
+  if (n.includes("demanda")) return byId("demanda-social-diversidade");
+  if (n.includes("internacion")) return byId("exames-internacionais");
+  if (n.includes("enem")) return byId("enem");
+  if (n.includes("olimpiada")) return byId("olimpiadas");
+  if (n.includes("transfer") || n.includes("diploma")) return byId("transferencia-externa");
+  if (n.includes("vestibular")) return byId("vestibular-fgv");
+  return null;
+}
+
+// Um único CTA de inscrição pro curso (não um por modalidade — muita opção de uma vez
+// paralisa a decisão). "Inscreva-se" se alguma forma de ingresso do curso está aberta
+// (leva pra /inscreva-se com o curso pré-selecionado, a modalidade é escolhida lá),
+// "Avise-me" se nenhuma estiver aberta ainda.
+function courseEnrollCta(course) {
+  const anyOpen = safeArray(course.admissions).some((name) => {
+    const admissionType = admissionTypeForCourseLabel(name);
+    return admissionType ? normalize(admissionType.status).includes("abert") : false;
+  });
+  if (anyOpen) {
+    return { open: true, href: `/inscreva-se?curso=${encodeURIComponent(course.id)}` };
+  }
+  return { open: false, prompt: `quero receber aviso quando as inscrições abrirem para ${courseName(course)} em ${course.city}` };
 }
 
 function courseDetailItems(courses = []) {
@@ -890,12 +936,17 @@ function resolveSections(plan, message, options = {}) {
   const dedupedAiActions = Array.from(new Map(aiSuggestedActions.map((item) => [normalize(item.prompt), item])).values()).slice(0, 5);
   const actions = dedupedAiActions.length ? dedupedAiActions : buildNextActions(message, selectedCourses, visibleTypes);
 
-  // Regra de produto: enquanto houver modalidade com inscrições em breve,
-  // a página sempre oferece captura de interesse. Não deixamos essa decisão
-  // apenas para o modelo, porque é um comportamento obrigatório da jornada.
-  const hasUpcomingAdmissions = safeArray(data.admissionTypes).some((item) => normalize(item.status).includes("breve"));
-  const asksAboutEnrollmentMoment = sig.asksDate || sig.asksAdmission || sig.asksVestibularSpecific || sig.asksLead;
-  const shouldShowLead = Boolean(hasUpcomingAdmissions || plan.leadCapture?.show || asksAboutEnrollmentMoment);
+  // Regra de produto: enquanto houver modalidade do processo seletivo regular com
+  // inscrições em breve, a página sempre oferece captura de interesse. Não deixamos
+  // essa decisão apenas para o modelo, porque é um comportamento obrigatório da jornada.
+  // Transferência fica de fora dessa checagem: ela nunca abre junto do ciclo regular,
+  // então o status dela sozinho não deveria travar a mensagem genérica de "em breve".
+  const hasUpcomingAdmissions = safeArray(data.admissionTypes).some((item) => item.id !== "transferencia-externa" && normalize(item.status).includes("breve"));
+  // "Pergunta sobre inscrição/data" não é mais, sozinha, motivo pra forçar o aviso —
+  // isso fazia sentido enquanto tudo estava "em breve", mas agora que há modalidade
+  // aberta, o sinal que importa é hasUpcomingAdmissions (fato real, não a pergunta) e
+  // a decisão editorial da própria IA (já orientada a não pedir aviso quando já abriu).
+  const shouldShowLead = Boolean(hasUpcomingAdmissions || plan.leadCapture?.show);
 
   if (shouldShowLead) {
     let title = "Receba um aviso quando as inscrições abrirem";
@@ -958,7 +1009,14 @@ function resolveSections(plan, message, options = {}) {
     });
   }
 
-  return resolved.filter((section) => safeArray(section.items).length || ["lead_form", "next_step", "warning"].includes(section.type));
+  // CTA único de inscrição no topo da página — obrigatório no contexto de curso
+  // específico (regra fixa, não é decisão da IA).
+  const enrollCta = specificCourseContext() && selectedCourses[0] ? courseEnrollCta(selectedCourses[0]) : null;
+
+  return {
+    sections: resolved.filter((section) => safeArray(section.items).length || ["lead_form", "next_step", "warning"].includes(section.type)),
+    enrollCta
+  };
 }
 
 function rewriteForKnownData(plan, message, sections) {
@@ -972,14 +1030,21 @@ function rewriteForKnownData(plan, message, sections) {
   normalized.answer = cleanCopy(plan.answer || "Separei as informações mais úteis para você continuar.");
 
   if (sig.asksDate && firstPeriod) {
+    // O texto precisa refletir o status real da modalidade — "a abertura ainda não
+    // aconteceu" fica errado assim que ela abre, então a frase muda conforme o status.
+    const admissionIsOpen = firstAdmission ? normalize(firstAdmission.status).includes("abert") : false;
     if (sig.asksVestibularSpecific) {
       normalized.pageTitle = "Datas do Vestibular FGV 2027.1";
-      normalized.answer = `As inscrições para o Vestibular FGV estão previstas para ${firstPeriod}. A abertura ainda não aconteceu, mas o período já está indicado. Abaixo, organizei as datas, como funciona a prova, materiais para estudar e caminhos para continuar.`;
+      normalized.answer = admissionIsOpen
+        ? `As inscrições para o Vestibular FGV estão abertas, com período de ${firstPeriod}. Abaixo, organizei as datas, como funciona a prova, materiais para estudar e caminhos para continuar.`
+        : `As inscrições para o Vestibular FGV estão previstas para ${firstPeriod}. A abertura ainda não aconteceu, mas o período já está indicado. Abaixo, organizei as datas, como funciona a prova, materiais para estudar e caminhos para continuar.`;
     } else {
       normalized.pageTitle = q.includes("2027") || q.includes("processo seletivo")
         ? "Inscrições para o processo seletivo 2027.1"
         : "Datas de inscrição";
-      normalized.answer = `As inscrições estão previstas para ${firstPeriod}. A abertura ainda não aconteceu, mas o período já está indicado. Veja abaixo as datas e caminhos relacionados ao que você procura.`;
+      normalized.answer = admissionIsOpen
+        ? `As inscrições estão abertas, com período de ${firstPeriod}. Veja abaixo as datas e caminhos relacionados ao que você procura.`
+        : `As inscrições estão previstas para ${firstPeriod}. A abertura ainda não aconteceu, mas o período já está indicado. Veja abaixo as datas e caminhos relacionados ao que você procura.`;
     }
   }
 
@@ -1144,8 +1209,9 @@ Matriz de navegação por intenção:
 6. Só inclua a seção scholarships quando a pergunta for especificamente sobre bolsa, financiamento ou auxílio financeiro. Bolsa não é o foco principal da audiência do Vestibular FGV — em página sobre curso, forma de ingresso ou qualquer outro tema, NÃO monte a seção completa de scholarships, mesmo que pareça um complemento útil. Nesses outros casos, bolsas podem aparecer só como uma opção dentro de next_step (ex: "Ver bolsas de estudo"), nunca como seção própria. Quando a pergunta for mesmo sobre bolsa, inclua scholarships: as bolsas de estudo da BASE_DO_SITE não têm relação com nenhuma forma de ingresso, então, ao mostrar bolsas numa página sobre uma forma de ingresso específica, escreva o título e a intro dessa seção exatamente como escreveria numa página geral sobre bolsas — por exemplo "Bolsas de estudo" / "Conheça as bolsas de estudo disponíveis para a graduação FGV" — sem mencionar a modalidade de ingresso da página atual.
 7. Para pergunta sobre preparação, prova, gabarito ou Vestibular FGV, inclua prep_materials quando houver materiais úteis na base.
 8. O FAQ em admissionTypes[].faq só existe para a modalidade Vestibular FGV — use o tipo faq apenas quando a pergunta for sobre dúvidas comuns dessa modalidade específica (se é presencial, o que pode levar, conteúdo programático, mudança de cidade de prova). Não use faq para ENEM, Processo Seletivo Internacional, Demanda Social, Olimpíadas ou Transferência: não há dados de dúvidas frequentes para essas modalidades na base, e usar o FAQ do Vestibular FGV nelas estaria errado. Nunca invente perguntas nem respostas fora da lista.
-9. Enquanto qualquer modalidade estiver com status de inscrições em breve, a experiência deve oferecer cadastro para aviso. Use leadCapture.show=true sempre que a pessoa pedir aviso, perguntar por abertura de inscrição, datas, curso, formas de ingresso, bolsas ou processo seletivo. O backend também forçará esse bloco quando houver inscrições em breve.
-10. Nunca termine uma renderização sem oferecer alguma continuidade útil para a pessoa. Use next_step com poucas opções contextuais, variadas e relacionadas ao que apareceu na página. primaryCta é o caminho mais direto rumo à inscrição fazendo sentido pra essa pessoa nesse momento (ex.: entender a forma de ingresso do curso que ela está vendo, ou receber aviso se as inscrições ainda não abriram) — nunca repita algo que já está óbvio ou já apareceu na própria página. followUpSuggestions são os caminhos secundários que ajudam a decidir ou avançar. A pessoa nunca deve terminar a leitura sem saber qual é o próximo passo prático para se inscrever.
+9. Use leadCapture.show=true (pedir aviso de abertura) só para uma modalidade que ainda NÃO tem inscrições abertas — verifique o status dela na BASE_DO_SITE antes de oferecer isso. Se a modalidade relevante para a pergunta já está com inscrições abertas, NÃO ofereça leadCapture para ela: nesse caso, a experiência já mostra um CTA de Inscreva-se (ver regra 9b), então pedir "aviso de quando abrir" não faz sentido e confunde quem já pode se inscrever agora. Se a modalidade já encerrou o processo seletivo (sem previsão de reabrir), também não ofereça leadCapture — não há o que avisar.
+9b. CTA de inscrição: sempre que a página mostrar o contexto de um curso específico (course_detail) ou de uma forma de ingresso (admission_details de uma modalidade específica, ou admission_options com a lista de modalidades), a própria interface já inclui um botão obrigatório de "Inscreva-se" (quando a modalidade está aberta) ou "Avise-me" (quando não está) — isso é automático, você não precisa e não deve tentar recriar esse botão. Fora desses dois contextos, fica a seu critério sugerir o caminho da inscrição via primaryCta ou followUpSuggestions sempre que fizer sentido para a pessoa avançar.
+10. Nunca termine uma renderização sem oferecer alguma continuidade útil para a pessoa. Use next_step com poucas opções contextuais, variadas e relacionadas ao que apareceu na página. primaryCta é o caminho mais direto rumo à inscrição fazendo sentido pra essa pessoa nesse momento (ex.: entender a forma de ingresso do curso que ela está vendo, se inscrever se já estiver aberto, ou receber aviso se as inscrições ainda não abriram) — nunca repita algo que já está óbvio ou já apareceu na própria página. followUpSuggestions são os caminhos secundários que ajudam a decidir ou avançar. A pessoa nunca deve terminar a leitura sem saber qual é o próximo passo prático para se inscrever.
 11. Se o pedido estiver fora do escopo do Vestibular FGV, use warning e ofereça caminhos de cursos, formas de ingresso, bolsas, eventos ou provas.
 
 BASE_DO_SITE:
@@ -1179,11 +1245,12 @@ ${JSON.stringify(dataCatalog)}`;
     try { plan = JSON.parse(text); }
     catch (error) { return NextResponse.json({ error: "A OpenAI respondeu em formato inesperado.", mode: "openai_parse_error", details: error.message }, { status: 502 }); }
 
-    const sections = resolveSections(plan, message, { aiOnly: body?.aiOnly === true });
+    const { sections, enrollCta } = resolveSections(plan, message, { aiOnly: body?.aiOnly === true });
     const normalized = rewriteForKnownData(plan, message, sections);
 
     return NextResponse.json({
       ...normalized,
+      enrollCta,
       debug: { mode: "openai", model, renderer: "react_sections_v1", noFallback: true, forcedLeadCapture: sections.some((section) => section.type === "lead_form") }
     }, { status: 200 });
   } catch (error) {

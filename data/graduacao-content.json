@@ -59,10 +59,11 @@
       "id": "vestibular-fgv",
       "label": "Vestibular FGV",
       "description": "Processo seletivo próprio da FGV, com estrutura que varia por curso e escola.",
-      "status": "inscricoes_em_breve",
+      "status": "inscricoes_abertas",
       "cycle": "2027.1",
-      "startDate": "2026-07-27",
+      "startDate": "2026-07-09",
       "endDate": "2026-09-16",
+      "examDate": "18 e 19 de outubro de 2026",
       "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/vestibular-fgv",
       "shortDescription": "Principal porta de entrada para os cursos de Graduação FGV, com provas presenciais e etapas que podem variar por curso e escola.",
       "registrationFrequency": "O Vestibular FGV ocorre anualmente para todos os cursos de Graduação e semestralmente para Administração de Empresas da FGV EAESP, Comunicação Digital FGV ECMI, Administração FGV EBAPE e Economia FGV EPGE.",
@@ -164,10 +165,10 @@
       "id": "enem",
       "label": "ENEM",
       "description": "Modalidade para candidatos que realizaram o ENEM. As edições aceitas, pontuações e etapas variam por curso e devem ser verificadas no edital.",
-      "status": "inscricoes_em_breve",
+      "status": "inscricoes_abertas",
       "cycle": "2027.1",
-      "startDate": "2026-07-27",
-      "endDate": "2026-09-16",
+      "startDate": "2026-07-09",
+      "endDate": "2027-01-08",
       "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/enem",
       "registrationFrequency": "O ingresso pelo ENEM ocorre anualmente para a maioria dos cursos de Graduação FGV. Para Administração de Empresas da FGV EAESP, Administração da FGV EBAPE e Comunicação Digital da FGV ECMI, os processos seletivos são realizados semestralmente.",
       "seatsByCourse": [
@@ -190,10 +191,10 @@
       "id": "exames-internacionais",
       "label": "Processo seletivo internacional",
       "description": "Modalidade para candidatos com certificações internacionais, como IB, ABITUR, BAC e SAT, conforme regras do curso.",
-      "status": "inscricoes_em_breve",
+      "status": "inscricoes_abertas",
       "cycle": "2027.1",
-      "startDate": "2026-07-27",
-      "endDate": "2026-09-16",
+      "startDate": "2026-07-09",
+      "endDate": "2026-12-18",
       "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/processo-seletivo-internacional",
       "registrationFrequency": "O ingresso pela modalidade internacional ocorre anualmente para a maioria dos cursos de Graduação FGV. Para Administração de Empresas da FGV EAESP, Administração da FGV EBAPE e Comunicação Digital da FGV ECMI, os processos seletivos são realizados semestralmente.",
       "eligibility": [
@@ -221,10 +222,11 @@
       "id": "demanda-social-diversidade",
       "label": "Vestibular por Demanda Social e Diversidade",
       "description": "Modalidade de ação afirmativa indicada na página de formas de ingresso e em páginas específicas de cursos.",
-      "status": "inscricoes_em_breve",
+      "status": "inscricoes_abertas",
       "cycle": "2027.1",
-      "startDate": "2026-07-27",
+      "startDate": "2026-07-09",
       "endDate": "2026-09-16",
+      "examDate": "18 e 19 de outubro de 2026",
       "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/vestibular-por-demanda-social-e-diversidade",
       "registrationFrequency": "O ingresso para Administração e Administração Pública da FGV EPPG, Administração Pública da FGV EAESP e Direito da FGV Direito SP ocorre anualmente. Para Administração de Empresas da FGV EAESP, os processos seletivos são realizados semestralmente.",
       "eligibility": [
@@ -246,9 +248,9 @@
       "id": "olimpiadas",
       "label": "Olimpíadas do Conhecimento",
       "description": "Modalidade disponível para cursos específicos, conforme edital e página do curso.",
-      "status": "inscricoes_em_breve",
+      "status": "inscricoes_abertas",
       "cycle": "2027.1",
-      "startDate": "2026-07-27",
+      "startDate": "2026-07-09",
       "endDate": "2026-09-16",
       "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/olimpiadas-do-conhecimento",
       "registrationFrequency": "O ingresso pela modalidade Olimpíadas do Conhecimento ocorre anualmente.",
@@ -266,10 +268,8 @@
       "id": "transferencia-externa",
       "label": "Transferência externa e/ou Portador de diploma",
       "description": "Modalidade para transferência externa e/ou candidatos já diplomados, conforme disponibilidade por curso.",
-      "status": "inscricoes_em_breve",
+      "status": "inscricoes_encerradas",
       "cycle": "2027.1",
-      "startDate": "2026-07-27",
-      "endDate": "2026-09-16",
       "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/transferencia-externa-eou-portadores-de-diploma"
     }
   ],
@@ -2014,10 +2014,34 @@
   ],
   "materials": [
     {
+      "id": "edital-2027-1",
+      "label": "Edital do Processo Seletivo 2027.1",
+      "description": "Documento oficial com regras, datas e critérios do processo seletivo 2027.1.",
+      "url": "https://www18.fgv.br/processoseletivo/arquivos/edital/2026.2/Edital-UNIFICADO_2026.2.pdf"
+    },
+    {
       "id": "provas-gabaritos",
       "label": "Provas e Gabaritos",
       "description": "Área oficial para selecionar cidade, curso e baixar provas/gabaritos de processos anteriores.",
       "url": "https://vestibular.fgv.br/provas-gabaritos"
+    },
+    {
+      "id": "provas-gabaritos-arquivo-1",
+      "label": "Provas e gabaritos anteriores — arquivo 1",
+      "description": "Arquivo para download com provas e gabaritos de processos anteriores.",
+      "url": "https://vestibular.fgv.br/sites/default/files/2026-06/materiais/rm-t01_0.zip"
+    },
+    {
+      "id": "provas-gabaritos-arquivo-2",
+      "label": "Provas e gabaritos anteriores — arquivo 2",
+      "description": "Arquivo para download com provas e gabaritos de processos anteriores.",
+      "url": "https://vestibular.fgv.br/sites/default/files/2025-12/materiais/dupla-ae_0.zip"
+    },
+    {
+      "id": "provas-gabaritos-arquivo-3",
+      "label": "Provas e gabaritos anteriores — arquivo 3",
+      "description": "Arquivo para download com provas e gabaritos de processos anteriores.",
+      "url": "https://vestibular.fgv.br/sites/default/files/2025-12/materiais/rm-t01_0.zip"
     },
     {
       "id": "editais-manuais",

@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, Bell, CalendarDays, FileText, GraduationCap, MapPin, Play, Sparkles } from "lucide-react";
+import { ArrowRight, Bell, CalendarDays, Download, FileText, GraduationCap, MapPin, Play, Sparkles } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -298,13 +299,17 @@ function ItemTable({ table }: { table: { columns: string[]; rows: string[][] } }
 function ListCards({ section, icon, onPrompt }: { section: Section; icon?: React.ReactNode; onPrompt?: (prompt: string) => void }) {
   const items = safeItems(section);
   const showLearnMore = section.type === "admission_options" && Boolean(onPrompt);
+  const showAdmissionCta = section.type === "admission_options";
   return (
     <SectionShell section={section}>
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {items.map((item, index) => {
           const hasTable = item.table && Array.isArray(item.table.rows) && item.table.rows.length;
+          const ctaAdmission = item.ctaAdmission;
+          const hasCtaAdmission = Boolean(ctaAdmission);
+          const wide = hasTable || hasCtaAdmission;
           return (
-            <Card key={item.id || index} className={hasTable ? "min-w-0 md:col-span-2 xl:col-span-3" : undefined}>
+            <Card key={item.id || index} className={wide ? "min-w-0 md:col-span-2 xl:col-span-3" : undefined}>
               <CardHeader>
                 <div className="mb-2 flex items-center gap-2">
                   {icon}
@@ -319,12 +324,50 @@ function ListCards({ section, icon, onPrompt }: { section: Section; icon?: React
                 {item.displayDate || item.displayTime ? <p><strong className="text-foreground">Quando:</strong> {[item.displayDate, item.displayTime].filter(Boolean).join(" · ")}</p> : null}
                 {item.city ? <p className="flex items-center gap-1"><MapPin className="h-4 w-4" /> {item.city}</p> : null}
                 {hasTable ? <ItemTable table={item.table} /> : null}
-                {showLearnMore && item.label ? (
-                  <Button variant="outline" size="sm" onClick={() => onPrompt!(`saiba mais sobre ${item.label} como forma de ingresso`)}>
-                    Saiba mais
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                {hasCtaAdmission ? (
+                  ctaAdmission.open ? (
+                    <Button asChild size="sm">
+                      <Link href={ctaAdmission.href}>
+                        Inscreva-se
+                      </Link>
+                    </Button>
+                  ) : (
+                    <Button variant="outline" size="sm" onClick={() => onPrompt?.(ctaAdmission.prompt)}>
+                      <Bell className="mr-2 h-3.5 w-3.5" />
+                      Avise-me
+                    </Button>
+                  )
+                ) : null}
+                {item.url ? (
+                  <Button asChild variant="outline" size="sm">
+                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+                      <Download className="mr-2 h-3.5 w-3.5" />
+                      Baixar
+                    </a>
                   </Button>
                 ) : null}
+                <div className="flex flex-wrap gap-2">
+                  {showAdmissionCta && item.open !== undefined ? (
+                    item.open ? (
+                      <Button asChild size="sm">
+                        <Link href={item.href}>
+                          Inscreva-se
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button variant="outline" size="sm" onClick={() => onPrompt?.(item.prompt)}>
+                        <Bell className="mr-2 h-3.5 w-3.5" />
+                        Avise-me
+                      </Button>
+                    )
+                  ) : null}
+                  {showLearnMore && item.label ? (
+                    <Button variant="outline" size="sm" onClick={() => onPrompt!(`saiba mais sobre ${item.label} como forma de ingresso`)}>
+                      Saiba mais
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  ) : null}
+                </div>
               </CardContent>
             </Card>
           );
@@ -588,6 +631,7 @@ function NextStep({ section, onPrompt, onCompareRequest }: { section: Section; o
             <Button
               key={label || index}
               variant="secondary"
+              className="h-auto whitespace-normal text-left"
               onClick={() => {
                 if (isCompareAction && onCompareRequest) onCompareRequest();
                 else if (action.prompt) onPrompt(action.prompt);

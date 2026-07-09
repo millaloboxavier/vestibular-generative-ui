@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowUp, History, Loader2, Menu, Sparkles, X } from "lucide-react";
+import { ArrowUp, Bell, History, Loader2, Menu, Sparkles, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,10 +15,24 @@ const suggestions = [
   "quero me inscrever",
 ];
 
+function normalizeStatus(status = "") {
+  return String(status).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+}
+
 function upcomingAdmissionNotice(): string | null {
   const admissionTypes = ((siteData as any).admissionTypes || []) as any[];
+  // Transferência não faz parte do ciclo seletivo regular, então o status dela sozinho
+  // não deve definir o aviso da home (mesma regra usada no backend).
+  const regularCycle = admissionTypes.filter((item) => item.id !== "transferencia-externa");
+
+  const open = regularCycle.find((item) => normalizeStatus(item.status).includes("abert"));
+  if (open) {
+    const cycle = open.cycle ? `${open.cycle} ` : "";
+    return `Processo seletivo ${cycle}— Inscrições abertas.`;
+  }
+
   const today = new Date().toISOString().slice(0, 10);
-  const upcoming = admissionTypes
+  const upcoming = regularCycle
     .filter((item) => /^\d{4}-\d{2}-\d{2}$/.test(item.startDate || "") && item.startDate >= today)
     .sort((a, b) => a.startDate.localeCompare(b.startDate));
   const next = upcoming[0];
@@ -40,6 +54,7 @@ type Plan = {
   intent?: string;
   entities?: any;
   sections?: Section[];
+  enrollCta?: { open: boolean; href?: string; prompt?: string } | null;
   debug?: any;
 };
 
@@ -961,10 +976,27 @@ export default function Page() {
 
             {plan ? (
               <div className="mt-6 space-y-6">
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Esta página foi gerada pela IA baseada na sua pergunta.</p>
+                <p className="text-center text-[0.65rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">Esta página foi gerada pela IA baseada na sua pergunta.</p>
                 <div className="rounded-[1.5rem] border p-5 md:p-6">
                   <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">{plan.pageTitle}</h1>
                   {plan.answer ? <p className="mt-3 text-base leading-7 text-muted-foreground md:text-lg">{plan.answer}</p> : null}
+                  {plan.enrollCta ? (
+                    plan.enrollCta.open ? (
+                      <Button asChild size="lg" className="mt-5 gap-2">
+                        <Link href={plan.enrollCta.href!}>Inscreva-se</Link>
+                      </Button>
+                    ) : (
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="mt-5 gap-2"
+                        onClick={() => plan.enrollCta?.prompt && submitQuestion(plan.enrollCta.prompt)}
+                      >
+                        <Bell className="h-4 w-4" />
+                        Avise-me
+                      </Button>
+                    )
+                  ) : null}
                 </div>
                 {sections.slice(0, visibleCount).map((section, index) => (
                   <SectionRenderer key={`${section.type}-${index}-${section.title}`} section={section} onPrompt={submitQuestion} onCompareRequest={() => setCompareOpen(true)} />
