@@ -56,7 +56,7 @@ export default async function InscrevaSePage({ searchParams }: { searchParams: P
       <section className="mx-auto max-w-3xl px-4 py-12 md:px-6">
         <div className="mb-8 rounded-[2rem] border bg-muted/40 p-6 md:p-8">
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">Inscrição</p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Finalize sua inscrição</h1>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Inicie sua inscrição</h1>
           <p className="mt-4 max-w-xl text-base leading-7 text-muted-foreground">
             Confirme cidade, curso e forma de ingresso. No final, você é levado ao formulário de inscrição.
           </p>
