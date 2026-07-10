@@ -712,6 +712,7 @@ export default function Page() {
   const [input, setInput] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [plan, setPlan] = useState<Plan | null>(null);
+  const [streamingPreview, setStreamingPreview] = useState<{ pageTitle?: string; answer?: string } | null>(null);
   const [visibleCount, setVisibleCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -775,9 +776,15 @@ export default function Page() {
       return;
     }
 
+    const previousItem = journeys.find((entry) => entry.id === activeJourneyId);
+    const previousTurn = previousItem
+      ? { question: previousItem.question, answer: previousItem.plan.answer, intent: previousItem.plan.intent, entities: previousItem.plan.entities }
+      : undefined;
+
     setError("");
     setLoading(true);
     setPlan(null);
+    setStreamingPreview(null);
     setVisibleCount(0);
     setCurrentQuestion(message);
     setInput("");
@@ -789,19 +796,56 @@ export default function Page() {
       const response = await fetch("/api/generate-ui", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ message, previousTurn }),
       });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data?.error || "Não foi possível montar a resposta agora.");
-      setPlan(data);
+
+      const contentType = response.headers.get("content-type") || "";
+      if (!contentType.includes("ndjson")) {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data?.error || "Não foi possível montar a resposta agora.");
+        throw new Error("Não foi possível montar a resposta agora.");
+      }
+
+      if (!response.body) throw new Error("Não foi possível montar a resposta agora.");
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let finalData: any = null;
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        let newlineIndex;
+        while ((newlineIndex = buffer.indexOf("\n")) >= 0) {
+          const line = buffer.slice(0, newlineIndex).trim();
+          buffer = buffer.slice(newlineIndex + 1);
+          if (!line) continue;
+
+          const event = JSON.parse(line);
+          if (event.phase === "partial") {
+            setStreamingPreview({ pageTitle: event.pageTitle, answer: event.answer });
+          } else if (event.phase === "final") {
+            finalData = event;
+          } else if (event.phase === "error") {
+            throw new Error(event.error || "Não foi possível montar a resposta agora.");
+          }
+        }
+      }
+
+      if (!finalData) throw new Error("Não foi possível montar a resposta agora.");
+      setPlan(finalData);
+      setStreamingPreview(null);
 
       const item: JourneyItem = {
         id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
         question: message,
-        title: data.pageTitle || message,
-        intent: data.intent,
+        title: finalData.pageTitle || message,
+        intent: finalData.intent,
         createdAt: compactDateLabel(),
-        plan: data,
+        plan: finalData,
       };
       setActiveJourneyId(item.id);
       setJourneys((previous) => [item, ...previous.filter((entry) => entry.question !== message)].slice(0, 12));
@@ -809,6 +853,7 @@ export default function Page() {
       setError(err?.message || "Não foi possível montar a resposta agora.");
     } finally {
       setLoading(false);
+      setStreamingPreview(null);
     }
   }
 
@@ -867,6 +912,7 @@ export default function Page() {
     setInput("");
     setCurrentQuestion("");
     setPlan(null);
+    setStreamingPreview(null);
     setVisibleCount(0);
     setLoading(false);
     setError("");
@@ -957,14 +1003,21 @@ export default function Page() {
                     <Loader2 className="h-5 w-5 animate-spin" />
                     Montando sua experiência<TypingDots />
                   </div>
-                  <div className="mt-5 grid gap-3">
-                    {loadingSteps.map((step, index) => (
-                      <div key={step} className="flex items-center gap-3 rounded-2xl bg-muted/50 p-3 text-sm text-muted-foreground">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full border text-xs">{index + 1}</span>
-                        {step}
-                      </div>
-                    ))}
-                  </div>
+                  {streamingPreview?.answer ? (
+                    <div className="mt-5 rounded-2xl bg-muted/50 p-4">
+                      {streamingPreview.pageTitle ? <p className="text-base font-semibold">{streamingPreview.pageTitle}</p> : null}
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground">{streamingPreview.answer}</p>
+                    </div>
+                  ) : (
+                    <div className="mt-5 grid gap-3">
+                      {loadingSteps.map((step, index) => (
+                        <div key={step} className="flex items-center gap-3 rounded-2xl bg-muted/50 p-3 text-sm text-muted-foreground">
+                          <span className="flex h-6 w-6 items-center justify-center rounded-full border text-xs">{index + 1}</span>
+                          {step}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <GenerativeSkeleton variant={skeletonVariant} />
               </>

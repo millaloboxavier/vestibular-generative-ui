@@ -1149,6 +1149,59 @@ const RESPONSE_SCHEMA = {
   }
 };
 
+function truncate(text = "", max = 240) {
+  const value = String(text || "");
+  return value.length > max ? `${value.slice(0, max)}…` : value;
+}
+
+function previousTurnBlock(previousTurn) {
+  if (!previousTurn || typeof previousTurn !== "object") return "";
+  const question = truncate(previousTurn.question, 200);
+  if (!question) return "";
+  const answer = truncate(previousTurn.answer, 240);
+  const entities = previousTurn.entities && typeof previousTurn.entities === "object" ? previousTurn.entities : {};
+  return `
+
+CONTEXTO DA CONVERSA ANTERIOR:
+Pergunta anterior: "${question}"
+Resposta anterior (resumo): "${answer}"
+Entidades identificadas antes: ${JSON.stringify(entities)}
+
+Regra: se a nova pergunta for uma continuação/refinamento da anterior (ex.: "e em SP?", "e o valor?", "mostra mais"), use o contexto anterior como base para preencher entities. Se a nova pergunta mudar de assunto, ignore o contexto anterior e comece do zero.`;
+}
+
+// Extrai o valor de uma string JSON já fechada de um buffer de texto ainda incompleto,
+// respeitando escapes — usado para ler pageTitle/answer antes do JSON inteiro terminar.
+function extractClosedString(buffer, key) {
+  const marker = `"${key}":"`;
+  const start = buffer.indexOf(marker);
+  if (start === -1) return null;
+  let i = start + marker.length;
+  let out = "";
+  while (i < buffer.length) {
+    const ch = buffer[i];
+    if (ch === "\\") {
+      if (i + 1 >= buffer.length) return null;
+      out += ch + buffer[i + 1];
+      i += 2;
+      continue;
+    }
+    if (ch === '"') {
+      try { return JSON.parse(`"${out}"`); } catch { return null; }
+    }
+    out += ch;
+    i++;
+  }
+  return null;
+}
+
+function extractPreview(buffer) {
+  const pageTitle = extractClosedString(buffer, "pageTitle");
+  const answer = extractClosedString(buffer, "answer");
+  if (pageTitle == null || answer == null) return null;
+  return { pageTitle, answer };
+}
+
 export async function POST(request) {
   const body = await request.json().catch(() => ({}));
   const message = String(body?.message || "").trim();
@@ -1219,14 +1272,17 @@ Matriz de navegação por intenção:
 9b. CTA de inscrição: sempre que a página mostrar o contexto de um curso específico (course_detail) ou de uma forma de ingresso (admission_details de uma modalidade específica, ou admission_options com a lista de modalidades), a própria interface já inclui um botão obrigatório de "Inscreva-se" (quando a modalidade está aberta) ou "Avise-me" (quando não está) — isso é automático, você não precisa e não deve tentar recriar esse botão. Fora desses dois contextos, fica a seu critério sugerir o caminho da inscrição via primaryCta ou followUpSuggestions sempre que fizer sentido para a pessoa avançar.
 10. Nunca termine uma renderização sem oferecer alguma continuidade útil para a pessoa. Use next_step com poucas opções contextuais, variadas e relacionadas ao que apareceu na página. primaryCta é o caminho mais direto rumo à inscrição fazendo sentido pra essa pessoa nesse momento (ex.: entender a forma de ingresso do curso que ela está vendo, se inscrever se já estiver aberto, ou receber aviso se as inscrições ainda não abriram) — nunca repita algo que já está óbvio ou já apareceu na própria página. followUpSuggestions são os caminhos secundários que ajudam a decidir ou avançar. A pessoa nunca deve terminar a leitura sem saber qual é o próximo passo prático para se inscrever.
 11. Se o pedido estiver fora do escopo do Vestibular FGV, use warning e ofereça caminhos de cursos, formas de ingresso, bolsas, eventos ou provas.
+${previousTurnBlock(body?.previousTurn)}
 
 BASE_DO_SITE:
 ${JSON.stringify(dataCatalog)}`;
 
+  const baseUrl = (process.env.OPENAI_BASE_URL || "https://api.openai.com").replace(/\/+$/, "");
+  const model = process.env.OPENAI_MODEL || "gpt-4.1-mini";
+
+  let openaiRes;
   try {
-    const baseUrl = (process.env.OPENAI_BASE_URL || "https://api.openai.com").replace(/\/+$/, "");
-    const model = process.env.OPENAI_MODEL || "gpt-4.1-mini";
-    const openaiRes = await fetch(`${baseUrl}/v1/responses`, {
+    openaiRes = await fetch(`${baseUrl}/v1/responses`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
       body: JSON.stringify({
@@ -1235,33 +1291,100 @@ ${JSON.stringify(dataCatalog)}`;
         input: message,
         store: false,
         temperature: 0.25,
+        stream: true,
         text: { format: { type: "json_schema", name: "fgv_generative_ui_v2", strict: true, schema: RESPONSE_SCHEMA } }
       })
     });
-
-    const raw = await openaiRes.json();
-    if (!openaiRes.ok) {
-      return NextResponse.json({ error: "A OpenAI não conseguiu gerar a resposta.", mode: "openai_error", details: raw }, { status: openaiRes.status >= 400 && openaiRes.status < 600 ? openaiRes.status : 502 });
-    }
-
-    const text = raw.output_text || raw.output?.flatMap((item) => item.content || []).find((content) => content.type === "output_text")?.text || "";
-    if (!text) return NextResponse.json({ error: "A OpenAI respondeu sem conteúdo estruturado.", mode: "openai_empty_response" }, { status: 502 });
-
-    let plan;
-    try { plan = JSON.parse(text); }
-    catch (error) { return NextResponse.json({ error: "A OpenAI respondeu em formato inesperado.", mode: "openai_parse_error", details: error.message }, { status: 502 }); }
-
-    const { sections, enrollCta } = resolveSections(plan, message, { aiOnly: body?.aiOnly === true });
-    const normalized = rewriteForKnownData(plan, message, sections);
-
-    return NextResponse.json({
-      ...normalized,
-      enrollCta,
-      debug: { mode: "openai", model, renderer: "react_sections_v1", noFallback: true, forcedLeadCapture: sections.some((section) => section.type === "lead_form") }
-    }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: "Não foi possível gerar a resposta com a OpenAI.", mode: "openai_exception", details: error.message }, { status: 502 });
   }
+
+  if (!openaiRes.ok || !openaiRes.body) {
+    const raw = await openaiRes.json().catch(() => ({}));
+    return NextResponse.json({ error: "A OpenAI não conseguiu gerar a resposta.", mode: "openai_error", details: raw }, { status: openaiRes.status >= 400 && openaiRes.status < 600 ? openaiRes.status : 502 });
+  }
+
+  const encoder = new TextEncoder();
+  const openaiReader = openaiRes.body.getReader();
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      const decoder = new TextDecoder();
+      let sseBuffer = "";
+      let fullText = "";
+      let partialSent = false;
+
+      function emit(payload) {
+        controller.enqueue(encoder.encode(`${JSON.stringify(payload)}\n`));
+      }
+
+      try {
+        while (true) {
+          const { value, done } = await openaiReader.read();
+          if (done) break;
+          sseBuffer += decoder.decode(value, { stream: true });
+
+          let boundary;
+          while ((boundary = sseBuffer.indexOf("\n\n")) >= 0) {
+            const rawEvent = sseBuffer.slice(0, boundary);
+            sseBuffer = sseBuffer.slice(boundary + 2);
+            const dataLine = rawEvent.split("\n").find((line) => line.startsWith("data: "));
+            if (!dataLine) continue;
+
+            let evt;
+            try { evt = JSON.parse(dataLine.slice(6)); } catch { continue; }
+
+            if (evt.type === "response.output_text.delta" && typeof evt.delta === "string") {
+              fullText += evt.delta;
+              if (!partialSent) {
+                const preview = extractPreview(fullText);
+                if (preview) {
+                  partialSent = true;
+                  emit({ phase: "partial", ...preview });
+                }
+              }
+            } else if (evt.type === "response.output_text.done" && typeof evt.text === "string") {
+              fullText = evt.text;
+            } else if (evt.type === "response.failed" || evt.type === "error") {
+              emit({ phase: "error", error: "A OpenAI não conseguiu gerar a resposta.", mode: "openai_error", details: evt });
+              controller.close();
+              return;
+            }
+          }
+        }
+
+        if (!fullText) {
+          emit({ phase: "error", error: "A OpenAI respondeu sem conteúdo estruturado.", mode: "openai_empty_response" });
+          controller.close();
+          return;
+        }
+
+        let plan;
+        try { plan = JSON.parse(fullText); }
+        catch (error) {
+          emit({ phase: "error", error: "A OpenAI respondeu em formato inesperado.", mode: "openai_parse_error", details: error.message });
+          controller.close();
+          return;
+        }
+
+        const { sections, enrollCta } = resolveSections(plan, message, { aiOnly: body?.aiOnly === true });
+        const normalized = rewriteForKnownData(plan, message, sections);
+
+        emit({
+          phase: "final",
+          ...normalized,
+          enrollCta,
+          debug: { mode: "openai", model, renderer: "react_sections_v1", noFallback: true, forcedLeadCapture: sections.some((section) => section.type === "lead_form") }
+        });
+      } catch (error) {
+        emit({ phase: "error", error: "Não foi possível gerar a resposta com a OpenAI.", mode: "openai_exception", details: error.message });
+      } finally {
+        controller.close();
+      }
+    }
+  });
+
+  return new Response(stream, { status: 200, headers: { "Content-Type": "application/x-ndjson; charset=utf-8" } });
 }
 
 export async function GET() {
