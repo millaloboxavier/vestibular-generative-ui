@@ -736,7 +736,10 @@ function resolveSections(plan, message, options = {}) {
   requestedSections.forEach((section) => {
     if (section.type === "course_cards") {
       let courses = matchCoursesFromText(message, section.courseIds, cityHints);
-      if (sig.asksAllCourses && !cityHints.length) courses = representativeCourses();
+      // Com aiOnly, os courseIds que a própria IA mandou (já resolvidos acima via
+      // matchCoursesFromText) têm a palavra final — não deixamos esse sinal de texto
+      // atropelar uma escolha específica que a IA já tinha feito corretamente.
+      if (!aiOnly && sig.asksAllCourses && !cityHints.length) courses = representativeCourses();
       if (courses.length) {
         selectedCourses = selectedCourses.length ? selectedCourses : courses;
         if (isSpecificCourseContext(message, courses, cityHints)) {
@@ -758,7 +761,10 @@ function resolveSections(plan, message, options = {}) {
 
     if (section.type === "course_compare") {
       let courses = matchCoursesFromText(message, section.courseIds, cityHints).slice(0, 3);
-      if (courses.length < 2) {
+      // Sem aiOnly, se não achamos pelo menos 2 cursos pra comparar, caímos num exemplo
+      // fixo de Administração — mas isso não faz sentido se o assunto da pergunta era
+      // outro curso, então com aiOnly preferimos simplesmente não montar a seção.
+      if (!aiOnly && courses.length < 2) {
         courses = safeArray(data.courses).filter((course) => ["administracao-empresas-sp", "administracao-publica-sp", "administracao-df"].includes(course.id));
       }
       if (courses.length >= 2) addSection({ ...sectionBase(section, "course_compare", "Compare as opções", "Veja diferenças entre cursos, cidades e formas de ingresso."), items: courses.slice(0, 3) });
