@@ -629,7 +629,7 @@ function NextStep({ section, onPrompt, onCompareRequest }: { section: Section; o
           const isCompareAction = /comparar/i.test(label) || /comparar/i.test(action.prompt || "");
           return (
             <Button
-              key={label || index}
+              key={`${label}-${index}`}
               variant="secondary"
               className="h-auto whitespace-normal text-left"
               onClick={() => {
