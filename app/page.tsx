@@ -713,6 +713,7 @@ export default function Page() {
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [plan, setPlan] = useState<Plan | null>(null);
   const [streamingPreview, setStreamingPreview] = useState<{ pageTitle?: string; answer?: string } | null>(null);
+  const [aiOnly, setAiOnly] = useState(false);
   const [visibleCount, setVisibleCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -796,7 +797,7 @@ export default function Page() {
       const response = await fetch("/api/generate-ui", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, previousTurn }),
+        body: JSON.stringify({ message, previousTurn, aiOnly }),
       });
 
       const contentType = response.headers.get("content-type") || "";
@@ -966,6 +967,10 @@ export default function Page() {
           <div className="mt-6 flex max-w-3xl flex-wrap justify-center gap-2">
             {suggestions.map((suggestion) => <Button key={suggestion} variant="outline" size="sm" onClick={() => submitQuestion(suggestion)}>{suggestion}</Button>)}
           </div>
+          <label className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
+            <input type="checkbox" checked={aiOnly} onChange={(event) => setAiOnly(event.target.checked)} />
+            Modo teste: aiOnly (mais liberdade pra IA, sem rede de segurança)
+          </label>
           {journeys.length ? (
             <Button variant="ghost" className="mt-8 gap-2" onClick={() => setDrawerOpen(true)}>
               <History className="h-4 w-4" /> Histórico de perguntas
@@ -987,6 +992,12 @@ export default function Page() {
                   <Badge className="ml-1">{journeys.length}</Badge>
                 </Button>
               ) : null}
+            </div>
+            <div className="mx-auto mt-2 max-w-4xl">
+              <label className="flex items-center gap-2 text-xs text-muted-foreground">
+                <input type="checkbox" checked={aiOnly} onChange={(event) => setAiOnly(event.target.checked)} />
+                Modo teste: aiOnly (mais liberdade pra IA, sem rede de segurança)
+              </label>
             </div>
           </div>
 
