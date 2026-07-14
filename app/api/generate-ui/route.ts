@@ -1241,6 +1241,7 @@ Regras obrigatórias:
 - O texto deve parecer interface final para vestibulandos: claro, humano, útil, sem mencionar IA, JSON, componente, intenção, confiança, protótipo ou sistema.
 - A resposta inicial deve explicar o caminho encontrado, antecipar o que a pessoa pode fazer em seguida e, quando fizer sentido, já puxar um diferencial real que ajude a construir confiança na escolha — sem ser seca nem exagerada.
 - Mantenha o texto leve e escaneável: answer com no máximo 2-3 frases curtas; intro de cada seção com no máximo 1 frase curta. Detalhes específicos (datas, documentos, valores) ficam nos cards e listas, não amontoados no texto corrido.
+- Não repita o mesmo conteúdo em textos diferentes da página. O título de uma seção não pode repetir o pageTitle (nem uma variação óbvia dele), e a intro de uma seção não pode reformular o que answer já disse — cada texto precisa acrescentar algo que os outros ainda não trouxeram (um detalhe específico, um critério pra decidir, um diferencial concreto). Evite frases-clichê que servem pra qualquer página, como "escolha o que mais combina com seu perfil" ou "compare e decida" — prefira algo específico ao que está sendo mostrado ali.
 
 Matriz de navegação por intenção:
 1. Se a pessoa pergunta genericamente por cursos, cursos por cidade ou por uma área ampla:
@@ -1293,6 +1294,8 @@ ${JSON.stringify(dataCatalog)}`;
 
   const baseUrl = (process.env.OPENAI_BASE_URL || "https://api.openai.com").replace(/\/+$/, "");
   const model = process.env.OPENAI_MODEL || "gpt-4.1-mini";
+  const requestedTemperature = Number(body?.temperature);
+  const temperature = Number.isFinite(requestedTemperature) ? Math.min(2, Math.max(0, requestedTemperature)) : 0.25;
 
   let openaiRes;
   try {
@@ -1304,7 +1307,7 @@ ${JSON.stringify(dataCatalog)}`;
         instructions,
         input: message,
         store: false,
-        temperature: 0.25,
+        temperature,
         stream: true,
         text: { format: { type: "json_schema", name: "fgv_generative_ui_v2", strict: true, schema: RESPONSE_SCHEMA } }
       })
@@ -1388,7 +1391,7 @@ ${JSON.stringify(dataCatalog)}`;
           phase: "final",
           ...normalized,
           enrollCta,
-          debug: { mode: "openai", model, renderer: "react_sections_v1", noFallback: true, forcedLeadCapture: sections.some((section) => section.type === "lead_form") }
+          debug: { mode: "openai", model, temperature, renderer: "react_sections_v1", noFallback: true, forcedLeadCapture: sections.some((section) => section.type === "lead_form") }
         });
       } catch (error) {
         emit({ phase: "error", error: "Não foi possível gerar a resposta com a OpenAI.", mode: "openai_exception", details: error.message });

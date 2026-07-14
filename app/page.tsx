@@ -714,6 +714,7 @@ export default function Page() {
   const [plan, setPlan] = useState<Plan | null>(null);
   const [streamingPreview, setStreamingPreview] = useState<{ pageTitle?: string; answer?: string } | null>(null);
   const [aiOnly, setAiOnly] = useState(false);
+  const [temperature, setTemperature] = useState(0.25);
   const [visibleCount, setVisibleCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -797,7 +798,7 @@ export default function Page() {
       const response = await fetch("/api/generate-ui", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, previousTurn, aiOnly }),
+        body: JSON.stringify({ message, previousTurn, aiOnly, temperature }),
       });
 
       const contentType = response.headers.get("content-type") || "";
@@ -971,6 +972,10 @@ export default function Page() {
             <input type="checkbox" checked={aiOnly} onChange={(event) => setAiOnly(event.target.checked)} />
             Modo teste: aiOnly (mais liberdade pra IA, sem rede de segurança)
           </label>
+          <label className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+            Temperatura: {temperature.toFixed(2)}
+            <input type="range" min="0" max="2" step="0.05" value={temperature} onChange={(event) => setTemperature(Number(event.target.value))} className="w-40" />
+          </label>
           {journeys.length ? (
             <Button variant="ghost" className="mt-8 gap-2" onClick={() => setDrawerOpen(true)}>
               <History className="h-4 w-4" /> Histórico de perguntas
@@ -993,10 +998,14 @@ export default function Page() {
                 </Button>
               ) : null}
             </div>
-            <div className="mx-auto mt-2 max-w-4xl">
+            <div className="mx-auto mt-2 flex max-w-4xl flex-wrap items-center gap-4">
               <label className="flex items-center gap-2 text-xs text-muted-foreground">
                 <input type="checkbox" checked={aiOnly} onChange={(event) => setAiOnly(event.target.checked)} />
                 Modo teste: aiOnly (mais liberdade pra IA, sem rede de segurança)
+              </label>
+              <label className="flex items-center gap-2 text-xs text-muted-foreground">
+                Temperatura: {temperature.toFixed(2)}
+                <input type="range" min="0" max="2" step="0.05" value={temperature} onChange={(event) => setTemperature(Number(event.target.value))} className="w-40" />
               </label>
             </div>
           </div>
