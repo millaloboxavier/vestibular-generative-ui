@@ -202,12 +202,20 @@ function cityHits(message, selectedCities = []) {
   return [...hints];
 }
 
+const SPECIFIC_SUBJECT_TERMS = ["direito", "economia", "administracao", "administração", "dados", "inteligencia", "inteligência", "comunicacao", "comunicação", "matematica", "matemática", "sociais", "relacoes", "relações"];
+
+function hasSpecificSubject(q) {
+  return SPECIFIC_SUBJECT_TERMS.some((term) => q.includes(normalize(term)));
+}
+
 function querySignals(message) {
   const q = normalize(message);
   return {
     q,
     asksCourse: /(curso|cursos|graduacao|graduação|administracao|administração|direito|economia|dados|inteligencia|inteligência|comunicacao|comunicação|relacoes|relações|matematica|matemática|sociais)/.test(q),
-    asksAllCourses: /(todos os cursos|quais cursos|cursos de graduacao|cursos de graduação|cursos disponiveis|cursos disponíveis|opcoes de curso|opções de curso|graduacao fgv|graduação fgv)/.test(q),
+    // "quais cursos" sozinho é uma pergunta genérica, mas "quais cursos de administração"
+    // já tem assunto específico — não deve cair no balde de "mostrar tudo".
+    asksAllCourses: /(todos os cursos|quais cursos|cursos de graduacao|cursos de graduação|cursos disponiveis|cursos disponíveis|opcoes de curso|opções de curso|graduacao fgv|graduação fgv)/.test(q) && !hasSpecificSubject(q),
     asksDate: /(data|prazo|quando|inscric|inscrição|inscrever|termina|abre|abertura|calendario|calendário)/.test(q),
     asksVestibularSpecific: /(vestibular fgv|data.*vestibular|vestibular.*data|prova.*vestibular|vestibular.*prova|inscri.*vestibular|vestibular.*inscri|fazer o vestibular|quero fazer vestibular|vestibular$)/.test(q) && !/(enem|internacional|transfer|demanda social|olimpiad|modalidades|formas de ingresso|todas as formas)/.test(q),
     asksAdmission: /(vestibular|enem|ingresso|modalidade|transferencia|transferência|internacional|demanda social|olimpiada|olimpíada)/.test(q),
@@ -279,7 +287,7 @@ function matchCoursesFromText(message, selectedIds = [], selectedCities = []) {
     const words = name.split(" ").filter((part) => part.length > 4);
     const nameHit = words.some((part) => q.includes(part));
     const tagHit = safeArray(course.tags).some((tag) => normalize(tag).length > 3 && q.includes(normalize(tag)));
-    const specific = ["direito", "economia", "administracao", "administração", "dados", "inteligencia", "inteligência", "comunicacao", "comunicação", "matematica", "matemática", "sociais", "relacoes", "relações"].some((term) => normalize(term).length && q.includes(normalize(term)) && haystack.includes(normalize(term)));
+    const specific = SPECIFIC_SUBJECT_TERMS.some((term) => normalize(term).length && q.includes(normalize(term)) && haystack.includes(normalize(term)));
     return cityHit || nameHit || tagHit || specific;
   });
 
