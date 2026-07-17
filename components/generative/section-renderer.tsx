@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, Bell, CalendarDays, Download, FileText, GraduationCap, MapPin, Play, Sparkles } from "lucide-react";
+import { ArrowRight, Bell, CalendarDays, Check, Download, FileText, GraduationCap, MapPin, Play, Sparkles } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -498,6 +498,24 @@ function CareerPathsSection({ section }: { section: Section }) {
   );
 }
 
+function ExperienceSection({ section }: { section: Section }) {
+  const items = safeItems(section);
+  return (
+    <SectionShell section={section}>
+      <ul className="space-y-3">
+        {items.map((item, index) => (
+          <li key={item.id || index} className="flex items-start gap-3">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-foreground text-background">
+              <Check className="h-3 w-3" />
+            </span>
+            <span className="text-sm leading-6 text-foreground">{item.label}</span>
+          </li>
+        ))}
+      </ul>
+    </SectionShell>
+  );
+}
+
 function TestimonialsSection({ section }: { section: Section }) {
   const items = safeItems(section);
   return (
@@ -660,6 +678,7 @@ export function SectionRenderer({ section, onPrompt, onCompareRequest }: { secti
   if (section.type === "course_careers") return <CareerPathsSection section={section} />;
   if (section.type === "course_testimonials") return section.layout === "spotlight" ? <TestimonialSpotlight section={section} /> : <TestimonialsSection section={section} />;
   if (section.type === "course_videos") return <VideosSection section={section} />;
+  if (section.type === "course_experience") return <ExperienceSection section={section} />;
   if (section.type === "lead_form") return <LeadForm section={section} />;
   if (section.type === "next_step") return <NextStep section={section} onPrompt={onPrompt} onCompareRequest={onCompareRequest} />;
   return null;

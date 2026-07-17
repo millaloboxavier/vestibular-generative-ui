@@ -123,7 +123,8 @@ function catalog() {
     careerPaths: safeArray(course.careerPaths),
     hasCareerPaths: safeArray(course.careerPaths).length > 0,
     hasTestimonials: safeArray(course.testimonials).length > 0,
-    hasVideos: safeArray(course.videos).length > 0
+    hasVideos: safeArray(course.videos).length > 0,
+    hasCourseExperience: safeArray(course.courseExperience).length > 0
   }));
 
   const admissionTypes = safeArray(data.admissionTypes).map((item, index) => ({
@@ -548,6 +549,12 @@ function courseCareerPaths(courses = [], descriptions = []) {
   });
 }
 
+function courseExperienceItems(courses = []) {
+  const courseList = safeArray(courses);
+  if (courseList.length !== 1) return [];
+  return safeArray(courseList[0].courseExperience).map((text, index) => ({ id: `experience-${index}`, label: text }));
+}
+
 function courseTestimonials(courses = []) {
   const courseList = safeArray(courses);
   if (courseList.length !== 1) return [];
@@ -720,7 +727,7 @@ function resolveSections(plan, message, options = {}) {
   const resolved = [];
   const addSection = (section) => {
     if (!section) return;
-    if (["course_cards", "course_detail", "timeline", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_numbers", "course_careers", "course_testimonials", "course_videos", "course_compare", "prep_materials", "admission_details", "faq", "warning", "lead_form"].includes(section.type)) {
+    if (["course_cards", "course_detail", "timeline", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_numbers", "course_careers", "course_testimonials", "course_videos", "course_experience", "course_compare", "prep_materials", "admission_details", "faq", "warning", "lead_form"].includes(section.type)) {
       const already = resolved.some((item) => item.type === section.type);
       if (already && !["course_cards"].includes(section.type)) return;
     }
@@ -812,6 +819,11 @@ function resolveSections(plan, message, options = {}) {
     if (section.type === "course_careers") {
       const items = courseCareerPaths(selectedCourses, section.textItems);
       if (items.length) addSection({ ...sectionBase(section, "course_careers", "Possibilidades de carreira", "Áreas em que quem se forma nesse curso pode atuar.", "list"), items });
+    }
+
+    if (section.type === "course_experience") {
+      const items = courseExperienceItems(selectedCourses);
+      if (items.length) addSection({ ...sectionBase(section, "course_experience", "Como é a experiência no curso", "Conheça as vivências que fazem parte da rotina de quem estuda aqui.", "list"), items });
     }
 
     if (section.type === "course_testimonials") {
@@ -1147,7 +1159,7 @@ const RESPONSE_SCHEMA = {
         additionalProperties: false,
         required: ["type", "title", "intro", "layout", "courseIds", "admissionTypeIds", "materialIds", "eventIds", "scholarshipIds", "textItems"],
         properties: {
-          type: { type: "string", enum: ["course_cards", "course_detail", "course_compare", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_numbers", "course_careers", "course_testimonials", "course_videos", "timeline", "prep_materials", "admission_details", "faq", "next_step", "lead_form", "warning"] },
+          type: { type: "string", enum: ["course_cards", "course_detail", "course_compare", "admission_options", "events", "scholarships", "course_differentials", "school_recognitions", "course_numbers", "course_careers", "course_testimonials", "course_videos", "course_experience", "timeline", "prep_materials", "admission_details", "faq", "next_step", "lead_form", "warning"] },
           title: { type: "string" },
           intro: { type: "string" },
           layout: { type: "string", enum: ["cards", "tabs_by_city", "list", "table", "single", "form", "chips", "accordion", "destaque", "spotlight", "foto"] },
@@ -1260,6 +1272,7 @@ Matriz de navegação por intenção:
      - course_careers, se hasCareerPaths. Regra obrigatória de formatação: veja 2c abaixo.
      - course_testimonials, se hasTestimonials.
      - course_videos, se hasVideos. Não escreva texto listando os vídeos no answer nem em outra seção — o vídeo é renderizado pelo próprio componente da seção.
+     - course_experience, se hasCourseExperience.
    - Pode usar events da cidade desse curso.
 2b. Layouts alternativos para variar o visual da página (use com moderação, nem toda seção precisa de um layout diferente):
    - school_recognitions: layout "foto" é uma composição com imagem, mais humanizada, para usar de vez em quando em vez de "cards".
