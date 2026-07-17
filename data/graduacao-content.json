@@ -172,19 +172,71 @@
       "url": "https://vestibular.fgv.br/graduacao/formas-de-ingresso/enem",
       "registrationFrequency": "O ingresso pelo ENEM ocorre anualmente para a maioria dos cursos de Graduação FGV. Para Administração de Empresas da FGV EAESP, Administração da FGV EBAPE e Comunicação Digital da FGV ECMI, os processos seletivos são realizados semestralmente.",
       "seatsByCourse": [
-        { "courseId": "administracao-rj", "seats": 15, "registrationFee": "R$ 135,00" },
-        { "courseId": "ciencia-dados-ia-rj", "seats": 8, "registrationFee": "R$ 125,00" },
-        { "courseId": "ciencias-sociais-rj", "seats": 16, "registrationFee": "R$ 125,00" },
-        { "courseId": "comunicacao-digital-rj", "seats": 15, "registrationFee": "R$ 135,00" },
-        { "courseId": "direito-rj", "seats": 20, "registrationFee": "R$ 125,00" },
-        { "courseId": "matematica-aplicada-rj", "seats": 8, "registrationFee": "R$ 125,00" },
-        { "courseId": "administracao-empresas-sp", "seats": 12, "registrationFee": "R$ 135,00" },
-        { "courseId": "administracao-publica-sp", "seats": 10, "registrationFee": "R$ 125,00" },
-        { "courseId": "direito-sp", "seats": 8, "registrationFee": "R$ 250,00" },
-        { "courseId": "economia-sp", "seats": 3, "registrationFee": "R$ 250,00" },
-        { "courseId": "relacoes-internacionais-sp", "seats": 5, "registrationFee": "R$ 125,00" },
-        { "courseId": "administracao-df", "seats": 15, "registrationFee": "R$ 125,00" },
-        { "courseId": "administracao-publica-df", "seats": 20, "registrationFee": "R$ 125,00" }
+        {
+          "courseId": "administracao-rj",
+          "seats": 15,
+          "registrationFee": "R$ 135,00"
+        },
+        {
+          "courseId": "ciencia-dados-ia-rj",
+          "seats": 8,
+          "registrationFee": "R$ 125,00"
+        },
+        {
+          "courseId": "ciencias-sociais-rj",
+          "seats": 16,
+          "registrationFee": "R$ 125,00"
+        },
+        {
+          "courseId": "comunicacao-digital-rj",
+          "seats": 15,
+          "registrationFee": "R$ 135,00"
+        },
+        {
+          "courseId": "direito-rj",
+          "seats": 20,
+          "registrationFee": "R$ 125,00"
+        },
+        {
+          "courseId": "matematica-aplicada-rj",
+          "seats": 8,
+          "registrationFee": "R$ 125,00"
+        },
+        {
+          "courseId": "administracao-empresas-sp",
+          "seats": 12,
+          "registrationFee": "R$ 135,00"
+        },
+        {
+          "courseId": "administracao-publica-sp",
+          "seats": 10,
+          "registrationFee": "R$ 125,00"
+        },
+        {
+          "courseId": "direito-sp",
+          "seats": 8,
+          "registrationFee": "R$ 250,00"
+        },
+        {
+          "courseId": "economia-sp",
+          "seats": 3,
+          "registrationFee": "R$ 250,00"
+        },
+        {
+          "courseId": "relacoes-internacionais-sp",
+          "seats": 5,
+          "registrationFee": "R$ 125,00"
+        },
+        {
+          "courseId": "administracao-df",
+          "seats": 15,
+          "registrationFee": "R$ 125,00"
+        },
+        {
+          "courseId": "administracao-publica-df",
+          "seats": 20,
+          "registrationFee": "R$ 125,00"
+        }
       ]
     },
     {
@@ -202,20 +254,161 @@
         "Para Administração e Administração Pública da FGV EPPG (Brasília), Relações Internacionais da FGV RI (São Paulo), Administração da FGV EBAPE, Ciências Sociais do FGV CPDOC (Rio de Janeiro) e Comunicação Digital da FGV ECMI, também são aceitos outros exames equivalentes, como Ciclo Básico Común (Argentina), Prueba de Selección Universitaria (Chile) e EXANI-II Admisión (México)."
       ],
       "internationalDiplomasByCourse": [
-        { "courseId": "administracao-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
-        { "courseId": "ciencia-dados-ia-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
-        { "courseId": "ciencias-sociais-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
-        { "courseId": "comunicacao-digital-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
-        { "courseId": "direito-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
-        { "courseId": "economia-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
-        { "courseId": "matematica-aplicada-rj", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
-        { "courseId": "administracao-empresas-sp", "diplomas": ["ABITUR", "BAC", "Esame di Stato", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
-        { "courseId": "administracao-publica-sp", "diplomas": ["ABITUR", "BAC", "Esame di Stato", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
-        { "courseId": "direito-sp", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
-        { "courseId": "economia-sp", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": false },
-        { "courseId": "relacoes-internacionais-sp", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
-        { "courseId": "administracao-df", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true },
-        { "courseId": "administracao-publica-df", "diplomas": ["ABITUR", "BAC", "Exame Internacional (Advanced Placement)", "International Baccalaureate", "SAT"], "acceptsOtherEquivalentExams": true }
+        {
+          "courseId": "administracao-rj",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": true
+        },
+        {
+          "courseId": "ciencia-dados-ia-rj",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": false
+        },
+        {
+          "courseId": "ciencias-sociais-rj",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": true
+        },
+        {
+          "courseId": "comunicacao-digital-rj",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": true
+        },
+        {
+          "courseId": "direito-rj",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": false
+        },
+        {
+          "courseId": "economia-rj",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": false
+        },
+        {
+          "courseId": "matematica-aplicada-rj",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": false
+        },
+        {
+          "courseId": "administracao-empresas-sp",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Esame di Stato",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": false
+        },
+        {
+          "courseId": "administracao-publica-sp",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Esame di Stato",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": false
+        },
+        {
+          "courseId": "direito-sp",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": false
+        },
+        {
+          "courseId": "economia-sp",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": false
+        },
+        {
+          "courseId": "relacoes-internacionais-sp",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": true
+        },
+        {
+          "courseId": "administracao-df",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": true
+        },
+        {
+          "courseId": "administracao-publica-df",
+          "diplomas": [
+            "ABITUR",
+            "BAC",
+            "Exame Internacional (Advanced Placement)",
+            "International Baccalaureate",
+            "SAT"
+          ],
+          "acceptsOtherEquivalentExams": true
+        }
       ]
     },
     {
@@ -237,11 +430,31 @@
         "O processo seletivo dos candidatos do Vestibular DSD é o mesmo do Vestibular regular."
       ],
       "seatsByCourse": [
-        { "courseId": "administracao-empresas-sp", "seats": 12, "registrationFee": "R$ 275,00" },
-        { "courseId": "administracao-publica-sp", "seats": 6, "registrationFee": "R$ 250,00" },
-        { "courseId": "direito-sp", "seats": 12, "registrationFee": "R$ 250,00" },
-        { "courseId": "administracao-df", "seats": 3, "registrationFee": "R$ 250,00" },
-        { "courseId": "administracao-publica-df", "seats": 3, "registrationFee": "R$ 250,00" }
+        {
+          "courseId": "administracao-empresas-sp",
+          "seats": 12,
+          "registrationFee": "R$ 275,00"
+        },
+        {
+          "courseId": "administracao-publica-sp",
+          "seats": 6,
+          "registrationFee": "R$ 250,00"
+        },
+        {
+          "courseId": "direito-sp",
+          "seats": 12,
+          "registrationFee": "R$ 250,00"
+        },
+        {
+          "courseId": "administracao-df",
+          "seats": 3,
+          "registrationFee": "R$ 250,00"
+        },
+        {
+          "courseId": "administracao-publica-df",
+          "seats": 3,
+          "registrationFee": "R$ 250,00"
+        }
       ]
     },
     {
@@ -259,9 +472,21 @@
         "Só são aceitas competições realizadas para estudantes de Ensino Médio ou níveis equivalentes; pontuação de competições de nível superior ou fundamental não é aceita."
       ],
       "seatsByCourse": [
-        { "courseId": "economia-sp", "seats": 4, "registrationFee": "R$ 250,00" },
-        { "courseId": "administracao-df", "seats": 15, "registrationFee": "R$ 250,00" },
-        { "courseId": "administracao-publica-df", "seats": 15, "registrationFee": "R$ 250,00" }
+        {
+          "courseId": "economia-sp",
+          "seats": 4,
+          "registrationFee": "R$ 250,00"
+        },
+        {
+          "courseId": "administracao-df",
+          "seats": 15,
+          "registrationFee": "R$ 250,00"
+        },
+        {
+          "courseId": "administracao-publica-df",
+          "seats": 15,
+          "registrationFee": "R$ 250,00"
+        }
       ]
     },
     {
@@ -595,9 +820,9 @@
       "url": "https://vestibular.fgv.br/cursos/sao-paulo/administracao",
       "entry": "2027.1",
       "duration": "04 anos",
-      "period": "Integral do 1º ao 5º semestre; parcial do 6º ao 8º.",
-      "tuition": "R$ 7.850,00/mês durante 4 anos (*2026.1)",
-      "campus": "Campus FGV EAESP — Av. 9 de Julho, 2029, Bela Vista, São Paulo, SP",
+      "period": "Integral (Português ou Inglês): do 1º ao 5º semestre, de segunda a sexta, de 7h às 19h, e parcial do 6º ao 8º.",
+      "tuition": "R$ 7.850,00/mês durante 4 anos *refere-se ao valor de 2026.1",
+      "campus": "Campus FGV EAESP - Av. 9 de Julho, 2029 Bela Vista, São Paulo, SP",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -605,123 +830,82 @@
         "Vestibular por Demanda Social e Diversidade"
       ],
       "candidatePerSeat": "10,4.",
-      "summary": "A graduação em Administração de Empresas da FGV EAESP é voltada a estudantes que querem alçar grandes voos e impactar o mundo positivamente. O aluno encontrará recursos e ferramentas para assumir uma posição de protagonista na transformação não só de empresas, mas da sociedade e da economia como um todo.",
+      "summary": "Na Graduação em Administração de Empresas da FGV EAESP, você desenvolve visão estratégica, pensamento crítico e capacidade de tomar decisões em um ambiente econômico e social em constante transformação. A formação une excelência acadêmica, experiências práticas, empreendedorismo e oportunidades internacionais. O curso é indicado para quem deseja compreender como empresas e organizações funcionam, gosta de resolver problemas complexos e busca uma formação ampla para construir diferentes caminhos profissionais. Também combina com pessoas criativas, colaborativas, adaptáveis e interessadas em gerar impacto positivo na sociedade.",
       "courseDifferentialsTitle": "Diferenciais do curso",
       "courseDifferentialsIntro": "A graduação em Administração de Empresas da FGV EAESP combina formação internacional, conexão com o mercado, oportunidades de dupla formação e excelência acadêmica.",
       "courseDifferentials": [
         {
-          "id": "duplo-diploma",
-          "title": "Duplo diploma internacional",
-          "shortDescription": "Alunos aprovados em processo seletivo interno podem cursar parte da graduação em instituições parceiras no exterior e obter diploma da FGV EAESP e da universidade estrangeira.",
+          "id": "formacao-conectada-ao-mercado",
+          "title": "Formação conectada ao mercado",
+          "shortDescription": "O curso aproxima teoria e prática por meio de projetos, imersões, contato com organizações e disciplinas voltadas aos desafios reais da gestão.",
+          "type": "formação prática",
+          "tags": [
+            "mercado",
+            "projetos",
+            "imersão"
+          ]
+        },
+        {
+          "id": "experiencia-internacional",
+          "title": "Experiência internacional",
+          "shortDescription": "A FGV EAESP possui três acreditações internacionais e mantém mais de 130 parcerias de intercâmbio. Os estudantes também podem participar de programas de duplo diploma com instituições da Europa, Ásia e América Latina.",
           "type": "internacionalização",
           "tags": [
             "intercâmbio",
             "duplo diploma",
-            "internacional",
-            "exterior"
+            "internacional"
           ]
         },
         {
-          "id": "dupla-graduacao",
-          "title": "Dupla graduação",
-          "shortDescription": "Alunos aprovados em processo seletivo interno podem obter formação em duas áreas, combinando Administração com cursos como Direito, Economia ou Accounting, Finance & Analytics.",
+          "id": "empreendedorismo-e-inovacao",
+          "title": "Empreendedorismo e inovação",
+          "shortDescription": "Disciplinas, ligas estudantis, programas de incubação e a aceleradora FGV Ventures apoiam quem deseja desenvolver novos negócios e transformar ideias em projetos.",
+          "type": "empreendedorismo",
+          "tags": [
+            "empreendedorismo",
+            "inovação",
+            "startups"
+          ]
+        },
+        {
+          "id": "multiplas-possibilidades-de-formacao",
+          "title": "Múltiplas possibilidades de formação",
+          "shortDescription": "A partir do 5º semestre, o estudante pode buscar uma dupla graduação combinando Administração com Direito, Economia ou Contabilidade, conforme as regras acadêmicas.",
           "type": "formação complementar",
           "tags": [
             "dupla graduação",
             "direito",
-            "economia",
-            "afa",
-            "segunda graduação"
-          ],
-          "details": {
-            "partnerSchools": [
-              "FGV Direito SP"
-            ],
-            "benefit": "Permite conquistar dois diplomas em menos tempo e com custo mais acessível do que cursar duas graduações separadamente."
-          }
+            "economia"
+          ]
         },
         {
-          "id": "centro-de-carreiras",
-          "title": "Centro de Carreiras",
-          "shortDescription": "Área dedicada à orientação profissional dos alunos e ex-alunos, com apoio em desenvolvimento de carreira, divulgação de oportunidades e eventos.",
-          "type": "carreira",
+          "id": "rede-de-conexoes",
+          "title": "Rede de conexões",
+          "shortDescription": "A convivência com professores, estudantes, ex-alunos, empresas e organizações contribui para a construção de uma rede profissional que acompanha o aluno durante e depois da graduação.",
+          "type": "networking",
           "tags": [
+            "networking",
             "carreira",
-            "emprego",
-            "estágio",
-            "orientação profissional",
-            "mercado"
+            "rede profissional"
           ]
-        },
-        {
-          "id": "entidades-estudantis",
-          "title": "Entidades estudantis",
-          "shortDescription": "Oportunidades extracurriculares para desenvolver habilidades pessoais e profissionais em projetos liderados por estudantes.",
-          "type": "experiência estudantil",
-          "tags": [
-            "vida universitária",
-            "entidades",
-            "projetos",
-            "liderança",
-            "extracurricular"
-          ]
-        },
-        {
-          "id": "graduacao-em-ingles",
-          "title": "Graduação em inglês",
-          "shortDescription": "Possibilidade de cursar a graduação em inglês, com disciplinas obrigatórias e parte das eletivas ministradas nesse idioma.",
-          "type": "internacionalização",
-          "tags": [
-            "inglês",
-            "curso em inglês",
-            "mercado internacional",
-            "graduação diurna"
-          ],
-          "details": {
-            "availability": "Disponível apenas para alunos da graduação diurna.",
-            "benefits": [
-              "Domínio de termos técnicos em inglês",
-              "Preparação para o mercado internacional",
-              "Formação internacional no Brasil, com investimento em moeda local"
-            ]
-          }
-        },
-        {
-          "id": "excelencia-academica",
-          "title": "Excelência acadêmica",
-          "shortDescription": "Conteúdo atualizado, metodologias inovadoras e corpo docente altamente qualificado, com professores brasileiros e estrangeiros formados em escolas de referência.",
-          "type": "qualidade acadêmica",
-          "tags": [
-            "excelência",
-            "professores",
-            "metodologia",
-            "qualidade acadêmica"
-          ]
-        },
-        {
-          "id": "pesquisa-e-conhecimento",
-          "title": "Pesquisa e conhecimento",
-          "shortDescription": "A escola conta com centros de estudos que conectam pesquisa aplicada e prática, produzindo conhecimento em diferentes áreas de gestão e negócios.",
-          "type": "pesquisa",
-          "tags": [
-            "pesquisa",
-            "centros de estudo",
-            "conhecimento",
-            "produção acadêmica"
-          ],
-          "details": {
-            "studyCenters": "20 centros de estudos",
-            "researchLines": "10 linhas de pesquisa"
-          }
         }
       ],
       "careerPaths": [
-        "Recursos Humanos",
-        "Operações",
-        "Marketing & Comercial",
-        "Empreendedorismo",
-        "Estratégia",
-        "Finanças"
+        "gestão empresarial",
+        "finanças corporativas",
+        "estratégia e consultoria",
+        "empreendedorismo e inovação",
+        "análise e inteligência de mercado",
+        "marketing e comunicação",
+        "gestão de pessoas",
+        "operações e tecnologia"
+      ],
+      "courseExperience": [
+        "Imersões com empresas, organizações e experiências internacionais",
+        "disciplinas voltadas à sustentabilidade e à liderança empreendedora",
+        "projetos de criação e desenvolvimento de novos negócios",
+        "ligas, empresas juniores, iniciativas sociais e entidades estudantis",
+        "oportunidades de intercâmbio, duplo diploma e dupla graduação"
       ]
     },
     {
@@ -732,11 +916,11 @@
       "state": "SP",
       "school": "FGV EAESP",
       "url": "https://vestibular.fgv.br/cursos/sao-paulo/administracao-publica",
-      "entry": "2026.2 / 2027.1 indicado na página de processo seletivo",
+      "entry": "2027.1",
       "duration": "04 anos",
-      "period": "Integral do 1º ao 6º semestre; matutino no 7º e 8º semestres.",
-      "tuition": "R$ 7.560,00/mês durante 4 anos (*2026.1)",
-      "campus": "Campus FGV EAESP — Av. 9 de Julho, 2029, Bela Vista, São Paulo, SP",
+      "period": "Integral: do 1º ao 6º semestre. Matutino: 7º e 8º semestres.",
+      "tuition": "R$ 7.560,00/mês - durante 4 anos. *refere-se ao valor de 2026.1",
+      "campus": "Campus FGV EAESP - Av. 9 de Julho, 2029 - Bela Vista, São Paulo, SP",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -744,7 +928,7 @@
         "Transferência e/ou Portador de Diploma",
         "Vestibular por Demanda Social e Diversidade"
       ],
-      "summary": "Curso voltado à formação de profissionais capazes de analisar políticas públicas e atuar na transformação social.",
+      "summary": "A Graduação em Administração Pública da FGV EAESP prepara você para compreender os desafios do país, formular políticas públicas e melhorar a gestão de organizações que trabalham pelo interesse coletivo. O curso reúne conhecimentos de gestão, Ciências Sociais, economia e políticas públicas. Ao longo da formação, você desenvolve pensamento crítico, capacidade de negociação e habilidades para analisar dados, planejar soluções e tomar decisões que gerem impacto positivo na sociedade. O curso é indicado para quem se interessa por questões sociais, econômicas e políticas e deseja participar de transformações coletivas. Também combina com pessoas que gostam de analisar problemas complexos, negociar com diferentes grupos e criar soluções para melhorar a vida das pessoas — seja no governo, em organizações sociais ou no setor privado.",
       "tags": [
         "políticas públicas",
         "governo",
@@ -757,28 +941,56 @@
       "courseDifferentialsIntro": "É uma formação para quem quer compreender como decisões públicas afetam a vida das pessoas, das empresas e das cidades.",
       "courseDifferentials": [
         {
-          "id": "dupla-graduacao-e-formacao-complementar",
-          "title": "Dupla graduação e formação complementar",
-          "shortDescription": "Possibilidade de combinar a trajetória com Direito, Economia ou outras áreas, conforme regras da escola.",
-          "type": ""
+          "id": "formacao-conectada-aos-desafios-da-sociedade",
+          "title": "Formação conectada aos desafios da sociedade",
+          "shortDescription": "O curso prepara você para analisar problemas públicos, compreender o funcionamento das instituições e desenvolver soluções para melhorar serviços, políticas e organizações.",
+          "type": "formação prática",
+          "tags": [
+            "políticas públicas",
+            "instituições"
+          ]
         },
         {
-          "id": "experiencias-praticas",
-          "title": "Experiências práticas",
-          "shortDescription": "Atividades de campo, visitas, projetos e conexão com problemas públicos reais.",
-          "type": ""
+          "id": "aprendizado-na-pratica",
+          "title": "Aprendizado na prática",
+          "shortDescription": "A formação inclui trabalhos de campo, resolução de problemas reais e imersões em governos e organizações, aproximando o estudante dos desafios da gestão pública desde a graduação.",
+          "type": "formação prática",
+          "tags": [
+            "trabalho de campo",
+            "imersão",
+            "gestão pública"
+          ]
         },
         {
-          "id": "carreira-com-impacto",
-          "title": "Carreira com impacto",
-          "shortDescription": "Apoio de carreira e preparação para atuação em governo, empresas, terceiro setor, consultorias e organismos internacionais.",
-          "type": ""
+          "id": "visao-estrategica-e-analitica",
+          "title": "Visão estratégica e analítica",
+          "shortDescription": "Você aprende a combinar análises qualitativas e quantitativas para tomar decisões, avaliar políticas públicas e planejar ações com mais eficiência.",
+          "type": "qualidade acadêmica",
+          "tags": [
+            "análise de dados",
+            "estratégia"
+          ]
         },
         {
-          "id": "internacionalizacao",
-          "title": "Internacionalização",
-          "shortDescription": "A escola destaca parcerias internacionais e oportunidades de intercâmbio.",
-          "type": ""
+          "id": "diferentes-possibilidades-de-carreira",
+          "title": "Diferentes possibilidades de carreira",
+          "shortDescription": "A atuação não se limita ao governo. Quem se forma no curso pode trabalhar em consultorias, organizações sociais, organismos internacionais, fundações, institutos de pesquisa e empresas privadas.",
+          "type": "carreira",
+          "tags": [
+            "carreira",
+            "governo",
+            "consultoria"
+          ]
+        },
+        {
+          "id": "experiencia-nacional-e-internacional",
+          "title": "Experiência nacional e internacional",
+          "shortDescription": "As atividades de imersão permitem conhecer diferentes realidades administrativas no Brasil e em outros países, além de comparar modelos de gestão e políticas públicas.",
+          "type": "internacionalização",
+          "tags": [
+            "imersão",
+            "internacional"
+          ]
         }
       ],
       "numbers": [
@@ -792,11 +1004,16 @@
         }
       ],
       "careerPaths": [
-        "Gestão pública e políticas públicas",
-        "Educação, saúde, cultura, esporte e sustentabilidade",
-        "Relações governamentais e responsabilidade social",
-        "Consultorias e concessões públicas",
-        "Organizações internacionais e terceiro setor"
+        "governos municipais, estaduais e federal",
+        "gestão e avaliação de políticas públicas",
+        "consultorias",
+        "organizações não governamentais",
+        "organismos internacionais",
+        "fundações empresariais",
+        "institutos de pesquisa",
+        "relações governamentais",
+        "responsabilidade social e sustentabilidade",
+        "áreas do setor privado que se relacionam com governos e políticas públicas"
       ],
       "testimonials": [],
       "videos": [
@@ -817,7 +1034,15 @@
         }
       ],
       "candidatePerSeat": "3,4 (2025.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fgv_inst_folder_adm_pub_vest_25_ap4-4_1.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fgv_inst_folder_adm_pub_vest_25_ap4-4_1.pdf",
+      "courseExperience": [
+        "Imersão em governos municipais e estaduais para analisar problemas reais e propor soluções",
+        "viagem a Brasília para acompanhar o funcionamento do Governo Federal",
+        "contato com experiências de governos da América Latina, África, China e Índia",
+        "trabalhos de campo e visitas a organizações públicas e sociais",
+        "projetos, entidades estudantis e iniciativas de impacto social",
+        "oportunidades de intercâmbio, duplo diploma e dupla graduação"
+      ]
     },
     {
       "id": "direito-sp",
@@ -829,16 +1054,16 @@
       "url": "https://vestibular.fgv.br/cursos/sao-paulo/direito",
       "entry": "2027.1",
       "duration": "05 anos",
-      "period": "Integral nos três primeiros anos; matutino nos anos finais",
-      "tuition": "R$ 8.335,70/mês (*2026.1)",
-      "campus": "FGV Direito SP - Rua Dr. Plínio Barreto, 365, Bela Vista, São Paulo - SP",
+      "period": "Integral nos 3 primeiros anos, 4º e 5º ano em período matutino",
+      "tuition": "R$ 8.335,70 - *refere-se ao valor de 2026.1",
+      "campus": "Campus FGV DIREITO SP - Rua Doutor Plínio Barreto, 365 - Bela Vista, São Paulo",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais",
         "Vestibular por Demanda Social e Diversidade"
       ],
-      "summary": "Direito em São Paulo, com processo seletivo próprio em duas fases, incluindo provas escritas e entrevista, conforme página da modalidade Vestibular FGV.",
+      "summary": "A Graduação em Direito da FGV Direito SP prepara você para compreender problemas jurídicos complexos e construir soluções para os desafios contemporâneos da sociedade. Com uma proposta que rompe com o ensino tradicional, o curso coloca o estudante como protagonista da aprendizagem. A formação combina conhecimentos jurídicos, metodologias participativas, prática profissional e diálogo com áreas como economia, administração, política, filosofia e tecnologia. O curso é indicado para quem se interessa pelas relações entre pessoas, empresas, governos e sociedade e deseja participar da construção de soluções para problemas jurídicos contemporâneos. Também combina com pessoas críticas, criativas e abertas ao diálogo, que gostam de argumentar, trabalhar em equipe e analisar uma mesma questão por diferentes perspectivas.",
       "admissionDates": {
         "Vestibular FGV": "27/07 a 16/09/2026",
         "ENEM": "Em breve",
@@ -856,28 +1081,54 @@
       "courseDifferentialsIntro": "O curso foi desenhado para ir além do ensino jurídico tradicional, colocando o estudante diante de problemas concretos, debates atuais e aplicações práticas do Direito.",
       "courseDifferentials": [
         {
-          "id": "aprendizagem-pratica",
-          "title": "Aprendizagem prática",
-          "shortDescription": "Estudos de caso, simulações, jogos, projetos e resolução de problemas jurídicos concretos.",
-          "type": ""
+          "id": "aprendizado-participativo",
+          "title": "Aprendizado participativo",
+          "shortDescription": "Em vez de apenas memorizar leis e conceitos, você analisa casos concretos, participa de debates e trabalha em equipe para desenvolver estratégias e tomar decisões.",
+          "type": "metodologia",
+          "tags": [
+            "casos concretos",
+            "debates"
+          ]
+        },
+        {
+          "id": "formacao-pratica",
+          "title": "Formação prática",
+          "shortDescription": "Clínicas jurídicas, projetos multidisciplinares, imersões e atividades de extensão aproximam os estudantes de situações reais e ajudam a desenvolver as habilidades exigidas no mercado.",
+          "type": "formação prática",
+          "tags": [
+            "clínicas jurídicas",
+            "extensão"
+          ]
+        },
+        {
+          "id": "direito-tecnologia-e-inovacao",
+          "title": "Direito, tecnologia e inovação",
+          "shortDescription": "O curso acompanha as transformações provocadas pela tecnologia e pela inteligência artificial nas profissões jurídicas, preparando os estudantes para novos desafios e áreas de atuação.",
+          "type": "tecnologia",
+          "tags": [
+            "tecnologia",
+            "inteligência artificial"
+          ]
         },
         {
           "id": "formacao-multidisciplinar",
           "title": "Formação multidisciplinar",
-          "shortDescription": "Contato com temas de economia, administração, relações internacionais, políticas públicas e inovação.",
-          "type": ""
+          "shortDescription": "Desde o primeiro ano, o Direito dialoga com ética, filosofia, contabilidade, administração, ciência política e economia, ampliando a capacidade de analisar problemas sob diferentes perspectivas.",
+          "type": "formação complementar",
+          "tags": [
+            "multidisciplinar"
+          ]
         },
         {
-          "id": "dupla-graduacao",
-          "title": "Dupla graduação",
-          "shortDescription": "Possibilidades de dupla graduação com outras escolas da FGV, conforme regras acadêmicas.",
-          "type": ""
-        },
-        {
-          "id": "atencao-individualizada",
-          "title": "Atenção individualizada",
-          "shortDescription": "Estrutura com proximidade entre estudantes e professores qualificados.",
-          "type": ""
+          "id": "experiencia-internacional",
+          "title": "Experiência internacional",
+          "shortDescription": "A escola mantém parcerias com aproximadamente 50 instituições de ensino ao redor do mundo e oferece oportunidades de intercâmbio e disciplinas em inglês por meio do Global Law Program.",
+          "type": "internacionalização",
+          "tags": [
+            "intercâmbio",
+            "inglês",
+            "internacional"
+          ]
         }
       ],
       "numbers": [
@@ -891,11 +1142,19 @@
         }
       ],
       "careerPaths": [
-        "Advocacia empresarial, societária, tributária, regulatória e contenciosa",
-        "Carreiras públicas",
-        "Organizações internacionais",
-        "Pesquisa e docência",
-        "Tecnologia, inovação, negócios e impacto social"
+        "advocacia",
+        "departamentos jurídicos de empresas",
+        "carreiras públicas",
+        "magistratura",
+        "Ministério Público",
+        "Defensoria Pública",
+        "consultoria",
+        "compliance e governança",
+        "regulação e políticas públicas",
+        "relações governamentais",
+        "tecnologia e inovação jurídica",
+        "organizações sociais e organismos internacionais",
+        "pesquisa e carreira acadêmica"
       ],
       "testimonials": [],
       "videos": [
@@ -916,7 +1175,18 @@
         }
       ],
       "candidatePerSeat": "20 (2026.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fgv_inst_folder_dir_sp_vest_25_ap3-4_0_0.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fgv_inst_folder_dir_sp_vest_25_ap3-4_0_0.pdf",
+      "courseExperience": [
+        "Estudo de casos concretos e metodologias participativas",
+        "clínicas jurídicas voltadas a diferentes áreas do Direito",
+        "projetos multidisciplinares com propostas de intervenção real",
+        "semanas de imersão, visitas de campo e interação com profissionais",
+        "laboratórios, grupos de estudo e iniciação científica",
+        "programas de extensão e advocacia de interesse público",
+        "competições estudantis nacionais e internacionais",
+        "intercâmbio, disciplinas em inglês e dupla graduação",
+        "Feira de Estágios e orientação profissional"
+      ]
     },
     {
       "id": "economia-sp",
@@ -926,17 +1196,17 @@
       "state": "SP",
       "school": "FGV EESP",
       "url": "https://vestibular.fgv.br/cursos/sao-paulo/economia",
-      "entry": "2027.1",
+      "entry": "2026.2",
       "duration": "04 anos",
       "period": "Integral",
-      "tuition": "R$ 9.885,00/mês (*2026.1)",
-      "campus": "FGV EESP - Rua Dr. Plínio Barreto, 365, Bela Vista, São Paulo - SP",
+      "tuition": "R$ 9.885,00 *refere-se ao valor de 2026.1. Valor atual sujeito a alterações.",
+      "campus": "Campus FGV EESP - Rua Doutor Plínio Barreto, 365 - Bela Vista, São Paulo",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais"
       ],
-      "summary": "Economia na FGV EESP, com ênfases em Finanças, Macroeconomia, Políticas Públicas, Economia Política, Negócios e Acadêmica.",
+      "summary": "A Graduação em Economia da FGV EESP prepara você para compreender fenômenos econômicos complexos, analisar dados e propor soluções para os desafios de empresas, governos e da sociedade. O curso combina matemática, estatística, programação e ciência de dados com conhecimentos de história, política e outras Ciências Sociais. Ao longo da formação, você desenvolve raciocínio crítico, clareza de pensamento e capacidade de tomar decisões baseadas em evidências. O curso é indicado para quem se interessa tanto por Ciências Exatas quanto por Ciências Humanas e deseja entender como decisões econômicas afetam empresas, governos e a sociedade. Também combina com pessoas curiosas, críticas e analíticas, que gostam de investigar problemas complexos, trabalhar com dados e buscar respostas baseadas em evidências.",
       "tags": [
         "economia",
         "finanças",
@@ -949,28 +1219,55 @@
       "courseDifferentialsIntro": "É uma formação para quem quer analisar problemas econômicos com profundidade, dados, método e visão crítica.",
       "courseDifferentials": [
         {
-          "id": "enfases-de-formacao",
-          "title": "Ênfases de formação",
-          "shortDescription": "Finanças, Macroeconomia, Políticas Públicas, Economia Política, Negócios e trilha acadêmica.",
-          "type": ""
+          "id": "formacao-quantitativa-e-multidisciplinar",
+          "title": "Formação quantitativa e multidisciplinar",
+          "shortDescription": "Você aprende a utilizar matemática, estatística, econometria, programação e ciência de dados para compreender questões econômicas, sem deixar de lado os aspectos sociais, políticos e históricos.",
+          "type": "formação prática",
+          "tags": [
+            "quantitativo",
+            "dados",
+            "econometria"
+          ]
         },
         {
-          "id": "metodos-ativos",
-          "title": "Métodos ativos",
-          "shortDescription": "Uso de PBL, projetos, debates, exercícios, jogos, laboratórios e pesquisa aplicada.",
-          "type": ""
+          "id": "aprendizado-baseado-em-problemas",
+          "title": "Aprendizado baseado em problemas",
+          "shortDescription": "O curso utiliza o Problem-Based Learning, metodologia na qual os estudantes trabalham em pequenos grupos para analisar problemas concretos, aplicar conhecimentos teóricos e construir soluções com a orientação dos professores.",
+          "type": "metodologia",
+          "tags": [
+            "problem-based learning",
+            "trabalho em grupo"
+          ]
         },
         {
-          "id": "internacionalizacao",
-          "title": "Internacionalização",
-          "shortDescription": "Possibilidade de experiências internacionais a partir da etapa intermediária do curso.",
-          "type": ""
+          "id": "curriculo-flexivel",
+          "title": "Currículo flexível",
+          "shortDescription": "A partir do terceiro ano, você pode direcionar sua formação para a área que mais combina com seus interesses: Finanças, Políticas Públicas, Negócios, Economia Política, Macroeconomia ou carreira acadêmica.",
+          "type": "formação complementar",
+          "tags": [
+            "ênfase",
+            "currículo flexível"
+          ]
         },
         {
-          "id": "apoio-academico-e-profissional",
-          "title": "Apoio acadêmico e profissional",
-          "shortDescription": "Estruturas como NAPPE e SkillsLab apoiam desenvolvimento acadêmico, carreira e habilidades.",
-          "type": ""
+          "id": "projetos-conectados-ao-mercado",
+          "title": "Projetos conectados ao mercado",
+          "shortDescription": "As disciplinas de projetos promovem experiências práticas e interdisciplinares desenvolvidas em parceria com empresas e instituições dos setores econômico e financeiro.",
+          "type": "formação prática",
+          "tags": [
+            "mercado",
+            "projetos"
+          ]
+        },
+        {
+          "id": "experiencia-internacional",
+          "title": "Experiência internacional",
+          "shortDescription": "Os estudantes podem realizar intercâmbio em universidades parceiras, cursando disciplinas equivalentes às da FGV EESP e ampliando sua formação acadêmica, cultural e pessoal.",
+          "type": "internacionalização",
+          "tags": [
+            "intercâmbio",
+            "internacional"
+          ]
         }
       ],
       "numbers": [
@@ -984,12 +1281,16 @@
         }
       ],
       "careerPaths": [
-        "Mercado financeiro e produtos financeiros",
-        "Políticas públicas",
-        "Estratégia e economia setorial",
-        "Finanças corporativas",
-        "Consultoria estratégica",
-        "Pesquisa econômica e carreira acadêmica"
+        "mercado financeiro e investimentos",
+        "análise econômica e de dados",
+        "consultoria",
+        "estratégia e inteligência de negócios",
+        "políticas públicas",
+        "planejamento econômico",
+        "bancos e instituições financeiras",
+        "empresas de tecnologia",
+        "organismos públicos e internacionais",
+        "pesquisa e carreira acadêmica"
       ],
       "testimonials": [],
       "videos": [
@@ -1010,7 +1311,14 @@
         }
       ],
       "candidatePerSeat": "17,2 (2023.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fgv_inst_folder_econ_vest_25_ap3-4-1.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fgv_inst_folder_econ_vest_25_ap3-4-1.pdf",
+      "courseExperience": [
+        "No primeiro ano, você aprende matemática, estatística, programação, ciência de dados e fundamentos de Economia",
+        "no segundo, aprofunda-se em microeconomia, macroeconomia, econometria, história, Direito e Contabilidade",
+        "no terceiro, escolhe uma ênfase e pode participar de intercâmbio, iniciação científica ou projetos de pesquisa",
+        "no quarto, complementa a formação com disciplinas eletivas, estágio e monografia",
+        "durante o curso, pode participar de projetos práticos, entidades estudantis e iniciativas ligadas a finanças, tecnologia, dados e empreendedorismo"
+      ]
     },
     {
       "id": "relacoes-internacionais-sp",
@@ -1023,14 +1331,14 @@
       "entry": "2027.1",
       "duration": "04 anos",
       "period": "Integral",
-      "tuition": "R$ 6.688,00 (*2026.1)",
-      "campus": "Campus FGV RI — Rua Itapeva, 474, Bela Vista, São Paulo",
+      "tuition": "R$ 6.688,00. *refere-se ao valor de 2026.1",
+      "campus": "Campus FGV RI - Rua Itapeva, 474, Bela Vista – São Paulo",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais"
       ],
-      "summary": "Curso para quem busca carreira global, com formação para organismos internacionais, consultorias, bancos, multinacionais, pesquisa aplicada e governo.",
+      "summary": "A Graduação em Relações Internacionais da FGV prepara você para compreender as transformações políticas, econômicas e sociais que conectam países, empresas e organizações ao redor do mundo. O curso combina conhecimentos teóricos e métodos de análise com a resolução de problemas concretos da política internacional e da economia global. Ao longo da formação, você desenvolve pensamento crítico, capacidade analítica e habilidades para atuar em ambientes multiculturais e multilíngues. O curso é indicado para quem se interessa por política, economia, história e pelos acontecimentos que transformam as relações entre países, empresas e sociedades. Também combina com pessoas curiosas, críticas e abertas a diferentes culturas, que gostam de analisar problemas complexos, aprender idiomas e construir uma carreira com possibilidades no Brasil e no exterior.",
       "tags": [
         "internacional",
         "carreira global",
@@ -1043,28 +1351,54 @@
       "courseDifferentialsIntro": "É uma formação para quem quer entender o mundo em transformação e atuar com análise política, econômica, social e estratégica.",
       "courseDifferentials": [
         {
+          "id": "formacao-conectada-aos-desafios-globais",
+          "title": "Formação conectada aos desafios globais",
+          "shortDescription": "Você aprende a analisar conflitos, negociações, relações econômicas e mudanças políticas que influenciam governos, empresas e sociedades.",
+          "type": "formação prática",
+          "tags": [
+            "geopolítica",
+            "negociação"
+          ]
+        },
+        {
+          "id": "teoria-aplicada-a-problemas-concretos",
+          "title": "Teoria aplicada a problemas concretos",
+          "shortDescription": "O curso utiliza métodos e ferramentas de análise para investigar questões internacionais complexas e construir soluções baseadas em evidências.",
+          "type": "metodologia",
+          "tags": [
+            "análise",
+            "evidências"
+          ]
+        },
+        {
           "id": "experiencia-internacional",
           "title": "Experiência internacional",
-          "shortDescription": "O curso estimula intercâmbio, imersões, simulações, estágios, voluntariado e disciplinas em inglês.",
-          "type": ""
+          "shortDescription": "A FGV mantém intercâmbio com mais de 200 instituições parceiras ao redor do mundo, além de oferecer cursos de férias, estágios e programas de voluntariado internacional.",
+          "type": "internacionalização",
+          "tags": [
+            "intercâmbio",
+            "voluntariado internacional"
+          ]
         },
         {
-          "id": "formacao-interdisciplinar",
-          "title": "Formação interdisciplinar",
-          "shortDescription": "Integra política, economia, história, dados, direito, negociação e análise de risco.",
-          "type": ""
-        },
-        {
-          "id": "corpo-docente-qualificado",
-          "title": "Corpo docente qualificado",
-          "shortDescription": "Professores com formação em instituições internacionais e experiência profissional em temas globais.",
-          "type": ""
+          "id": "vivencias-fora-da-sala-de-aula",
+          "title": "Vivências fora da sala de aula",
+          "shortDescription": "Viagens de imersão a Brasília, regiões de fronteira e organismos internacionais aproximam os estudantes dos espaços onde as relações internacionais acontecem na prática.",
+          "type": "formação prática",
+          "tags": [
+            "imersão",
+            "viagens"
+          ]
         },
         {
           "id": "preparacao-para-carreiras-globais",
           "title": "Preparação para carreiras globais",
-          "shortDescription": "Contato com organizações internacionais, setor financeiro, consultorias, empresas, terceiro setor e setor público.",
-          "type": ""
+          "shortDescription": "O Centro de Carreiras oferece orientação profissional, preparação para entrevistas, apoio na elaboração de currículos e atividades voltadas ao ingresso em organismos internacionais.",
+          "type": "carreira",
+          "tags": [
+            "centro de carreiras",
+            "orientação profissional"
+          ]
         }
       ],
       "numbers": [
@@ -1078,12 +1412,18 @@
         }
       ],
       "careerPaths": [
-        "Organizações internacionais",
-        "Mercado financeiro e análise de risco político",
-        "Empresas multinacionais",
-        "Governo e diplomacia",
-        "Terceiro setor",
-        "Mídia, pesquisa e carreira acadêmica"
+        "organismos internacionais",
+        "empresas multinacionais",
+        "comércio exterior e negócios internacionais",
+        "consultoria",
+        "análise de riscos e cenários",
+        "relações governamentais",
+        "diplomacia e serviço público",
+        "organizações não governamentais",
+        "cooperação internacional",
+        "sustentabilidade e responsabilidade social",
+        "pesquisa e produção de conhecimento",
+        "comunicação e análise política internacional"
       ],
       "testimonials": [
         {
@@ -1115,7 +1455,17 @@
         }
       ],
       "candidatePerSeat": "9,7 (2023.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fgv_inst_folder_rel_inter_vest_25_ap3-4-1.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fgv_inst_folder_rel_inter_vest_25_ap3-4-1.pdf",
+      "courseExperience": [
+        "Análise de problemas concretos da política internacional e da economia global",
+        "intercâmbios acadêmicos de seis meses a um ano",
+        "cursos de férias em universidades internacionais",
+        "estágios de férias e programas de voluntariado em organismos internacionais",
+        "viagens de imersão a Brasília, regiões de fronteira e instituições internacionais",
+        "convivência com estudantes de diferentes países",
+        "formação complementar em áreas como negócios internacionais",
+        "planejamento de carreira, networking e preparação para processos seletivos"
+      ]
     },
     {
       "id": "administracao-rj",
@@ -1125,18 +1475,18 @@
       "state": "RJ",
       "school": "FGV EBAPE",
       "url": "https://vestibular.fgv.br/cursos/rio-de-janeiro/administracao",
-      "entry": "2026.2 indicado na página",
+      "entry": "2027.1",
       "duration": "04 anos",
       "period": "Integral",
-      "tuition": "R$ 7.834,33/mês (*2026.1)",
-      "campus": "FGV EBAPE Botafogo e Barra da Tijuca - Rio de Janeiro - RJ",
+      "tuition": "R$ 7.834,33. *refere-se ao valor de 2026.1.",
+      "campus": "FGV EBAPE - Botafogo - Rua Jorn. Orlando Dantas, 30, Botafogo, Rio de Janeiro/RJ; FGV EBAPE - Barra da Tijuca - Avenida das Américas, 3434, Bloco I, Térreo e 2º andar, Rio de Janeiro/RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais",
         "Transferência e/ou Portador de Diploma"
       ],
-      "summary": "Curso estruturado em rigor científico, internacionalização e alinhamento às práticas contemporâneas de mercado.",
+      "summary": "A Graduação em Administração da FGV EBAPE prepara você para compreender o funcionamento das organizações, tomar decisões estratégicas e atuar em um mercado cada vez mais global e competitivo. O curso combina teoria e prática com uma formação bilíngue e uma perspectiva internacional. Ao longo da graduação, você desenvolve capacidade analítica, raciocínio lógico, visão global e habilidades para resolver problemas complexos em empresas, governos, organizações sociais ou empreendimentos próprios. O curso é indicado para quem deseja compreender como as organizações funcionam e busca uma formação ampla, com possibilidades de atuação em diferentes setores. Também combina com pessoas analíticas, curiosas e interessadas em empreendedorismo, tecnologia e sustentabilidade, que desejam desenvolver uma visão internacional e construir uma carreira sem fronteiras.",
       "tags": [
         "gestão",
         "negócios",
@@ -1148,28 +1498,56 @@
       "courseDifferentialsIntro": "É uma formação para quem busca uma carreira em gestão com forte orientação internacional e conexão com problemas reais de organizações.",
       "courseDifferentials": [
         {
-          "id": "trilhas-de-especializacao",
-          "title": "Trilhas de especialização",
-          "shortDescription": "Nos períodos finais, o estudante pode aprofundar a formação em Finanças, International Business, Marketing & Entrepreneurship.",
-          "type": ""
+          "id": "formacao-bilingue-e-internacional",
+          "title": "Formação bilíngue e internacional",
+          "shortDescription": "O contato frequente com conteúdos em inglês e as oportunidades de intercâmbio preparam você para trabalhar em ambientes multiculturais e construir uma carreira no Brasil ou no exterior.",
+          "type": "internacionalização",
+          "tags": [
+            "bilíngue",
+            "inglês",
+            "intercâmbio"
+          ]
         },
         {
-          "id": "experiencia-internacional",
-          "title": "Experiência internacional",
-          "shortDescription": "O curso destaca intercâmbio, dupla titulação e programas internacionais como parte da jornada.",
-          "type": ""
+          "id": "aprendizado-conectado-ao-mercado",
+          "title": "Aprendizado conectado ao mercado",
+          "shortDescription": "O curso combina fundamentos teóricos com situações reais de gestão, permitindo compreender na prática os desafios enfrentados por diferentes tipos de organização.",
+          "type": "formação prática",
+          "tags": [
+            "mercado",
+            "gestão"
+          ]
         },
         {
-          "id": "field-project-e-vivencias-organizacionais",
-          "title": "Field Project e vivências organizacionais",
-          "shortDescription": "Projetos aplicados aproximam o estudante de desafios reais de organizações.",
-          "type": ""
+          "id": "experiencia-em-empresas-reais",
+          "title": "Experiência em empresas reais",
+          "shortDescription": "No Field Project, os estudantes participam de imersões em organizações parceiras, aplicando seus conhecimentos com a orientação de professores e gestores.",
+          "type": "formação prática",
+          "tags": [
+            "field project",
+            "imersão"
+          ]
         },
         {
-          "id": "carreira-e-mentoria",
-          "title": "Carreira e mentoria",
-          "shortDescription": "Apoio para orientação profissional, rede Alumni, mentoria e oportunidades em plataformas internacionais.",
-          "type": ""
+          "id": "formacao-analitica-e-tecnologica",
+          "title": "Formação analítica e tecnológica",
+          "shortDescription": "Além das áreas tradicionais da Administração, você desenvolve pensamento crítico, capacidade de argumentação e conhecimentos relacionados à tecnologia e à transformação digital.",
+          "type": "tecnologia",
+          "tags": [
+            "tecnologia",
+            "transformação digital"
+          ]
+        },
+        {
+          "id": "apoio-para-construir-a-carreira",
+          "title": "Apoio para construir a carreira",
+          "shortDescription": "O Núcleo de Estágio e Desenvolvimento de Carreira orienta os estudantes e aproxima a turma de empresas empregadoras. A plataforma Highered também oferece acesso a oportunidades profissionais em mais de 90 países.",
+          "type": "carreira",
+          "tags": [
+            "carreira",
+            "estágio",
+            "highered"
+          ]
         }
       ],
       "numbers": [
@@ -1187,11 +1565,19 @@
         }
       ],
       "careerPaths": [
-        "Gestão em empresas privadas",
-        "Setor público e organizações internacionais",
-        "Consultoria",
-        "Finanças, marketing e negócios internacionais",
-        "Empreendedorismo e inovação"
+        "marketing",
+        "finanças",
+        "logística e operações",
+        "gestão de pessoas",
+        "estratégia e consultoria",
+        "empreendedorismo",
+        "inovação e transformação digital",
+        "análise de dados aplicada à gestão",
+        "startups e fintechs",
+        "organizações públicas",
+        "empresas privadas",
+        "organizações do terceiro setor",
+        "pesquisa e carreira acadêmica"
       ],
       "testimonials": [
         {
@@ -1218,7 +1604,17 @@
         }
       ],
       "candidatePerSeat": "4,58 (2025.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/nova-matriz_curricular_fgv-ebape-2026.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/nova-matriz_curricular_fgv-ebape-2026.pdf",
+      "courseExperience": [
+        "Formação em marketing, finanças, operações, logística e gestão de pessoas",
+        "disciplinas relacionadas a empreendedorismo, sustentabilidade e tecnologia",
+        "Field Project com imersão em organizações públicas, privadas e sociais",
+        "intercâmbios e experiências interculturais",
+        "atividades de pesquisa e contato com centros de conhecimento",
+        "participação em empresa júnior, liga de empreendedorismo e projetos sociais",
+        "apoio para estágios e desenvolvimento profissional",
+        "oportunidades de carreira no Brasil e no exterior"
+      ]
     },
     {
       "id": "ciencia-dados-ia-rj",
@@ -1231,15 +1627,15 @@
       "entry": "2027.1",
       "duration": "04 anos",
       "period": "Diurno",
-      "tuition": "R$ 4.000,00 (*2026.1)",
-      "campus": "Praia de Botafogo, 190, 5º andar — Rio de Janeiro, RJ",
+      "tuition": "R$ 4.000,00 - *refere-se ao valor de 2026.1",
+      "campus": "Praia de Botafogo, 190, 5º andar - Rio de Janeiro - RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais",
         "Transferência e/ou Portador de Diploma"
       ],
-      "summary": "Curso da FGV EMAp voltado a carreira em tecnologia, dados, bancos, varejo, consultoria, organizações e pesquisa.",
+      "summary": "A Graduação em Ciência de Dados e Inteligência Artificial da FGV EMAp prepara você para transformar grandes volumes de dados em conhecimento e desenvolver soluções para problemas complexos. O curso combina matemática, estatística e computação para formar profissionais capazes de criar algoritmos, analisar informações e desenvolver sistemas inteligentes. Ao longo da formação, você aprende desde os fundamentos da programação até temas avançados, como aprendizado de máquinas, processamento de linguagem natural e aprendizado profundo. O curso é indicado para quem se interessa por matemática, tecnologia e programação e deseja utilizar dados para compreender problemas e criar novas soluções. Também combina com pessoas curiosas, analíticas e criativas, que gostam de investigar padrões, testar hipóteses e acompanhar as transformações provocadas pela inteligência artificial.",
       "admissionDates": {
         "Vestibular FGV": "27/07 a 16/09/2026",
         "ENEM": "Em breve",
@@ -1259,37 +1655,74 @@
       "courseDifferentialsIntro": "É uma formação para quem quer usar matemática, estatística, computação e IA para resolver problemas concretos.",
       "courseDifferentials": [
         {
-          "id": "formacao-tecnica-forte",
-          "title": "Formação técnica forte",
-          "shortDescription": "Base em matemática, estatística, computação, análise de dados, Big Data e escrita científica.",
-          "type": ""
+          "id": "formacao-interdisciplinar",
+          "title": "Formação interdisciplinar",
+          "shortDescription": "Você combina conhecimentos de matemática, estatística e computação para compreender dados, identificar padrões e desenvolver soluções aplicáveis a diferentes setores.",
+          "type": "formação prática",
+          "tags": [
+            "matemática",
+            "estatística",
+            "computação"
+          ]
         },
         {
-          "id": "casos-reais-e-metodologia-participativa",
-          "title": "Casos reais e metodologia participativa",
-          "shortDescription": "O estudante trabalha com problemas concretos e métodos aplicados.",
-          "type": ""
+          "id": "aprendizado-na-pratica",
+          "title": "Aprendizado na prática",
+          "shortDescription": "Os estudantes implementam modelos e técnicas em casos reais, apresentam resultados e desenvolvem habilidades como trabalho em equipe, comunicação e tomada de decisão.",
+          "type": "formação prática",
+          "tags": [
+            "casos reais",
+            "modelos"
+          ]
         },
         {
-          "id": "internacionalizacao",
-          "title": "Internacionalização",
-          "shortDescription": "A escola destaca oportunidades de intercâmbio e conexões internacionais.",
-          "type": ""
+          "id": "conteudos-conectados-ao-futuro",
+          "title": "Conteúdos conectados ao futuro",
+          "shortDescription": "A grade aborda temas como inteligência artificial, machine learning, aprendizado profundo, ciência de redes, processamento de linguagem natural, visualização e segurança de dados.",
+          "type": "tecnologia",
+          "tags": [
+            "inteligência artificial",
+            "machine learning"
+          ]
         },
         {
-          "id": "aplicacao-em-multiplas-areas",
-          "title": "Aplicação em múltiplas áreas",
-          "shortDescription": "Mercado financeiro, saúde, tecnologia, consultoria, governo, varejo, pesquisa e terceiro setor.",
-          "type": ""
+          "id": "experiencia-internacional",
+          "title": "Experiência internacional",
+          "shortDescription": "A FGV EMAp mantém conexões com universidades de diferentes países e prepara os estudantes para intercâmbios, estágios e programas de pós-graduação no exterior.",
+          "type": "internacionalização",
+          "tags": [
+            "intercâmbio",
+            "pós-graduação"
+          ]
+        },
+        {
+          "id": "formacao-pioneira",
+          "title": "Formação pioneira",
+          "shortDescription": "A FGV EMAp foi uma das primeiras instituições brasileiras a oferecer uma graduação específica em Ciência de Dados e Inteligência Artificial, com sua primeira turma formada em 2023.",
+          "type": "qualidade acadêmica",
+          "tags": [
+            "pioneirismo",
+            "ciência de dados"
+          ]
         }
       ],
       "numbers": [],
       "careerPaths": [
-        "Tecnologia e startups",
-        "Varejo, e-commerce e mídia",
-        "Consultoria e mercado financeiro",
-        "Saúde, farmacêuticas e epidemiologia",
-        "Governo, políticas públicas e pesquisa aplicada"
+        "Ciência de Dados",
+        "inteligência artificial",
+        "machine learning",
+        "engenharia de dados",
+        "desenvolvimento de algoritmos",
+        "análise e visualização de dados",
+        "tecnologia e desenvolvimento de software",
+        "segurança e gestão de dados",
+        "consultoria",
+        "mercado financeiro e fintechs",
+        "varejo e comércio eletrônico",
+        "indústria farmacêutica e saúde",
+        "empresas multinacionais e startups",
+        "órgãos públicos",
+        "pesquisa e carreira acadêmica"
       ],
       "testimonials": [],
       "videos": [
@@ -1305,7 +1738,19 @@
         }
       ],
       "candidatePerSeat": "5,86 (2025.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-curricular-ciencia-de-dados-e-inteligencia-artificial.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-curricular-ciencia-de-dados-e-inteligencia-artificial.pdf",
+      "courseExperience": [
+        "Matemática, cálculo, álgebra linear e probabilidade",
+        "programação, estruturas de dados e bancos de dados",
+        "análise exploratória e visualização de dados",
+        "técnicas e algoritmos de Ciência de Dados",
+        "aprendizado de máquinas e inteligência artificial",
+        "aprendizado profundo e processamento de linguagem natural",
+        "engenharia de software e computação escalável",
+        "gestão, segurança e ética no uso de dados",
+        "projetos aplicados, estágios e atividades de extensão",
+        "intercâmbios e experiências acadêmicas internacionais"
+      ]
     },
     {
       "id": "ciencias-sociais-rj",
@@ -1315,17 +1760,17 @@
       "state": "RJ",
       "school": "FGV CPDOC",
       "url": "https://vestibular.fgv.br/cursos/rio-de-janeiro/ciencias-sociais",
-      "entry": "Consultar página do curso",
+      "entry": "2027.1",
       "duration": "04 anos",
       "period": "Diurno",
-      "tuition": "R$ 2.162,21/mês (*2026.1)",
-      "campus": "FGV Botafogo - Praia de Botafogo, 190, 14º andar, Rio de Janeiro - RJ",
+      "tuition": "R$ 2.162,21: *refere-se ao valor de 2026.1",
+      "campus": "FGV BOTAFOGO - Praia de Botafogo, 190, 14º andar - Rio de Janeiro/RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais"
       ],
-      "summary": "Curso da FGV CPDOC, com possibilidades de dupla graduação e formação complementar em áreas como Direito, Matemática Aplicada, Ciência de Dados, Economia, Comunicação Digital e Administração.",
+      "summary": "A Graduação em Ciências Sociais da FGV CPDOC prepara você para compreender como as sociedades se organizam, se transformam e constroem suas relações políticas, culturais e sociais. O curso reúne Sociologia, Antropologia e Ciência Política com conhecimentos de história, relações internacionais e humanidades digitais. Ao longo da formação, você desenvolve autonomia intelectual, pensamento crítico e métodos de pesquisa para analisar fenômenos sociais e atuar em diferentes instituições. O curso é indicado para quem tem curiosidade sobre o funcionamento da sociedade e deseja compreender temas relacionados a política, cultura, comportamento, desigualdades e movimentos sociais. Também combina com pessoas críticas, investigativas e abertas a diferentes perspectivas, que gostam de pesquisar, interpretar informações e transformar conhecimento em ações com impacto social.",
       "tags": [
         "ciências sociais",
         "sociedade",
@@ -1338,28 +1783,56 @@
       "courseDifferentialsIntro": "É uma formação para quem quer compreender problemas sociais com profundidade e atuar com pesquisa, análise, políticas públicas, memória, cultura e dados.",
       "courseDifferentials": [
         {
-          "id": "teoria-e-pratica-de-pesquisa",
-          "title": "Teoria e prática de pesquisa",
-          "shortDescription": "O curso aproxima leitura crítica, métodos de pesquisa, laboratórios e investigação aplicada.",
-          "type": ""
+          "id": "formacao-plural-e-interdisciplinar",
+          "title": "Formação plural e interdisciplinar",
+          "shortDescription": "Você estuda os fenômenos sociais por diferentes perspectivas, conectando Sociologia, Antropologia e Ciência Política a áreas como história, relações internacionais e tecnologia.",
+          "type": "formação prática",
+          "tags": [
+            "sociologia",
+            "antropologia",
+            "ciência política"
+          ]
         },
         {
-          "id": "acervo-e-memoria",
-          "title": "Acervo e memória",
-          "shortDescription": "Contato com um dos principais acervos de arquivos pessoais de personalidades públicas do país.",
-          "type": ""
+          "id": "pesquisa-desde-a-graduacao",
+          "title": "Pesquisa desde a graduação",
+          "shortDescription": "Os estudantes podem participar de iniciação científica, laboratórios e núcleos dedicados a temas como política, cultura, memória, gênero, raça, humanidades digitais e políticas públicas.",
+          "type": "pesquisa",
+          "tags": [
+            "iniciação científica",
+            "laboratórios"
+          ]
         },
         {
-          "id": "interdisciplinaridade",
-          "title": "Interdisciplinaridade",
-          "shortDescription": "Possibilidade de dupla graduação e certificados complementares em áreas como Direito, Matemática Aplicada, Ciência de Dados, Economia, Comunicação Digital e Administração.",
-          "type": ""
+          "id": "formacao-teorica-e-metodologica",
+          "title": "Formação teórica e metodológica",
+          "shortDescription": "O curso combina fundamentos das Ciências Sociais com métodos qualitativos e quantitativos, análise de dados e oficinas de pesquisa social aplicada.",
+          "type": "metodologia",
+          "tags": [
+            "métodos de pesquisa",
+            "análise de dados"
+          ]
         },
         {
-          "id": "parcerias-internacionais",
-          "title": "Parcerias internacionais",
-          "shortDescription": "A página destaca acordos com instituições internacionais, incluindo Sciences Po.",
-          "type": ""
+          "id": "experiencias-praticas",
+          "title": "Experiências práticas",
+          "shortDescription": "Estágios na Casa Acervo, no Núcleo de Audiovisual e Documentário e no Núcleo de Pesquisa Social Aplicada aproximam os estudantes de diferentes formas de produção e aplicação do conhecimento.",
+          "type": "formação prática",
+          "tags": [
+            "estágio",
+            "acervo",
+            "audiovisual"
+          ]
+        },
+        {
+          "id": "possibilidades-de-ampliar-a-formacao",
+          "title": "Possibilidades de ampliar a formação",
+          "shortDescription": "Você pode fazer intercâmbio, buscar uma dupla graduação ou cursar formações complementares em áreas como Direito, Economia, Administração, Ciência de Dados e Comunicação Digital.",
+          "type": "formação complementar",
+          "tags": [
+            "intercâmbio",
+            "dupla graduação"
+          ]
         }
       ],
       "numbers": [
@@ -1373,12 +1846,19 @@
         }
       ],
       "careerPaths": [
-        "Pesquisa social aplicada",
-        "Políticas públicas e planejamento",
-        "Organizações da sociedade civil",
-        "Consultoria política e social",
-        "Arquivos, memória, cultura e documentação",
-        "Carreira acadêmica"
+        "pesquisa social e de opinião",
+        "análise política",
+        "consultoria e assessoria",
+        "políticas públicas",
+        "organizações sociais e terceiro setor",
+        "institutos de pesquisa",
+        "projetos culturais",
+        "memória e patrimônio",
+        "produção audiovisual e documental",
+        "análise de dados sociais",
+        "relações internacionais",
+        "comunicação e pesquisa de tendências",
+        "ensino e carreira acadêmica"
       ],
       "testimonials": [
         {
@@ -1405,7 +1885,19 @@
         }
       ],
       "candidatePerSeat": "1,11 (2025.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-curricular-ciencias-sociais.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-curricular-ciencias-sociais.pdf",
+      "courseExperience": [
+        "Estudos em Sociologia, Antropologia e Ciência Política",
+        "conteúdos de história, filosofia, ética e instituições brasileiras",
+        "métodos de pesquisa qualitativa e quantitativa",
+        "análise de dados aplicada às Ciências Sociais",
+        "oficinas de pesquisa social aplicada",
+        "participação em laboratórios e projetos de iniciação científica",
+        "estágios em acervos, núcleos de pesquisa e projetos audiovisuais",
+        "intercâmbio em instituições internacionais",
+        "disciplinas eletivas e formações complementares",
+        "possibilidade de dupla graduação"
+      ]
     },
     {
       "id": "comunicacao-digital-rj",
@@ -1415,18 +1907,18 @@
       "state": "RJ",
       "school": "FGV Comunicação",
       "url": "https://vestibular.fgv.br/cursos/rio-de-janeiro/comunicacao-digital",
-      "entry": "2027.1 indicado na página de processo seletivo",
+      "entry": "2027.1",
       "duration": "04 anos",
       "period": "Integral",
-      "tuition": "R$ 4.600,00/mês (*2026.1)",
-      "campus": "FGV Botafogo - Praia de Botafogo, 190, Rio de Janeiro - RJ",
+      "tuition": "R$ 4.600,00 *refere-se ao valor de 2026.1",
+      "campus": "FGV BOTAFOGO - Praia de Botafogo, 190, Rio de Janeiro - RJ. CEP: 22250-900",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais",
         "Transferência e/ou Portador de Diploma"
       ],
-      "summary": "Curso da FGV Comunicação no Rio de Janeiro, com modalidades Vestibular FGV, ENEM e Internacional indicadas na página do curso.",
+      "summary": "A Graduação em Comunicação Digital da FGV prepara você para compreender as transformações da comunicação e criar estratégias, conteúdos, produtos e experiências para os ambientes digitais. O curso combina comunicação, criatividade, tecnologia e análise de dados. Ao longo da formação, você aprende a interpretar o comportamento das pessoas nas plataformas digitais, tomar decisões baseadas em dados e utilizar recursos como inteligência artificial de maneira ética e responsável. O curso é indicado para quem se interessa por comunicação, criatividade, tecnologia e pelas mudanças provocadas pelas plataformas digitais. Também combina com pessoas curiosas e analíticas, que gostam de criar conteúdos, compreender comportamentos, trabalhar com dados e experimentar novas formas de conectar pessoas, marcas e organizações.",
       "tags": [
         "comunicação",
         "digital",
@@ -1438,28 +1930,54 @@
       "courseDifferentialsIntro": "É uma formação para quem quer entender como tecnologia, dados, linguagem, plataformas e cultura transformam a comunicação.",
       "courseDifferentials": [
         {
-          "id": "comunicacao-dados",
-          "title": "Comunicação + dados",
-          "shortDescription": "O curso une publicidade, jornalismo, linguística, cultura digital, estratégia, IA e Data Science.",
-          "type": ""
+          "id": "comunicacao-orientada-por-dados",
+          "title": "Comunicação orientada por dados",
+          "shortDescription": "Você aprende a coletar e analisar dados de ambientes digitais para planejar estratégias, compreender públicos e melhorar conteúdos, produtos e serviços.",
+          "type": "formação prática",
+          "tags": [
+            "dados",
+            "estratégia digital"
+          ]
         },
         {
-          "id": "laboratorios-e-projetos",
-          "title": "Laboratórios e projetos",
-          "shortDescription": "Mídia Lab, DappLab e Agência de Comunicação Digital apoiam experiências práticas desde o início do curso.",
-          "type": ""
+          "id": "formacao-interdisciplinar",
+          "title": "Formação interdisciplinar",
+          "shortDescription": "O curso integra conhecimentos de Comunicação, Ciência de Dados, Linguística, Sociologia e Informação para oferecer uma visão ampla das transformações digitais.",
+          "type": "formação prática",
+          "tags": [
+            "interdisciplinar",
+            "comunicação"
+          ]
         },
         {
-          "id": "metodologias-ativas",
-          "title": "Metodologias ativas",
-          "shortDescription": "Casos, projetos e oficinas conectam os alunos a problemas de comunicação reais.",
-          "type": ""
+          "id": "aprendizado-ativo",
+          "title": "Aprendizado ativo",
+          "shortDescription": "Casos de ensino, projetos, oficinas e atividades práticas colocam o estudante no centro da aprendizagem e aproximam a formação dos desafios do mercado.",
+          "type": "metodologia",
+          "tags": [
+            "casos de ensino",
+            "oficinas"
+          ]
         },
         {
-          "id": "internacionalizacao",
-          "title": "Internacionalização",
-          "shortDescription": "A página destaca intercâmbio e experiências como FGV-Sorbonne.",
-          "type": ""
+          "id": "tecnologia-e-inteligencia-artificial",
+          "title": "Tecnologia e inteligência artificial",
+          "shortDescription": "A graduação aborda o impacto das tecnologias e da inteligência artificial nos processos de comunicação, com atenção ao uso ético, crítico e responsável desses recursos.",
+          "type": "tecnologia",
+          "tags": [
+            "inteligência artificial",
+            "ética"
+          ]
+        },
+        {
+          "id": "laboratorios-e-pesquisa-aplicada",
+          "title": "Laboratórios e pesquisa aplicada",
+          "shortDescription": "Os estudantes têm acesso a laboratórios com tecnologia de ponta e a metodologias de pesquisa aplicada em redes sociais, comunicação e debate público.",
+          "type": "pesquisa",
+          "tags": [
+            "laboratórios",
+            "redes sociais"
+          ]
         }
       ],
       "numbers": [
@@ -1473,11 +1991,21 @@
         }
       ],
       "careerPaths": [
-        "Produção de conteúdo digital",
-        "Business intelligence e dados de comunicação",
-        "Gestão de comunicação digital",
-        "Empreendedorismo digital",
-        "Pesquisa em mídia, plataformas e cultura digital"
+        "comunicação e marketing digital",
+        "estratégia de conteúdo",
+        "criação e produção de conteúdo",
+        "jornalismo digital e de dados",
+        "mídias sociais",
+        "análise de dados e business intelligence",
+        "pesquisa de comportamento e tendências",
+        "planejamento de comunicação",
+        "publicidade",
+        "produção de vídeos e podcasts",
+        "comunicação corporativa",
+        "campanhas políticas",
+        "inovação e desenvolvimento de produtos digitais",
+        "empreendedorismo",
+        "pesquisa em mídias digitais"
       ],
       "testimonials": [],
       "videos": [
@@ -1498,7 +2026,19 @@
         }
       ],
       "candidatePerSeat": "1,4 (2025.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-graduacao_fgv-ecmi.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-graduacao_fgv-ecmi.pdf",
+      "courseExperience": [
+        "Estudos sobre comunicação, informação e cultura digital",
+        "coleta, análise e visualização de dados de ambientes on-line",
+        "produção de conteúdos para diferentes formatos e plataformas",
+        "uso de programação e métodos digitais aplicados à comunicação",
+        "projetos relacionados a inteligência artificial, jogos e experiências imersivas",
+        "análise crítica de redes sociais, memes, vídeos, publicidade e desinformação",
+        "atividades de extensão, seminários, oficinas e hackathons",
+        "contato com organizações, empresas e projetos de impacto social",
+        "apoio para estágios e desenvolvimento profissional",
+        "possibilidade de dupla graduação e experiências internacionais"
+      ]
     },
     {
       "id": "direito-rj",
@@ -1511,15 +2051,15 @@
       "entry": "2027.1",
       "duration": "05 anos",
       "period": "Integral",
-      "tuition": "R$ 6.880,00 (*2026.1)",
-      "campus": "FGV Botafogo — Praia de Botafogo, 190, Botafogo/RJ",
+      "tuition": "R$ 6.880,00 - *refere-se ao valor de 2026.1",
+      "campus": "FGV BOTAFOGO - Praia de Botafogo, 190, Botafogo/RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais",
         "Transferência e/ou Portador de Diploma"
       ],
-      "summary": "Direito no Rio de Janeiro, com ingresso 2027.1 e modalidades Vestibular FGV, ENEM e Internacional quando disponíveis.",
+      "summary": "A Graduação em Direito da FGV Direito Rio prepara você para compreender os desafios jurídicos do país, construir argumentos e desenvolver soluções para problemas reais. O curso combina formação acadêmica sólida, prática jurídica e liberdade para personalizar parte da trajetória. Ao longo da graduação, você desenvolve pensamento crítico, criatividade e capacidade de argumentação para atuar em diferentes áreas do Direito e da sociedade. O curso é indicado para quem se interessa pelas leis, pelas instituições e pelos desafios que envolvem as relações entre pessoas, empresas, governos e sociedade. Também combina com pessoas críticas, criativas e abertas ao diálogo, que gostam de argumentar, analisar diferentes perspectivas e construir soluções para problemas complexos.",
       "admissionDates": {
         "Vestibular FGV": "27/07 a 16/09/2026",
         "ENEM": "Em breve",
@@ -1536,28 +2076,53 @@
       "courseDifferentialsIntro": "É uma formação para quem quer ir além da carreira jurídica tradicional e atuar em advocacia, setor público, pesquisa, tecnologia, mercado, terceiro setor ou organizações internacionais.",
       "courseDifferentials": [
         {
-          "id": "field-project",
-          "title": "Field Project",
-          "shortDescription": "Projetos aplicados aproximam os alunos de problemas reais do Direito nos primeiros períodos.",
-          "type": ""
+          "id": "formacao-personalizada",
+          "title": "Formação personalizada",
+          "shortDescription": "O curso é dividido em duas etapas. Na primeira, você constrói uma base sólida nas áreas essenciais do Direito. Na segunda, escolhe disciplinas eletivas, trilhas profissionais e formações complementares de acordo com seus interesses.",
+          "type": "formação complementar",
+          "tags": [
+            "trilhas",
+            "eletivas"
+          ]
         },
         {
-          "id": "atividades-monitoradas",
-          "title": "Atividades monitoradas",
-          "shortDescription": "Atividades de férias e experiências supervisionadas ampliam contato com a prática.",
-          "type": ""
+          "id": "aprendizado-com-problemas-reais",
+          "title": "Aprendizado com problemas reais",
+          "shortDescription": "Nos Field Projects, os estudantes trabalham em projetos multidisciplinares e desenvolvem soluções para desafios reais, com impacto em organizações e na comunidade.",
+          "type": "formação prática",
+          "tags": [
+            "field projects",
+            "problemas reais"
+          ]
         },
         {
-          "id": "mentoria",
-          "title": "Mentoria",
-          "shortDescription": "Apoio individualizado para escolhas acadêmicas e profissionais.",
-          "type": ""
+          "id": "pratica-juridica-em-clinicas",
+          "title": "Prática jurídica em clínicas",
+          "shortDescription": "Nas clínicas jurídicas, os estudantes participam de causas reais e complexas, sempre acompanhados por profissionais qualificados.",
+          "type": "formação prática",
+          "tags": [
+            "clínicas jurídicas"
+          ]
         },
         {
-          "id": "dupla-graduacao-e-formacao-complementar",
-          "title": "Dupla graduação e formação complementar",
-          "shortDescription": "Parcerias com EBAPE, EMAp e CPDOC ampliam possibilidades interdisciplinares.",
-          "type": ""
+          "id": "acompanhamento-academico",
+          "title": "Acompanhamento acadêmico",
+          "shortDescription": "O programa de mentoria aproxima estudantes de professores, pesquisadores e ex-alunos para apoiar escolhas acadêmicas e o planejamento da carreira.",
+          "type": "carreira",
+          "tags": [
+            "mentoria",
+            "carreira"
+          ]
+        },
+        {
+          "id": "experiencia-internacional",
+          "title": "Experiência internacional",
+          "shortDescription": "A graduação oferece intercâmbios, competições, eventos internacionais, aulas com professores estrangeiros e disciplinas em outros idiomas.",
+          "type": "internacionalização",
+          "tags": [
+            "intercâmbio",
+            "internacional"
+          ]
         }
       ],
       "numbers": [
@@ -1571,13 +2136,21 @@
         }
       ],
       "careerPaths": [
-        "Advocacia e escritórios",
-        "Carreiras públicas",
-        "Setor empresarial e regulatório",
-        "Tecnologia, inovação e mercado",
-        "Organizações internacionais",
-        "Terceiro setor e impacto social",
-        "Pesquisa e docência"
+        "advocacia",
+        "departamentos jurídicos de empresas",
+        "magistratura",
+        "Ministério Público",
+        "Defensoria Pública",
+        "procuradorias",
+        "carreiras públicas",
+        "consultoria",
+        "regulação",
+        "arbitragem e mediação",
+        "compliance e governança",
+        "organizações sociais",
+        "relações governamentais",
+        "organismos internacionais",
+        "pesquisa e carreira acadêmica"
       ],
       "testimonials": [
         {
@@ -1609,7 +2182,19 @@
         }
       ],
       "candidatePerSeat": "8,2 (2025.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-curricular-direito-rio-2025.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-curricular-direito-rio-2025.pdf",
+      "courseExperience": [
+        "Formação básica nas principais áreas do Direito",
+        "disciplinas eletivas e trilhas profissionais",
+        "Field Projects com problemas e organizações reais",
+        "clínicas jurídicas supervisionadas",
+        "mentoria acadêmica e profissional",
+        "atividades monitoradas de férias em escritórios, empresas, órgãos públicos e organizações sociais",
+        "iniciação científica e incentivo à carreira acadêmica",
+        "dupla graduação e formações complementares",
+        "intercâmbio e disciplinas cursadas no exterior",
+        "participação em entidades estudantis e competições"
+      ]
     },
     {
       "id": "economia-rj",
@@ -1630,7 +2215,7 @@
         "Exames Internacionais",
         "Transferência e/ou Portador de Diploma"
       ],
-      "summary": "Economia na FGV EPGE, no Rio de Janeiro, com processo seletivo 2027.1 indicado na página do curso.",
+      "summary": "A Graduação em Ciências Econômicas da FGV EPGE prepara você para compreender problemas econômicos e financeiros, analisar dados e tomar decisões em cenários complexos. O curso combina teoria econômica, métodos quantitativos, estatística, econometria, ciência de dados e inteligência artificial. Ao longo da formação, você desenvolve pensamento crítico e capacidade analítica para atuar no mercado financeiro, em empresas, governos, organismos internacionais ou na pesquisa acadêmica. O curso é indicado para quem se interessa por Economia, matemática e análise de dados e deseja compreender como decisões financeiras, políticas e empresariais afetam a sociedade. Também combina com pessoas analíticas, críticas e curiosas, que gostam de resolver problemas complexos e buscam uma formação rigorosa para atuar no mercado ou seguir uma trajetória acadêmica.",
       "tags": [
         "economia",
         "finanças",
@@ -1642,28 +2227,53 @@
       "courseDifferentialsIntro": "É uma formação para quem quer desenvolver independência intelectual, criatividade, raciocínio analítico e capacidade crítica.",
       "courseDifferentials": [
         {
-          "id": "base-rigorosa",
-          "title": "Base rigorosa",
-          "shortDescription": "Forte formação em teoria econômica, métodos quantitativos, programação e modelagem.",
-          "type": ""
+          "id": "formacao-quantitativa-orientada-por-dados",
+          "title": "Formação quantitativa orientada por dados",
+          "shortDescription": "Você aprende a utilizar estatística, econometria, modelagem, ciência de dados e inteligência artificial para analisar questões econômicas e financeiras.",
+          "type": "formação prática",
+          "tags": [
+            "quantitativo",
+            "dados"
+          ]
         },
         {
-          "id": "temas-contemporaneos",
-          "title": "Temas contemporâneos",
-          "shortDescription": "Economia ambiental, fintechs, empreendedorismo, políticas públicas e IA aplicada à economia.",
-          "type": ""
+          "id": "ensino-conectado-a-pesquisa",
+          "title": "Ensino conectado à pesquisa",
+          "shortDescription": "Os conteúdos trabalhados em sala acompanham pesquisas e discussões atuais da Economia, aproximando os estudantes do conhecimento produzido no Brasil e no exterior.",
+          "type": "pesquisa",
+          "tags": [
+            "pesquisa",
+            "produção acadêmica"
+          ]
         },
         {
-          "id": "ensino-e-pesquisa-integrados",
-          "title": "Ensino e pesquisa integrados",
-          "shortDescription": "Contato com pesquisadores, seminários e produção acadêmica desde a graduação.",
-          "type": ""
+          "id": "preparacao-para-diferentes-carreiras",
+          "title": "Preparação para diferentes carreiras",
+          "shortDescription": "A formação permite atuar no mercado financeiro, em empresas, consultorias, políticas públicas, organismos internacionais ou seguir para o mestrado e o doutorado.",
+          "type": "carreira",
+          "tags": [
+            "mercado financeiro",
+            "pós-graduação"
+          ]
         },
         {
-          "id": "internacionalizacao",
-          "title": "Internacionalização",
-          "shortDescription": "Visitas de pesquisadores, seminários, intercâmbio e contato com referências globais.",
-          "type": ""
+          "id": "ambiente-interdisciplinar",
+          "title": "Ambiente interdisciplinar",
+          "shortDescription": "A proximidade com outros cursos da FGV favorece projetos e formações complementares em áreas como Direito, Administração, Matemática Aplicada, Ciências Sociais e Comunicação Digital.",
+          "type": "formação complementar",
+          "tags": [
+            "interdisciplinar"
+          ]
+        },
+        {
+          "id": "experiencia-internacional",
+          "title": "Experiência internacional",
+          "shortDescription": "Os estudantes podem cursar um ou dois semestres em universidades parceiras no exterior, com aproveitamento dos créditos na graduação.",
+          "type": "internacionalização",
+          "tags": [
+            "intercâmbio",
+            "internacional"
+          ]
         }
       ],
       "numbers": [
@@ -1677,12 +2287,19 @@
         }
       ],
       "careerPaths": [
-        "Mercado financeiro",
-        "Gestão e estratégia empresarial",
-        "Setor público e políticas públicas",
-        "Consultoria",
-        "Organizações internacionais",
-        "Pesquisa aplicada, sustentabilidade e tecnologia"
+        "mercado financeiro",
+        "bancos de investimento",
+        "gestão de patrimônio e investimentos",
+        "análise econômica e financeira",
+        "ciência e análise de dados",
+        "consultoria",
+        "planejamento e estratégia",
+        "empresas privadas",
+        "empreendedorismo",
+        "políticas públicas",
+        "bancos centrais e órgãos governamentais",
+        "organismos internacionais",
+        "pesquisa e carreira acadêmica"
       ],
       "testimonials": [
         {
@@ -1719,7 +2336,19 @@
         }
       ],
       "candidatePerSeat": "8 (2026.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fluxograma_2026-v2-1.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/fluxograma_2026-v2-1.pdf",
+      "courseExperience": [
+        "Estudos de teoria econômica, macroeconomia e microeconomia",
+        "formação em matemática, estatística e econometria",
+        "aplicação de ciência de dados e inteligência artificial à Economia",
+        "análise de problemas financeiros, sociais e de políticas públicas",
+        "contato com pesquisadores e professores visitantes internacionais",
+        "formação complementar em outras escolas da FGV",
+        "intercâmbio acadêmico com aproveitamento de créditos",
+        "acesso a disciplinas de mestrado e doutorado, conforme desempenho e aprovação",
+        "apoio para estágios e desenvolvimento de carreira",
+        "oportunidades relacionadas a pesquisa e empreendedorismo"
+      ]
     },
     {
       "id": "matematica-aplicada-rj",
@@ -1729,18 +2358,18 @@
       "state": "RJ",
       "school": "FGV EMAp",
       "url": "https://vestibular.fgv.br/cursos/rio-de-janeiro/matematica-aplicada",
-      "entry": "2027.1 indicado na página de processo seletivo",
+      "entry": "2027.1",
       "duration": "04 anos",
       "period": "Diurno",
-      "tuition": "R$ 3.000,00/mês (*2026.1)",
-      "campus": "FGV Botafogo - Praia de Botafogo, 190, 5º andar, Rio de Janeiro - RJ",
+      "tuition": "R$ 3.000,00 - *refere-se ao valor de 2026.1",
+      "campus": "FGV BOTAFOGO - Praia de Botafogo, 190, 5º andar - Rio de Janeiro – RJ",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais",
         "Transferência e/ou Portador de Diploma"
       ],
-      "summary": "Curso da FGV EMAp para atuação em setores estratégicos, consultoria e pesquisa acadêmica.",
+      "summary": "A Graduação em Matemática Aplicada da FGV EMAp prepara você para utilizar a matemática na compreensão e na solução de problemas reais. O curso combina matemática, estatística, computação e modelagem matemática. Ao longo da formação, você desenvolve raciocínio lógico, capacidade analítica e conhecimentos para criar modelos, analisar dados e construir soluções aplicáveis a áreas como economia, finanças, saúde, tecnologia e políticas públicas. O curso é indicado para quem gosta de matemática e deseja utilizá-la para compreender fenômenos, analisar informações e solucionar problemas complexos. Também combina com pessoas curiosas, analíticas e interessadas em tecnologia, programação e pesquisa, que buscam uma formação com aplicações em diferentes setores.",
       "tags": [
         "matemática",
         "dados",
@@ -1753,28 +2382,53 @@
       "courseDifferentialsIntro": "É uma formação para quem gosta de raciocínio lógico, modelos, dados e aplicação prática do conhecimento.",
       "courseDifferentials": [
         {
-          "id": "tres-eixos-de-formacao",
-          "title": "Três eixos de formação",
-          "shortDescription": "Matemática, Computação e Modelagem Matemática.",
-          "type": ""
+          "id": "formacao-ampla-e-contemporanea",
+          "title": "Formação ampla e contemporânea",
+          "shortDescription": "Você aprende conteúdos da matemática pura e aplicada, combinados a estatística, programação, algoritmos e técnicas computacionais.",
+          "type": "formação prática",
+          "tags": [
+            "matemática",
+            "programação"
+          ]
         },
         {
-          "id": "aplicacao-em-problemas-reais",
-          "title": "Aplicação em problemas reais",
-          "shortDescription": "Modelos e técnicas são discutidos e implementados em casos concretos.",
-          "type": ""
+          "id": "matematica-conectada-ao-mundo-real",
+          "title": "Matemática conectada ao mundo real",
+          "shortDescription": "O curso trabalha com aplicações em áreas como engenharia, economia, finanças, epidemiologia, Direito, meio ambiente e planejamento urbano.",
+          "type": "formação prática",
+          "tags": [
+            "aplicações",
+            "modelagem"
+          ]
         },
         {
-          "id": "internacionalizacao",
-          "title": "Internacionalização",
-          "shortDescription": "A escola destaca conexões internacionais e possibilidades de intercâmbio.",
-          "type": ""
+          "id": "pesquisa-desde-a-graduacao",
+          "title": "Pesquisa desde a graduação",
+          "shortDescription": "Os estudantes podem participar de projetos de iniciação científica e aprofundar seus conhecimentos em áreas específicas da Matemática e da Computação.",
+          "type": "pesquisa",
+          "tags": [
+            "iniciação científica"
+          ]
         },
         {
-          "id": "corpo-docente-qualificado",
-          "title": "Corpo docente qualificado",
-          "shortDescription": "Professores com doutorado e pós-doutorado em universidades estrangeiras e experiência aplicada.",
-          "type": ""
+          "id": "formacao-flexivel-e-avancada",
+          "title": "Formação flexível e avançada",
+          "shortDescription": "Além das disciplinas obrigatórias, o curso oferece trilhas e conteúdos avançados que permitem direcionar a formação conforme os interesses de cada estudante.",
+          "type": "formação complementar",
+          "tags": [
+            "trilhas",
+            "conteúdos avançados"
+          ]
+        },
+        {
+          "id": "experiencia-internacional",
+          "title": "Experiência internacional",
+          "shortDescription": "A FGV EMAp mantém parcerias com instituições estrangeiras, possibilitando intercâmbios com aproveitamento das disciplinas cursadas no exterior.",
+          "type": "internacionalização",
+          "tags": [
+            "intercâmbio",
+            "internacional"
+          ]
         }
       ],
       "numbers": [
@@ -1784,12 +2438,19 @@
         }
       ],
       "careerPaths": [
-        "Mercado financeiro e seguros",
-        "Saúde e epidemiologia",
-        "Combate ao crime e segurança",
-        "Monitoramento ambiental e análise de cenários",
-        "Planejamento estratégico e gerenciamento de riscos",
-        "Consultoria e pesquisa acadêmica"
+        "modelagem matemática",
+        "análise e Ciência de Dados",
+        "tecnologia e desenvolvimento de algoritmos",
+        "inteligência artificial e aprendizado de máquinas",
+        "mercado financeiro",
+        "bancos e seguradoras",
+        "consultoria",
+        "gestão de riscos",
+        "saúde e epidemiologia",
+        "planejamento urbano e ambiental",
+        "órgãos públicos",
+        "desenvolvimento de políticas públicas",
+        "pesquisa científica e carreira acadêmica"
       ],
       "testimonials": [],
       "videos": [
@@ -1810,7 +2471,19 @@
         }
       ],
       "candidatePerSeat": "3,17 (2025.1)",
-      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-curricular-matematica-aplicada.pdf"
+      "curriculumUrl": "https://vestibular.fgv.br/sites/default/files/upload/grade-curricular-matematica-aplicada.pdf",
+      "courseExperience": [
+        "Cálculo, álgebra, geometria e análise matemática",
+        "probabilidade, estatística e processos estocásticos",
+        "programação, estruturas de dados e algoritmos",
+        "modelagem de fenômenos físicos, biológicos e socioeconômicos",
+        "otimização e análise numérica",
+        "aprendizado de máquinas",
+        "análise e visualização de grandes volumes de dados",
+        "aplicações em finanças, saúde, segurança e meio ambiente",
+        "iniciação científica e atividades de pesquisa",
+        "disciplinas eletivas, extensão e experiências internacionais"
+      ]
     },
     {
       "id": "administracao-df",
@@ -1820,11 +2493,11 @@
       "state": "DF",
       "school": "FGV EPPG",
       "url": "https://vestibular.fgv.br/cursos/brasilia/administracao",
-      "entry": "2026.2 / processo 2027.1 indicado na página",
+      "entry": "2026.2",
       "duration": "04 anos",
       "period": "Integral",
-      "tuition": "R$ 5.931,02 (*2026.1)",
-      "campus": "Campus FGV EPPG — SGAN Quadra 602, Módulos A B e C, Asa Norte, Brasília - DF",
+      "tuition": "R$ 5.931,02 *refere-se ao valor de 2026.1",
+      "campus": "Campus FGV EPPG - SGAN Quadra 602 - Módulos A, B e C. Asa Norte, Brasília - DF",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
@@ -1833,7 +2506,7 @@
         "Vestibular por Demanda Social e Diversidade",
         "Transferência e/ou Portador de Diploma"
       ],
-      "summary": "Administração de Empresas em Brasília, com formação para organizações privadas e públicas.",
+      "summary": "A Graduação em Administração de Empresas da FGV EPPG prepara você para criar novos negócios, transformar organizações e liderar em cenários de mudança. Com uma proposta conectada à vocação de Brasília, o curso combina fundamentos da Administração, empreendedorismo, tecnologia, inteligência artificial e experiências em empresas, órgãos públicos e organizações sociais. Ao longo da formação, você desenvolve visão estratégica, capacidade analítica e competências para liderar equipes e tomar decisões. O curso é indicado para quem deseja compreender como as organizações funcionam, desenvolver novos negócios e liderar projetos, equipes e processos de transformação. Também combina com pessoas criativas, empreendedoras e interessadas em tecnologia, que buscam uma formação prática e desejam gerar impacto positivo no mercado e na sociedade.",
       "admissionDates": {
         "Vestibular FGV": "27/07 a 16/09/2026",
         "Transferência e/ou Portador de Diploma": "13/05 a 17/07/2026",
@@ -1850,38 +2523,72 @@
       "courseDifferentialsIntro": "É uma formação para quem quer estudar gestão em Brasília, em contato com órgãos dos Três Poderes, organismos internacionais, representações diplomáticas e organizações públicas e privadas.",
       "courseDifferentials": [
         {
-          "id": "formacao-integral-global",
-          "title": "Formação Integral Global",
-          "shortDescription": "Desafios ao longo dos quatro anos conectam Distrito Federal, Amazônia, América Latina e temas globais.",
-          "type": ""
+          "id": "aprendizado-conectado-a-pratica",
+          "title": "Aprendizado conectado à prática",
+          "shortDescription": "Você participa de atividades de imersão para solucionar desafios reais junto a empresas, ministérios, secretarias, tribunais, organizações internacionais e ONGs.",
+          "type": "formação prática",
+          "tags": [
+            "imersão",
+            "desafios reais"
+          ]
         },
         {
-          "id": "aprendizado-na-pratica",
-          "title": "Aprendizado na prática",
-          "shortDescription": "Atividades imersivas aproximam os estudantes de organizações públicas, privadas e do terceiro setor.",
-          "type": ""
+          "id": "empreendedorismo-e-inovacao",
+          "title": "Empreendedorismo e inovação",
+          "shortDescription": "O curso prepara você para identificar necessidades, compreender consumidores, desenvolver modelos de negócio e criar startups ou transformar empresas existentes.",
+          "type": "empreendedorismo",
+          "tags": [
+            "startups",
+            "modelos de negócio"
+          ]
         },
         {
-          "id": "excelencia-academica",
-          "title": "Excelência acadêmica",
-          "shortDescription": "Corpo docente formado em instituições nacionais e internacionais, com pesquisa aplicada e conexões com o mercado.",
-          "type": ""
+          "id": "tecnologia-aplicada-a-gestao",
+          "title": "Tecnologia aplicada à gestão",
+          "shortDescription": "A formação aborda Ciência de Dados, inteligência artificial, transformação digital e governança de dados aplicadas à tomada de decisões nas organizações.",
+          "type": "tecnologia",
+          "tags": [
+            "ciência de dados",
+            "inteligência artificial"
+          ]
         },
         {
-          "id": "intercambio-internacional",
-          "title": "Intercâmbio internacional",
-          "shortDescription": "A disciplina Experiências Multiculturais integra o intercâmbio ao currículo.",
-          "type": ""
+          "id": "desenvolvimento-de-liderancas",
+          "title": "Desenvolvimento de lideranças",
+          "shortDescription": "Disciplinas e expedições formativas trabalham liderança, valores, autoconhecimento, capacidade de adaptação e atuação em equipes de alto desempenho.",
+          "type": "formação complementar",
+          "tags": [
+            "liderança",
+            "expedições"
+          ]
+        },
+        {
+          "id": "experiencia-nacional-e-internacional",
+          "title": "Experiência nacional e internacional",
+          "shortDescription": "Um semestre do curso é dedicado a experiências em outras escolas da FGV ou no exterior, ampliando a formação acadêmica, cultural e profissional.",
+          "type": "internacionalização",
+          "tags": [
+            "intercâmbio",
+            "outras escolas fgv"
+          ]
         }
       ],
       "numbers": [],
       "careerPaths": [
-        "Empreendedorismo privado e público",
-        "Startups e ecossistemas de inovação",
-        "Gestão e liderança em organizações privadas, públicas e do terceiro setor",
-        "Finanças e fundos de investimento",
-        "Relações institucionais e governamentais",
-        "Consultorias estratégicas"
+        "estratégia e gestão empresarial",
+        "marketing e vendas",
+        "finanças e investimentos",
+        "gestão de pessoas",
+        "operações e logística",
+        "consultoria",
+        "empreendedorismo e startups",
+        "inovação e transformação digital",
+        "análise de dados aplicada aos negócios",
+        "empresas nacionais e internacionais",
+        "organizações públicas",
+        "organizações do terceiro setor",
+        "responsabilidade social e negócios de impacto",
+        "comércio e negociações internacionais"
       ],
       "testimonials": [],
       "videos": [
@@ -1902,7 +2609,21 @@
         }
       ],
       "candidatePerSeat": "1,17 (2026.1)",
-      "curriculumUrl": "https://eppg.fgv.br/curso/graduacao/graduacao-em-administracao-de-empresas#estrutura"
+      "curriculumUrl": "https://eppg.fgv.br/curso/graduacao/graduacao-em-administracao-de-empresas#estrutura",
+      "courseExperience": [
+        "Administração, estratégia e modelos de negócio",
+        "marketing, vendas e comportamento do consumidor",
+        "finanças corporativas e investimentos",
+        "gestão de pessoas e equipes de alta performance",
+        "operações, processos e logística",
+        "inteligência artificial e análise de dados",
+        "empreendedorismo e ecossistemas de inovação",
+        "governança, compliance e sustentabilidade",
+        "imersões em empresas, órgãos públicos e organizações sociais",
+        "expedições formativas no Brasil e no exterior",
+        "disciplinas em inglês e experiências multiculturais",
+        "intercâmbio nacional e internacional"
+      ]
     },
     {
       "id": "administracao-publica-df",
@@ -1912,18 +2633,18 @@
       "state": "DF",
       "school": "FGV EPPG",
       "url": "https://vestibular.fgv.br/cursos/brasilia/administracao-publica",
-      "entry": "2026.2 indicado na página",
+      "entry": "2027.1",
       "duration": "04 anos",
       "period": "Integral",
-      "tuition": "R$ 5.311,36/mês (*2026.1)",
-      "campus": "Campus FGV EPPG - SGAN Quadra 602, Módulos A, B e C, Asa Norte, Brasília - DF",
+      "tuition": "R$ 5.311,36 *refere-se ao valor de 2026.1",
+      "campus": "Campus FGV EPPG - Setor de Grandes Áreas Norte - SGAN - Quadra 602 - Módulos A, B e C. Asa Norte, DF/Brasília",
       "admissions": [
         "Vestibular FGV",
         "ENEM",
         "Exames Internacionais",
         "Transferência e/ou Portador de Diploma"
       ],
-      "summary": "Administração Pública em Brasília, voltada a formação para impacto público e atuação em contextos institucionais.",
+      "summary": "A Graduação em Administração Pública da FGV EPPG prepara você para compreender o funcionamento do Estado, analisar políticas públicas e liderar iniciativas que gerem impacto positivo na sociedade. Realizado em Brasília, o curso combina Administração, política, economia, Direito, tecnologia e análise de dados. Ao longo da formação, você desenvolve competências para solucionar problemas públicos e atuar nas relações entre governos, empresas e organizações sociais. O curso é indicado para quem se interessa por política, gestão e pelos desafios enfrentados pelo Estado e pela sociedade. Também combina com pessoas analíticas, colaborativas e comprometidas com o interesse público, que desejam liderar projetos, melhorar serviços e criar soluções para problemas coletivos.",
       "tags": [
         "políticas públicas",
         "governo",
@@ -1935,28 +2656,54 @@
       "courseDifferentialsIntro": "É uma formação para quem quer contribuir para melhor governança, desenvolvimento e justiça social no Brasil.",
       "courseDifferentials": [
         {
-          "id": "formacao-integral-humana",
-          "title": "Formação Integral Humana",
-          "shortDescription": "Desafios em equipe e expedições conectam a formação à missão de transformar o Brasil.",
-          "type": ""
+          "id": "formacao-no-centro-politico-do-pais",
+          "title": "Formação no centro político do país",
+          "shortDescription": "Estudar em Brasília permite acompanhar de perto o funcionamento das instituições e os principais debates e decisões da vida pública nacional.",
+          "type": "formação prática",
+          "tags": [
+            "brasília",
+            "instituições"
+          ]
         },
         {
-          "id": "aprendizado-na-pratica",
-          "title": "Aprendizado na prática",
-          "shortDescription": "Atividades imersivas com ministérios, secretarias, Congresso, tribunais, agências internacionais, ONGs e empresas.",
-          "type": ""
+          "id": "aprendizado-conectado-a-pratica",
+          "title": "Aprendizado conectado à prática",
+          "shortDescription": "Os estudantes participam de imersões para solucionar desafios reais junto a ministérios, secretarias, Congresso, tribunais, organizações internacionais, empresas e ONGs.",
+          "type": "formação prática",
+          "tags": [
+            "imersão",
+            "governo"
+          ]
         },
         {
-          "id": "tecnologia-aplicada",
-          "title": "Tecnologia aplicada",
-          "shortDescription": "O curso inclui teorias científicas e tecnologias de aplicação de algoritmos e inteligência artificial.",
-          "type": ""
+          "id": "tecnologia-aplicada-a-gestao-publica",
+          "title": "Tecnologia aplicada à gestão pública",
+          "shortDescription": "O curso aborda inteligência artificial, análise e governança de dados, transformação digital e inovação aplicadas à administração e aos serviços públicos.",
+          "type": "tecnologia",
+          "tags": [
+            "inteligência artificial",
+            "governança de dados"
+          ]
         },
         {
-          "id": "intercambio",
-          "title": "Intercâmbio",
-          "shortDescription": "O estudante pode realizar intercâmbio internacional e também passar um semestre em escolas da FGV em São Paulo ou no Rio de Janeiro.",
-          "type": ""
+          "id": "desenvolvimento-de-liderancas",
+          "title": "Desenvolvimento de lideranças",
+          "shortDescription": "Disciplinas e expedições formativas trabalham liderança, valores, capacidade de adaptação e atuação em ambientes complexos e multiculturais.",
+          "type": "formação complementar",
+          "tags": [
+            "liderança",
+            "expedições"
+          ]
+        },
+        {
+          "id": "experiencia-nacional-e-internacional",
+          "title": "Experiência nacional e internacional",
+          "shortDescription": "Um semestre é dedicado a experiências em outras escolas da FGV ou no exterior, ampliando a formação acadêmica, cultural e profissional.",
+          "type": "internacionalização",
+          "tags": [
+            "intercâmbio",
+            "outras escolas fgv"
+          ]
         }
       ],
       "numbers": [
@@ -1966,13 +2713,19 @@
         }
       ],
       "careerPaths": [
-        "Cargos eletivos e gestão governamental",
-        "Organismos internacionais",
-        "Empresas estatais, privadas e concessionárias",
-        "Terceiro setor e fundações empresariais",
-        "Responsabilidade social e relações governamentais",
-        "Empreendedorismo público e privado",
-        "Consultorias nacionais e internacionais"
+        "órgãos dos governos municipal, estadual e federal",
+        "gestão e avaliação de políticas públicas",
+        "empresas públicas e concessionárias",
+        "consultorias",
+        "organismos internacionais",
+        "organizações sociais e fundações",
+        "relações governamentais e institucionais",
+        "inovação e transformação digital no setor público",
+        "gestão de projetos sociais",
+        "responsabilidade social e sustentabilidade",
+        "empreendedorismo público e social",
+        "pesquisa e carreira acadêmica",
+        "cargos eletivos e assessoria política"
       ],
       "testimonials": [
         {
@@ -2009,7 +2762,22 @@
         }
       ],
       "candidatePerSeat": "2,08 (2026.1)",
-      "curriculumUrl": "https://eppg.fgv.br/curso/graduacao/graduacao-em-administracao-publica#estrutura"
+      "curriculumUrl": "https://eppg.fgv.br/curso/graduacao/graduacao-em-administracao-publica#estrutura",
+      "courseExperience": [
+        "Fundamentos da Administração Pública",
+        "instituições brasileiras e teoria política",
+        "análise e avaliação de políticas públicas",
+        "orçamento e finanças públicas",
+        "Direito Constitucional, Administrativo e Tributário",
+        "governança pública digital",
+        "inteligência artificial e análise de dados",
+        "inovação e empreendedorismo no setor público",
+        "gestão de pessoas e liderança",
+        "imersões em órgãos públicos, empresas e organizações sociais",
+        "expedições formativas no Brasil e no exterior",
+        "disciplinas em inglês e experiências multiculturais",
+        "projetos de extensão, iniciação científica e experiências profissionais"
+      ]
     }
   ],
   "materials": [
